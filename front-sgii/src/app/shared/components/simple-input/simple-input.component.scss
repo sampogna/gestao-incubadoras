@@ -1,0 +1,19 @@
+// .custom-input {
+//     margin-bottom: 35px;
+//   }
+  
+  .custom-input input {
+    width: 100%;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #F7F7FD;
+    font-family: 'Nunito Sans';
+    font-size: 16px;
+    line-height: 22px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      font-style: italic;
+    }
+  }

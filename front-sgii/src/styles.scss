@@ -1,0 +1,12 @@
+@use 'shared/styles/variables.scss' as *;
+@import './app/shared/buttons/button.scss';
+
+body {
+    font-family: $font-family;
+    background-color: $bg-color;
+    box-sizing: border-box;
+    height: 100vh;
+    margin: 0;
+}
+
+

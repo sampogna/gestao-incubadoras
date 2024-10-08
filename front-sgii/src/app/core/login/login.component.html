@@ -1,0 +1,15 @@
+<div class="login-container">
+    <img src="../../../assets/img/full_logo.png" alt="">
+    <hr>
+
+    
+    <div class="login-container__controls">
+        <div class="login-container__controls-title"> ACESSE O SISTEMA </div>
+        <simple-input placeholder="Usuário" [(ngModel)]="auth.username" ></simple-input>
+        <simple-input placeholder="Senha" [(ngModel)]="auth.password" [type]="'password'" ></simple-input>
+
+        <button type="button" primary-button (click)="logIntoSystem()"> Entrar </button>
+        <a href="#"> Esqueci minha senha </a>
+    </div>
+    
+</div>
