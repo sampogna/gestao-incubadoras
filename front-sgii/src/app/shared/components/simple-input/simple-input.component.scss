@@ -1,3 +1,6 @@
+.input-container {
+  position: relative;
+
   .custom-input input {
     width: 100%;
     padding: 8px 20px;
@@ -9,7 +12,22 @@
     line-height: 22px;
     box-sizing: border-box;
 
+    max-width: 340px;
+  
     &::placeholder {
       font-style: italic;
     }
   }
+
+  i {
+    position: absolute;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-left: 16px;
+  }
+
+}
+  
+.p-left-icon {
+  padding-left: 54px !important;
+}

@@ -1,5 +1,9 @@
 <div class="card">
-    <card-header [title]="'LISTAGEM DE AÇÕES DE SENSIBILIZAÇÃO'" [breadcrumbItems]="breadcrumbItems" (buttonNewClicked)="navigateToCreation()"></card-header>
-    <div class="card__search"></div>
+    <div class="card__header">
+        <card-header [title]="'LISTAGEM DE AÇÕES DE SENSIBILIZAÇÃO'" [breadcrumbItems]="breadcrumbItems" (buttonNewClicked)="navigateToCreation()"></card-header>
+    </div>
+    <div class="card__search">
+        <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>
+    </div>
     <div class="card__table"></div>
 </div>

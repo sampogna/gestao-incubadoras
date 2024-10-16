@@ -5,21 +5,26 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   selector: 'simple-input',
   styleUrls: ['./simple-input.component.scss'],
   template: `
-      <div class="custom-input">
-        <input type="{{type}}" [placeholder]="placeholder"[(ngModel)]="value" (ngModelChange)="onChange($event)">
-      </div>`,
-      providers: [
-        {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => SimpleInputComponent),
-          multi: true
-        }
-      ]
+      <div class="input-container">
+        <i class="fa fa-{{leftIconClass}}" *ngIf="leftIconClass"></i>
+        <div class="custom-input">
+          <input type="{{type}}" [placeholder]="placeholder"[(ngModel)]="value" (ngModelChange)="onChange($event)" [class.p-left-icon]="leftIconClass">
+        </div>
+      </div>
+      `,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SimpleInputComponent),
+      multi: true
+    }
+  ]
 })
 export class SimpleInputComponent implements ControlValueAccessor {
   @Input() label: string;
-  @Input() placeholder: string;
+  @Input() placeholder: string = '';
   @Input() type: string = 'text';
+  @Input() leftIconClass: string; //Utilize classes do fontawesome 4.7
   value: string;
 
   onChange: any = () => {};

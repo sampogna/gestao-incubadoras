@@ -35,16 +35,16 @@ $front-sgii-theme: mat.define-light-theme((
 @import './app/shared/buttons/button.scss';
 
 body {
-    font-family: $font-family;
-    background-color: $bg-color;
-    box-sizing: border-box !important;
-    height: 100vh;
-    margin: 0;
+	font-family: $font-family;
+	background-color: $bg-color;
+	box-sizing: border-box !important;
+	height: 100vh;
+	margin: 0;
 }
 
 * {
-  box-sizing: border-box;
-  font-family: "Nunito Sans", sans-serif;
+	box-sizing: border-box;
+	font-family: "Nunito Sans", sans-serif;
 }
 
 
@@ -62,7 +62,12 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 h1 {
-  font-size: 36px;
-  font-weight: 500;
+	font-size: 36px;
+	font-weight: 500;
 }
 
+.card {
+	&__search {
+		margin-top: 25px;
+	}
+}

@@ -13,6 +13,7 @@ export class CardBreadcrumbComponent {
   constructor(private router: Router) {}
 
   navigateToRoute(absoluteRoute: string): void {
-    this.router.navigateByUrl(absoluteRoute);
+    if (absoluteRoute)
+      this.router.navigateByUrl(absoluteRoute);
   }
 }
