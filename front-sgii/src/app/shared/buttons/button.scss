@@ -1,26 +1,23 @@
 @import './../../../shared/styles/variables.scss';
 
 .button{
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: none;
-    padding: 10px 32px;
-    font-size: 20px;
-    line-height: 24px;
-    font-family: $font-family;
-    
-    // width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  padding: 10px 32px;
+  font-size: 20px;
+  font-family: $font-family;
 
   &:hover {
     cursor: pointer;
   }
 
-    &--primary{
-      background-color: $bg-color;
-      color: #fff;
-    }
-    &--secondary{
-      color: $bg-color;
-      border-color: $bg-color;
-    }
+  &--primary{
+    background-color: $bg-color;
+    color: #fff;
   }
+  &--secondary{
+    color: $bg-color;
+    border-color: $bg-color;
+  }
+}

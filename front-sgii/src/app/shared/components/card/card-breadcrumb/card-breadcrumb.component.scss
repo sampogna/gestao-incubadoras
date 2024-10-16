@@ -1,0 +1,19 @@
+@use '../../../../../shared/styles/variables.scss' as v;
+
+.breadcrumb {
+    color: v.$grey;
+    display: inline-flex;
+    align-items: baseline;
+    border-bottom: 2px solid;
+    gap: 4px;
+
+    .route-link:hover {
+        transition: 1s;
+        color: v.$bg-color;
+        cursor: pointer;
+    }
+}
+
+.fa.fa-angle-right {
+    font-weight: 700;
+}
