@@ -1,0 +1,31 @@
+:host ::ng-deep .navbar {
+    width: 100vw;
+    height: 55px;
+    max-height: 55px;
+    background-color: #04292A;
+    padding: 8px 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__burger-btn {
+        color: white !important;
+        font-size: 1.5rem;
+        background-color: transparent;
+        padding: 0 !important;
+    }
+
+    &__icon {
+        padding-top: 10px;
+    }
+
+    &__profile {
+        color: white;
+        font-size: 30px;
+    }
+
+    .cdk-overlay-pane {
+        margin-top: 17px !important;
+    }
+}

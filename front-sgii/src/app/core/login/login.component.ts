@@ -26,7 +26,7 @@ export class LoginComponent {
       .subscribe(
         (data => {
           if (typeof data != 'string')
-            this.router.navigateByUrl('Home');
+            this.router.navigateByUrl('bem-vindo');
           else
             this.toastr.error(data);
         })

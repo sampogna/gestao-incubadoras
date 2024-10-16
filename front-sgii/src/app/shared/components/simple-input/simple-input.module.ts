@@ -1,10 +1,12 @@
 import { NgModule } from "@angular/core";
 import { SimpleInputComponent } from "./simple-input.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
+    
+    imports: [CommonModule, FormsModule, ReactiveFormsModule ],
+    exports: [SimpleInputComponent],
     declarations: [SimpleInputComponent],
-    imports: [FormsModule],
-    exports: [SimpleInputComponent]
   })
   export class SimpleInputModule { }

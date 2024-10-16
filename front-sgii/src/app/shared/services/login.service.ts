@@ -1,16 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IUser, UserTypes } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+    private userSubject: BehaviorSubject<IUser | null>;
+    public user: Observable<IUser | null>;
     
     constructor(
         // private httpClient: HttpClient
-    ) { }
+    ) { 
+        this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+        this.user = this.userSubject.asObservable();
+    }
 
     mockedUser = {
         name: 'John Doe',
@@ -19,12 +24,29 @@ export class LoginService {
         type: UserTypes.Advanced
     } as IUser;
 
+
+    public get currentUserValue(): (IUser | null) {
+        return this.userSubject.value;
+    }
+
+    public get isLoggedIn(): boolean {
+        return !!this.userSubject?.value;
+    }
+
     login(): Observable<IUser | string> {
         /**
          * Retorna string para erro
          * Para sucesso, retorna o objeto do usuario
          */
+        this.userSubject.next(this.mockedUser)
+        localStorage.setItem('user', JSON.stringify(this.mockedUser));
         return of(this.mockedUser);
     }
+
+    logout() {
+        // Remove user from local storage and set current user to null
+        localStorage.removeItem('currentUser');
+        this.userSubject.next(null);
+      }
 
 }
