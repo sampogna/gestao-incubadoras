@@ -5,5 +5,15 @@
     <div class="card__search">
         <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>
     </div>
-    <div class="card__table"></div>
+    <div class="card__table">
+        <table-striped [tableItems]="users" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
+        </table-striped>
+        
+        <!-- Define the actions using ng-template -->
+        <ng-template #actionButtonsTemplate let-user>
+            <edit-button (clicked)="edit(user)"></edit-button>
+          <!-- <button (click)="editUser(user)">Edit</button>
+          <button (click)="deleteUser(user)">Delete</button> -->
+        </ng-template>
+    </div>
 </div>

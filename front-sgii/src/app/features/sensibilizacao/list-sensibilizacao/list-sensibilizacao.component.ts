@@ -10,6 +10,13 @@ import { bcListSensibilizacao } from 'src/app/shared/breadcrumb-items';
 
 export class ListSensibilizacaoComponent implements OnInit {
 
+    users = [
+        { id: 1, name: 'John', age: 25 },
+        { id: 2, name: 'Jane', age: 30 },
+      ];
+    
+      columns = ['id', 'name', 'age'];
+
     breadcrumbItems = bcListSensibilizacao;
 
     constructor(private router: Router) { }
@@ -18,5 +25,9 @@ export class ListSensibilizacaoComponent implements OnInit {
 
     navigateToCreation(): void {
         this.router.navigateByUrl("/sensibilizacao/editar")
+    }
+
+    edit(user: any) {
+        console.log('edit clicked', user);
     }
 }

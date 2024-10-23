@@ -6,6 +6,8 @@ import { ButtonModule } from "src/app/shared/buttons/button.module";
 import { MatTableModule } from '@angular/material/table';
 import { CardModule } from "src/app/shared/components/card/card.module";
 import { SimpleInputModule } from "src/app/shared/components/simple-input/simple-input.module";
+import { TableStripedModule } from "src/app/shared/components/table-striped/table-striped.module";
+import { EditButtonModule } from "src/app/shared/components/edit-button/edit-button.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SimpleInputModule } from "src/app/shared/components/simple-input/simple
     ButtonModule,
     MatTableModule,
     CardModule,
-    SimpleInputModule
+    SimpleInputModule,
+    TableStripedModule,
+    EditButtonModule
   ]
 })
 export class SensibilizacaoModule { }

@@ -1,0 +1,44 @@
+.mat-elevation-z8 {
+    box-shadow: none;
+}
+
+
+.mat-mdc-header {
+    &-cell {
+        background-color: #F1F3F9 !important;
+        font-size: 16px;
+        font-weight: 700;
+        color: #1D2433;
+        border: none;
+    }
+
+    &-row {
+        height: 40px;
+    }
+}
+
+
+.mat-mdc {
+    &-row {
+        height: 40px;
+        border: none;
+    }
+
+    &-cell {
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+    }
+}
+
+.mat-column-actions {
+    text-align: center;
+}
+
+.mat-mdc-row:nth-child(even){
+    background-color: #F8F9FC;
+}
+        
+.mat-mdc-row:nth-child(odd){
+    background-color: #fff;
+}
