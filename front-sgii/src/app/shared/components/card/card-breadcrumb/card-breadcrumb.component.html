@@ -15,8 +15,7 @@
     <i class="fa fa-angle-right"></i>
     <div class="" *ngFor="let item of breadcrumbItems; let i = index">
         <a (click)="navigateToRoute(item.route)" class="route-link"> {{ item.name }} </a>
-        
-        <div *ngIf="index == (breadcrumbItems?.length - 1)"> <i class="fa fa-angle-right"></i> </div>
+        <i class="fa fa-angle-right" *ngIf="i != (breadcrumbItems?.length - 1)"></i>
     </div>
     
 </div>

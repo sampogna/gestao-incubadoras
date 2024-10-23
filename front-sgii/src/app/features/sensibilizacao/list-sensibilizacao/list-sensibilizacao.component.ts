@@ -8,7 +8,7 @@ import { bcListSensibilizacao } from 'src/app/shared/breadcrumb-items';
     styleUrls: ['list-sensibilizacao.component.scss']
 })
 
-export class ListSensibilizacaoComponent implements OnInit {
+export class ListSensibilizacaoComponent {
 
     users = [
         { id: 1, name: 'John', age: 25 },
@@ -21,13 +21,11 @@ export class ListSensibilizacaoComponent implements OnInit {
 
     constructor(private router: Router) { }
 
-    ngOnInit() { }
-
     navigateToCreation(): void {
-        this.router.navigateByUrl("/sensibilizacao/editar")
+        this.router.navigateByUrl("/sensibilizacao/editar");
     }
 
-    edit(user: any) {
-        console.log('edit clicked', user);
+    navigateToEdit(sensibilizacao: any) {
+        this.router.navigateByUrl("/sensibilizacao/editar/" + sensibilizacao.id);
     }
 }
