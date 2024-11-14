@@ -12,7 +12,8 @@
     line-height: 22px;
     box-sizing: border-box;
 
-    max-width: 340px;
+    // max-width: 340px;
+    max-width: 100%;
   
     &::placeholder {
       font-style: italic;

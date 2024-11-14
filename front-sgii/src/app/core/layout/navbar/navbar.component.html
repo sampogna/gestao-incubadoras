@@ -4,7 +4,7 @@
     </button>
 
     <div class="navbar__icon">
-        <button>
+        <button routerLink="/bem-vindo">
             <svg width="66" height="58" viewBox="0 0 66 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g filter="url(#filter0_d_19_240)">
                 <rect x="4" width="50" height="42" fill="url(#pattern0_19_240)" shape-rendering="crispEdges"/>
@@ -30,19 +30,23 @@
     </div>
 
     <div class="navbar__profile">
-        <button>
-            <i class="fa fa-user-circle-o"></i>
+        <button [matMenuTriggerFor]="userItems">
+            <i class="fa fa-user-circle"></i>
         </button>
-        
     </div>
     
 </div>
 
-<mat-menu #items>
+<mat-menu #items >
     <button mat-menu-item routerLink="/sensibilizacao">Sensibilização</button>
     <button mat-menu-item >Prospecção</button>
     <button mat-menu-item >Qualificação de Empreendedores</button>
     <button mat-menu-item >Empreendimentos</button>
     <button mat-menu-item >Desenvolvimento do Incubado</button>
     <button mat-menu-item >Usuários</button>
+</mat-menu>
+
+<mat-menu #userItems>
+    <button mat-menu-item routerLink="/profile">Exibir perfil</button>
+    <button mat-menu-item (click)="logout()">Deslogar</button>
 </mat-menu>

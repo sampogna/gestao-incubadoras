@@ -9,6 +9,7 @@ import { IBreadCrumbItem } from 'src/app/shared/models/breadcrumb.model';
 export class CardHeaderComponent {
   @Input() title: string = '';
   @Input() breadcrumbItems: IBreadCrumbItem[];
+  @Input() showCreateButton = true;
   
   @Output() buttonNewClicked: EventEmitter<any> = new EventEmitter();
   

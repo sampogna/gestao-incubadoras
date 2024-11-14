@@ -20,7 +20,12 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@floating-ui/dom": "^1.6.12",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1",
+    "ngx-mask": "^16.4.2",
     "ngx-toastr": "^17.0.2",
+    "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

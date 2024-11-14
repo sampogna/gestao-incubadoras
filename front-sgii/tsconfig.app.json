@@ -2,8 +2,12 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "strict": false,
     "outDir": "./out-tsc/app",
     "types": []
+  },
+  "angularCompilerOptions": {
+    "stricTemplates": false
   },
   "files": [
     "src/main.ts"

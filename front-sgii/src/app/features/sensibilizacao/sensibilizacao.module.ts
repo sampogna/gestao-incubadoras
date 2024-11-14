@@ -8,6 +8,18 @@ import { CardModule } from "src/app/shared/components/card/card.module";
 import { SimpleInputModule } from "src/app/shared/components/simple-input/simple-input.module";
 import { TableStripedModule } from "src/app/shared/components/table-striped/table-striped.module";
 import { EditButtonModule } from "src/app/shared/components/edit-button/edit-button.module";
+import { MatSelectModule } from "@angular/material/select";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import { MatNativeDateModule } from "@angular/material/core";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
+import { FileUploadAreaModule } from "src/app/shared/components/file-upload-area/file-upload-area.module";
+
 
 @NgModule({
   declarations: [
@@ -15,14 +27,27 @@ import { EditButtonModule } from "src/app/shared/components/edit-button/edit-but
     EditSensibilizacaoComponent
   ],
   imports: [
+    CommonModule,
     SensibilizacaoRoutingModule,
     ButtonModule,
     MatTableModule,
     CardModule,
-    SimpleInputModule,
     TableStripedModule,
-    EditButtonModule
-  ]
+    EditButtonModule,
+    MatSelectModule,
+    FormsModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatIconModule,
+    MatInputModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    NgxMaskDirective, 
+    NgxMaskPipe,
+    FileUploadAreaModule,
+    SimpleInputModule,
+  ],
+  providers: [provideNgxMask()]
 })
 export class SensibilizacaoModule { }
   

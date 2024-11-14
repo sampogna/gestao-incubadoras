@@ -1,0 +1,44 @@
+<div class="profile">
+    <div class="profile__header">
+        <svg width="184" height="184" viewBox="0 0 184 184" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_108_448)">
+            <rect x="4" width="176" height="176" rx="88" fill="#A39F9F"/>
+            <rect x="4.5" y="0.5" width="175" height="175" rx="87.5" stroke="#FFF0F0"/>
+            <path d="M150.667 154V139.333C150.667 131.554 147.576 124.093 142.075 118.592C136.574 113.09 129.113 110 121.333 110H62.6667C54.887 110 47.426 113.09 41.9249 118.592C36.4238 124.093 33.3334 131.554 33.3334 139.333V154" stroke="#25282B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M92 80.6667C108.2 80.6667 121.333 67.5337 121.333 51.3333C121.333 35.133 108.2 22 92 22C75.7996 22 62.6666 35.133 62.6666 51.3333C62.6666 67.5337 75.7996 80.6667 92 80.6667Z" stroke="#25282B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+            <filter id="filter0_d_108_448" x="0" y="0" width="184" height="184" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_108_448"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_108_448" result="shape"/>
+            </filter>
+            </defs>
+        </svg>
+
+        <h1> {{ user?.name }} </h1>
+        <span> {{ user?.email }} </span>
+    </div>
+    <div class="profile__fields">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="">Usuário</label>
+                <input placeholder="Usuário"/>
+            </div>
+            <div class="col-md-4">
+                <label for="">Usuário</label>
+                <input type="text">
+            </div>
+            <div class="col-md-4">
+                <label for="">Usuário</label>
+                <!-- <simple-input placeholder="Usuário" ></simple-input> -->
+            </div>
+        </div>
+        
+    </div>
+</div>

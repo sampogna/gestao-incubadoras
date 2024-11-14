@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
 import { LoginGuard } from './shared/guards/login.guard';
+import { ProfileComponent } from './features/profile/profile.component';
 
 
 const loginModule = () => import('./core/login/login.module').then(x => x.LoginModule);
@@ -17,7 +18,8 @@ const routes: Routes = [
     canActivate: [LoginGuard], 
     children: [
       { path: 'bem-vindo', loadChildren: bemVindoModule },
-      { path: 'sensibilizacao', loadChildren: sensibilizacaoModule }
+      { path: 'sensibilizacao', loadChildren: sensibilizacaoModule },
+      { path: 'profile', component: ProfileComponent }
     ]
   },
   { path: '**', redirectTo: 'login' } 

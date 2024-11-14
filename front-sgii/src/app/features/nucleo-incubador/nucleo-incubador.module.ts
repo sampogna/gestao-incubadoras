@@ -1,11 +1,17 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { EditNucleosIncubadoresComponent } from './edit-nucleos-incubadores/edit-nucleos-incubadores.component';
+import { ListNucleosIncubadoresComponent } from './list-nucleos-incubadores/list-nucleos-incubadores.component';
+
+
 
 @NgModule({
-    declarations: [
-    //   LoginComponent
-    ],
-    imports: [
-    ]
-  })
-  export class FeaturesModule { }
-  
+  declarations: [
+    EditNucleosIncubadoresComponent,
+    ListNucleosIncubadoresComponent
+  ],
+  imports: [
+    CommonModule
+  ]
+})
+export class NucleoIncubadorModule { }

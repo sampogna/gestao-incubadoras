@@ -1,0 +1,6 @@
+<div class="input-container">
+    <i class="fa fa-{{leftIconClass}}" *ngIf="leftIconClass"></i>
+    <div class="custom-input">
+      <input type="{{type}}" [placeholder]="placeholder"[(ngModel)]="value" (ngModelChange)="onChange($event)" [class.p-left-icon]="leftIconClass">
+    </div>
+  </div>

@@ -13,9 +13,9 @@
         </svg>
     </button>
     <i class="fa fa-angle-right"></i>
-    <div class="" *ngFor="let item of breadcrumbItems; let i = index">
+    <div class="" *ngFor="let item of breadcrumbItems; let itemCount = index">
         <a (click)="navigateToRoute(item.route)" class="route-link"> {{ item.name }} </a>
-        <i class="fa fa-angle-right" *ngIf="i != (breadcrumbItems?.length - 1)"></i>
+        <i class="fa fa-angle-right" *ngIf="itemCount != (breadcrumbItems?.length - 1)"></i>
     </div>
     
 </div>

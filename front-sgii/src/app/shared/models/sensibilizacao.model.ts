@@ -1,8 +1,6 @@
-import { INucleoIncubador } from "./nucleo-incubador.model";
-
-export interface ISensibilizacao {
+export class Sensibilizacao {
     Id: number;
-    IdNucleoIncubador: number;
+    IdNucleoIncubador: number | null = null;
     IdTipoSensibilizacao: TiposAcaoSensibilizacao;
     Tema: string;
     IdUsuarioResponsavel: number;
@@ -14,6 +12,12 @@ export interface ISensibilizacao {
     DataRegistro: Date;
     IdUsuRegistrou: number;
     Status: StatusAprovacaoSensibilizacao;
+
+    Participantes?: ParticipanteSensibilizacao[] = [];
+
+    constructor() {
+        this.Participantes = [];
+    }
   }
 
 export enum TiposAcaoSensibilizacao {
@@ -25,4 +29,10 @@ export enum StatusAprovacaoSensibilizacao {
     Aguardando,
     Aprovado,
     Reprovado
+}
+
+export interface ParticipanteSensibilizacao {
+    Id?: number;
+    Nome: string;
+    IdSensibilizacao?: number;
 }

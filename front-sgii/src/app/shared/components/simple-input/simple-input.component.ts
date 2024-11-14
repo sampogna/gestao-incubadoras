@@ -1,24 +1,18 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'simple-input',
   styleUrls: ['./simple-input.component.scss'],
-  template: `
-      <div class="input-container">
-        <i class="fa fa-{{leftIconClass}}" *ngIf="leftIconClass"></i>
-        <div class="custom-input">
-          <input type="{{type}}" [placeholder]="placeholder"[(ngModel)]="value" (ngModelChange)="onChange($event)" [class.p-left-icon]="leftIconClass">
-        </div>
-      </div>
-      `,
+  templateUrl: './simple-input.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SimpleInputComponent),
       multi: true
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleInputComponent implements ControlValueAccessor {
   @Input() label: string;
@@ -32,8 +26,8 @@ export class SimpleInputComponent implements ControlValueAccessor {
 
   writeValue(value: any) {
     this.value = value;
-    this.onChange(value);
-    this.onTouch(value);
+    // this.onChange(value);
+    // this.onTouch(value);
   }
 
   registerOnChange(fn: any) {
