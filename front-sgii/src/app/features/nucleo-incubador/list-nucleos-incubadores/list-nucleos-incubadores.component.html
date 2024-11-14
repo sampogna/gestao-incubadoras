@@ -1,1 +1,20 @@
-<p>list-nucleos-incubadores works!</p>
+<div class="card">
+    <div class="card__header">
+        <card-header [title]="'LISTAGEM DE NÚCLEOS INCUBADORES'" [breadcrumbItems]="breadcrumbItems" (buttonNewClicked)="navigateToCreation()"></card-header>
+    </div>
+    <div class="card__search">
+        <simple-input [placeholder]="'Digite o nome do núcleo'" [leftIconClass]="'search'"></simple-input>
+    </div>
+    <div class="card__table">
+        <table-striped [tableItems]="users" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
+        </table-striped>
+        
+        <ng-template #actionButtonsTemplate let-user>
+            <div class="table-btns-spaced">
+                <edit-button (clicked)="navigateToEdit(user)"></edit-button>
+                <delete-button (clicked)="deleteElement(user)"></delete-button>
+            </div>
+            
+        </ng-template>
+    </div>
+</div>

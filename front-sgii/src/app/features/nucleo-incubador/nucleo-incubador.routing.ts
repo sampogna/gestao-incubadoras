@@ -1,5 +1,3 @@
-// const loginModule = () => import('./core/login/login.module').then(x => x.LoginModule);
-
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ListNucleosIncubadoresComponent } from "./list-nucleos-incubadores/list-nucleos-incubadores.component";
