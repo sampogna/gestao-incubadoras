@@ -5,6 +5,7 @@ import { FileUploadAreaModule } from './components/file-upload-area/file-upload-
 import { EditButtonModule } from './components/edit-button/edit-button.module';
 import { SimpleInputModule } from './components/simple-input/simple-input.module';
 import { TableStripedModule } from './components/table-striped/table-striped.module';
+import { DeleteButtonModule } from './components/delete-button/delete-button.module';
 
 
 
@@ -16,7 +17,16 @@ import { TableStripedModule } from './components/table-striped/table-striped.mod
     FileUploadAreaModule,
     EditButtonModule,
     SimpleInputModule,
-    TableStripedModule
+    TableStripedModule,
+    DeleteButtonModule
+  ],
+  exports: [
+    CardModule,
+    FileUploadAreaModule,
+    EditButtonModule,
+    SimpleInputModule,
+    TableStripedModule,
+    DeleteButtonModule
   ]
 })
 export class SharedModule { }
