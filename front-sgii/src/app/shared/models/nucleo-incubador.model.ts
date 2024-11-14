@@ -1,4 +1,4 @@
-export interface INucleoIncubador {
-    id: number;
-    name: string;
+export class NucleoIncubador {
+    Id: number;
+    Descricao: string;
 }

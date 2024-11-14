@@ -100,31 +100,35 @@ select {
 } 
 
 input {
-    width: 100%;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #F7F7FD;
-    font-family: 'Nunito Sans';
-    font-size: 16px;
-    line-height: 22px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #F7F7FD;
+  font-family: 'Nunito Sans';
+  font-size: 16px;
+  line-height: 22px;
+  box-sizing: border-box;
 
-    max-width: 100%;
+  max-width: 100%;
+
+  &::placeholder {
+    font-style: italic;
+  }
   
-    &::placeholder {
-      font-style: italic;
-    }
+  &:disabled {
+    background-color: #E0E0E0;
   }
+ }
 
-  textarea {
-    background-color: #F7F7FD;
-    border: none;
-    padding: 8px 20px;;
-  }
+textarea {
+  background-color: #F7F7FD;
+  border: none;
+  padding: 8px 20px;;
+}
 
-  .table-btns-spaced {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-  }
+.table-btns-spaced {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}

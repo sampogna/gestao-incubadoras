@@ -6,6 +6,7 @@ import { EditButtonModule } from './components/edit-button/edit-button.module';
 import { SimpleInputModule } from './components/simple-input/simple-input.module';
 import { TableStripedModule } from './components/table-striped/table-striped.module';
 import { DeleteButtonModule } from './components/delete-button/delete-button.module';
+import { ButtonModule } from './buttons/button.module';
 
 
 
@@ -18,7 +19,8 @@ import { DeleteButtonModule } from './components/delete-button/delete-button.mod
     EditButtonModule,
     SimpleInputModule,
     TableStripedModule,
-    DeleteButtonModule
+    DeleteButtonModule,
+    ButtonModule
   ],
   exports: [
     CardModule,
@@ -26,7 +28,8 @@ import { DeleteButtonModule } from './components/delete-button/delete-button.mod
     EditButtonModule,
     SimpleInputModule,
     TableStripedModule,
-    DeleteButtonModule
+    DeleteButtonModule,
+    ButtonModule
   ]
 })
 export class SharedModule { }

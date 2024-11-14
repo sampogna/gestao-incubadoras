@@ -4,6 +4,7 @@ import { EditNucleosIncubadoresComponent } from './edit-nucleos-incubadores/edit
 import { ListNucleosIncubadoresComponent } from './list-nucleos-incubadores/list-nucleos-incubadores.component';
 import { NucleoIncubadorRoutingModule } from './nucleo-incubador.routing';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     NucleoIncubadorRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class NucleoIncubadorModule { }

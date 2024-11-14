@@ -1,1 +1,22 @@
-<p>edit-nucleos-incubadores works!</p>
+<div class="card">
+    <div class="card__header">
+        <card-header [title]="pageTitle" [breadcrumbItems]="breadcrumbItems" [showCreateButton]="false"></card-header>
+    </div>
+    <div class="card__fields">
+        <div class="row">
+            <div class="col-md-6">
+                <label> Código </label>
+                <input type="text" [(ngModel)]="nucleoIncubador.Id" disabled placeholder="Crie para visualizar">
+            </div>
+
+            <div class="col-md-6">
+                <label> Nome do Núcleo </label>
+                <input type="text" [(ngModel)]="nucleoIncubador.Descricao" placeholder="Digite o nome">
+            </div>
+        </div>
+    </div>
+    <div class="card__footer">
+        <button secondary-button routerLink="/nucleo-incubador"> Voltar </button>
+        <button primary-button> Salvar </button>
+    </div>
+</div>

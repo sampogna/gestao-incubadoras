@@ -1,17 +1,17 @@
-import { INucleoIncubador } from "./models/nucleo-incubador.model";
+import { NucleoIncubador } from "./models/nucleo-incubador.model";
 
-export const mockedNucleos: INucleoIncubador[] = [
-    { id: 3, name: 'ARA - Aracruz' },
-    { id: 4, name: 'CAI - Cachoeiro de Itapemirim' },
-    { id: 5, name: 'COL - Colatina' },
-    { id: 6, name: 'GUA - Guarapari' },
-    { id: 7, name: 'ITA - Itapina' },
-    { id: 8, name: 'LIN - Linhares' },
-    { id: 9, name: 'NOV - Nova Venécia' },
-    { id: 10, name: 'SER - Serra' },
-    { id: 11, name: 'SMT - São Mateus' },
-    { id: 12, name: 'STE - Santa Teresa' },
-    { id: 13, name: 'VNI - Venda Nova do Imigrante' },
-    { id: 14, name: 'VVL - Vila Velha' },
-    { id: 15, name: 'VIX - Vitória' }
+export const mockedNucleos: NucleoIncubador[] = [
+    { Id: 3, Descricao: 'ARA - Aracruz' },
+    { Id: 4, Descricao: 'CAI - Cachoeiro de Itapemirim' },
+    { Id: 5, Descricao: 'COL - Colatina' },
+    { Id: 6, Descricao: 'GUA - Guarapari' },
+    { Id: 7, Descricao: 'ITA - Itapina' },
+    { Id: 8, Descricao: 'LIN - Linhares' },
+    { Id: 9, Descricao: 'NOV - Nova Venécia' },
+    { Id: 10, Descricao: 'SER - Serra' },
+    { Id: 11, Descricao: 'SMT - São Mateus' },
+    { Id: 12, Descricao: 'STE - Santa Teresa' },
+    { Id: 13, Descricao: 'VNI - Venda Nova do Imigrante' },
+    { Id: 14, Descricao: 'VVL - Vila Velha' },
+    { Id: 15, Descricao: 'VIX - Vitória' }
 ];
