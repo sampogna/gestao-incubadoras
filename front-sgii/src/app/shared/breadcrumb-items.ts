@@ -17,3 +17,13 @@ export const bcEditNucleoIncubador: IBreadCrumbItem[] = [
     { name: 'Listagem de núcleos incubadores', route: '../' },
     { name: 'Edição', route: '' }
 ]
+
+export const bcListProspeccaoDesafio: IBreadCrumbItem[] = [
+    { name: 'Listagem de desafios de prospecção', route: '../' },
+    { name: 'Edição', route: '' }
+]
+
+export const bcEditProspeccaoReuniao: IBreadCrumbItem[] = [
+    { name: 'Listagem de reuniões de prospecção', route: '../' },
+    { name: 'Edição', route: '' }
+]

@@ -1,5 +1,3 @@
-// const loginModule = () => import('./core/login/login.module').then(x => x.LoginModule);
-
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { EditSensibilizacaoComponent } from "./edit-sensibilizacao/edit-sensibilizacao.component";

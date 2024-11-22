@@ -7,6 +7,16 @@ import { SimpleInputModule } from './components/simple-input/simple-input.module
 import { TableStripedModule } from './components/table-striped/table-striped.module';
 import { DeleteButtonModule } from './components/delete-button/delete-button.module';
 import { ButtonModule } from './buttons/button.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +30,19 @@ import { ButtonModule } from './buttons/button.module';
     SimpleInputModule,
     TableStripedModule,
     DeleteButtonModule,
-    ButtonModule
+    ButtonModule,
+
+    MatTableModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatIconModule,
+    MatInputModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    NgxMaskDirective, 
+    NgxMaskPipe,
+    FormsModule
   ],
   exports: [
     CardModule,
@@ -29,7 +51,19 @@ import { ButtonModule } from './buttons/button.module';
     SimpleInputModule,
     TableStripedModule,
     DeleteButtonModule,
-    ButtonModule
+    ButtonModule,
+
+    MatTableModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatChipsModule,
+    MatIconModule,
+    MatInputModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    NgxMaskDirective, 
+    NgxMaskPipe,
+    FormsModule
   ]
 })
 export class SharedModule { }

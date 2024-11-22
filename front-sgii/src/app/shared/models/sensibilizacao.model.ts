@@ -1,3 +1,6 @@
+import { Participante } from "./participante.model";
+import { StatusAprovacaoBasico } from "./status-aprovacao.model";
+
 export class Sensibilizacao {
     Id: number;
     IdNucleoIncubador: number | null = null;
@@ -11,9 +14,9 @@ export class Sensibilizacao {
     Observacoes: string;
     DataRegistro: Date;
     IdUsuRegistrou: number;
-    Status: StatusAprovacaoSensibilizacao;
+    Status: StatusAprovacaoBasico;
 
-    Participantes?: ParticipanteSensibilizacao[] = [];
+    Participantes?: Participante[] = [];
 
     constructor() {
         this.Participantes = [];
@@ -23,16 +26,4 @@ export class Sensibilizacao {
 export enum TiposAcaoSensibilizacao {
     Palestra,
     Evento
-}
-
-export enum StatusAprovacaoSensibilizacao {
-    Aguardando,
-    Aprovado,
-    Reprovado
-}
-
-export interface ParticipanteSensibilizacao {
-    Id?: number;
-    Nome: string;
-    IdSensibilizacao?: number;
 }

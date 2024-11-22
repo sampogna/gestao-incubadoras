@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { bcEditSensibilizacao } from 'src/app/shared/breadcrumb-items';
 import { mockedNucleos } from 'src/app/shared/mocks.util';
-import { ParticipanteSensibilizacao, Sensibilizacao, TiposAcaoSensibilizacao } from 'src/app/shared/models/sensibilizacao.model';
+import { Participante } from 'src/app/shared/models/participante.model';
+import { Sensibilizacao, TiposAcaoSensibilizacao } from 'src/app/shared/models/sensibilizacao.model';
 
 @Component({
     selector: 'edit-sensibilizacao',
@@ -46,7 +47,7 @@ export class EditSensibilizacaoComponent implements OnInit {
             this.sensibilizacao.Participantes = [];
         }
 
-        const participante: ParticipanteSensibilizacao = {
+        const participante: Participante = {
             Nome: value
         }
         this.sensibilizacao.Participantes.push(participante);
@@ -55,7 +56,7 @@ export class EditSensibilizacaoComponent implements OnInit {
         this.toast.success('Participante adicionado à ação');
     }
 
-    removeParticipante(participante: ParticipanteSensibilizacao) {
+    removeParticipante(participante: Participante) {
         const index = this.sensibilizacao.Participantes?.indexOf(participante) || 0;
         if (index > -1) {
             this.sensibilizacao.Participantes?.splice(index, 1);

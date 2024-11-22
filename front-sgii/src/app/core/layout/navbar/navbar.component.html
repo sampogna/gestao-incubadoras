@@ -40,11 +40,16 @@
 <mat-menu #items>
     <button mat-menu-item routerLink="/nucleo-incubador"> Núcleos Incubadores </button>
     <button mat-menu-item routerLink="/sensibilizacao">Sensibilização</button>
-    <button mat-menu-item >Prospecção</button>
+    <button mat-menu-item [matMenuTriggerFor]="prospeccaoItems">Prospecção</button>
     <button mat-menu-item >Qualificação de Empreendedores</button>
     <button mat-menu-item >Empreendimentos</button>
     <button mat-menu-item >Desenvolvimento do Incubado</button>
     <button mat-menu-item >Usuários</button>
+</mat-menu>
+
+<mat-menu #prospeccaoItems>
+    <button mat-menu-item routerLink="/prospeccao/reuniao">Reunião de prospecção</button>
+    <button mat-menu-item routerLink="/prospeccao/desafio">Desafio da inovação</button>
 </mat-menu>
 
 <mat-menu #userItems>
