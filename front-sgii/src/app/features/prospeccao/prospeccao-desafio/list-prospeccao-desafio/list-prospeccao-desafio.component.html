@@ -1,6 +1,13 @@
 <div class="card">
     <div class="card__header">
-        <card-header [title]="'LISTAGEM DE DESAFIOS DE PROSPECÇÃO'" [breadcrumbItems]="breadcrumbItems" (buttonNewClicked)="navigateToCreation()"></card-header>
+        <card-header 
+            [title]="'LISTAGEM DE DESAFIOS DE PROSPECÇÃO'" 
+            [breadcrumbItems]="breadcrumbItems" 
+            (buttonNewClicked)="navigateToCreation()"
+            [showExportButton]="true"
+            [showCreateButton]="true"
+        >
+        </card-header>
     </div>
     <div class="card__search">
         <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>

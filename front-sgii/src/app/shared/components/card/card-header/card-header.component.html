@@ -1,5 +1,11 @@
 <div class="card-header">
     <h1> {{ title | uppercase }} </h1>
-    <button primary-button (click)="emitClickedNewRegistry()" *ngIf="showCreateButton"> + Novo </button>
+    <div class="buttons">   
+        <button class="buttons__export" primary-button (click)="emitClickedExport()" *ngIf="showExportButton">
+            <i class="fa fa-file-excel-o mr-3"></i> Exportar
+        </button>
+        <button primary-button (click)="emitClickedNewRegistry()" *ngIf="showCreateButton"> + Novo </button>
+
+    </div>
 </div>
 <card-breadcrumb [breadcrumbItems]="breadcrumbItems"></card-breadcrumb>
