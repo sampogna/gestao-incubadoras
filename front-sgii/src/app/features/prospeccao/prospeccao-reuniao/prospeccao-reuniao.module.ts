@@ -3,12 +3,14 @@ import { ListProspeccaoReuniaoComponent } from './list-prospeccao-reuniao/list-p
 import { EditProspeccaoReuniaoComponent } from './edit-prospeccao-reuniao/edit-prospeccao-reuniao.component';
 import { CommonModule } from '@angular/common';
 import { ProspeccaoReuniaoRoutingModule } from './prospeccao-reuniao.routing';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        ProspeccaoReuniaoRoutingModule
+        ProspeccaoReuniaoRoutingModule,
+        SharedModule
     ],
     declarations: [
         ListProspeccaoReuniaoComponent,

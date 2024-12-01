@@ -17,7 +17,7 @@
                 <label> Núcleo Incubador </label>
                 <select [(ngModel)]="desafioInovacao.Id">
                     <option [value]="null" disabled> Escolha o núcleo </option>
-                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.id">{{nucleo.name}}</option>
+                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
                 </select>
             </div>
         </div>

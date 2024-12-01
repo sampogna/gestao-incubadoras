@@ -1,1 +1,108 @@
-<p>edit-prospeccao-reuniao works!</p>
+<div class="card">
+    <div class="card__header">
+        <card-header [title]="pageTitle" [breadcrumbItems]="breadcrumbItems" [showCreateButton]="false"></card-header>
+    </div>
+
+    <div class="card__fields">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <label>Email</label>
+                <simple-input placeholder="Digite o email" type="email"></simple-input>
+            </div>
+            <div class="col-md-4">
+                <label> Núcleo Incubador </label>
+                <select [(ngModel)]="reuniao.IdNucleoIncubador">
+                    <option [value]="null" disabled> Escolha o núcleo </option>
+                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label> Tipo da Ação de Prospecção </label>
+                <select [(ngModel)]="reuniao.IdTipoAcaoProspeccao">
+                    <option [value]="null" disabled> Escolha o tipo da ação </option>
+                    <option *ngFor="let tipoAcao of tipoReuniaoSelectIems" [value]="tipoAcao.id"> {{tipoAcao.name}} </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <label>
+                    Data do evento
+                </label>
+                 <input mask="00/00/0000 00:00" placeholder="dd/mm/aaaa hh:mm">
+            </div>
+            <div class="col-md-4">
+                <label>
+                    Local
+                </label>
+                 <input placeholder="Digite o local">
+            </div>
+            <div class="col-md-4">
+                <label>
+                    Perfil do público-alvo
+                </label>
+                 <input placeholder="Digite o perfil">
+            </div>
+            <div class="col-md-2">
+                <label>
+                    Número de pessoas sensibilizadas
+                </label>
+                 <input placeholder="Digite o número" type="number">
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6" style="display: flex; flex-direction: column;">
+                <label for="">
+                    Observações
+                </label>
+                <textarea rows="4"></textarea>
+            </div>
+        </div>
+
+        <!-- Responsaveis -->
+         <div class="row mb-4">
+            <div class="col">
+                <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
+                <simple-input placeholder="Digite o nome" (keydown.enter)="add($event)"></simple-input>
+                <div class="listbox-container">
+                    <mat-chip-listbox>
+                        <mat-chip *ngFor="let participante of reuniao.Participantes" >
+                            {{ participante.Nome }}
+                            <button matChipRemove aria-label="Remove orange" (click)="removeParticipante(participante)">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                    </mat-chip-listbox>
+                </div>
+            </div>
+         </div>
+        
+         <div class="row mb-4">
+            <div class="col-md-6">
+                <h3 style="margin: 0 !important;"> Lista de participantes (arquivo) </h3>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    A lista de participantes pode ter sido incluída na pergunta anterior:  lista dos participantes (Texto). 
+                    Neste caso não é necessário fazer upload de arquivo e esta pergunta pode ser deixada em branco. 
+                    Caso contrário, é necessário fazer upload de arquivo (foto) com os nomes dos participantes.
+                </span>
+                <file-upload-area></file-upload-area>
+            </div>
+
+            <div class="col-md-6">
+                <h3 style="margin: 0 !important;"> Registro fotográfico </h3>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    Inclua aqui as imagens que comprovem a realização da ação de sensibilização. <br>
+                    <div style="text-decoration: underline;">Observação:</div> Não inserir imagens maiores que 1024 x 1080 px.
+                </span>
+                <file-upload-area></file-upload-area>
+            </div>  
+         </div>
+    </div>
+
+    <div class="card__footer">
+        <button secondary-button routerLink="/reuniao"> Voltar </button>
+        <button primary-button> Salvar </button>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { bcEditProspeccaoReuniao } from 'src/app/shared/breadcrumb-items';
+import { bcEditProspeccaoDesafio } from 'src/app/shared/breadcrumb-items';
 import { mockedNucleos } from 'src/app/shared/mocks.util';
 import { Participante } from 'src/app/shared/models/participante.model';
 import { DesafioInovacao, IdeiaDesafioInovacao } from 'src/app/shared/models/prospeccao.model';
@@ -13,7 +13,7 @@ import { DesafioInovacao, IdeiaDesafioInovacao } from 'src/app/shared/models/pro
 })
 export class EditProspeccaoDesafioComponent implements OnInit {
     pageTitle: string;
-    breadcrumbItems = bcEditProspeccaoReuniao;
+    breadcrumbItems = bcEditProspeccaoDesafio;
 
     nucleos = mockedNucleos;
 
@@ -27,7 +27,7 @@ export class EditProspeccaoDesafioComponent implements OnInit {
     ngOnInit() {
         const id = this.route.snapshot.params['id'];
         
-        this.pageTitle = (id) ? 'Edição de ação de sensibilização' : 'Criação de ação de sensibilização';
+        this.pageTitle = (id) ? 'Edição de desafio de prospecção' : 'Criação de desafio de prospecção';
     }
 
     add(event: any, tipoInsercao: 'Participantes' | 'Ideias'): void {

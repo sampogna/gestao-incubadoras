@@ -54,3 +54,21 @@ export class ReuniaoProspeccao {
         this.Participantes = [];
     }
 }
+
+///////////////////// Reuniao
+
+export enum TiposAcaoReuniao {
+    ReuniaoGrupoPesquisa,
+    ReuniaoOrganizacoes,
+    AtendimentoEmpreendedor,
+    AtendimentoInventorIndependente,
+    MapeamentoTCC
+}
+
+export const TiposReuniaoSelectItems = [
+    { id: TiposAcaoReuniao.ReuniaoGrupoPesquisa, name: 'Reunião com Grupo de Pesquisa ou Extensão' },
+    { id: TiposAcaoReuniao.AtendimentoInventorIndependente, name: 'Reunião com Organizações' },
+    { id: TiposAcaoReuniao.AtendimentoEmpreendedor, name: 'Atendimento à Empreendedor' },
+    { id: TiposAcaoReuniao.AtendimentoInventorIndependente, name: 'Atendimento à Inventor Independente' },
+    { id: TiposAcaoReuniao.MapeamentoTCC, name: 'Mapeamento de TCC' }
+]

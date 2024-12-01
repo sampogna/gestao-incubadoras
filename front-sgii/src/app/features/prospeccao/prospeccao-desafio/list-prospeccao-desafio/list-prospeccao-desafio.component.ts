@@ -23,7 +23,7 @@ export class ListProspeccaoDesafioComponent {
       this.router.navigateByUrl("prospeccao/desafio/editar");
   }
 
-  navigateToEdit(sensibilizacao: any) {
-      this.router.navigateByUrl("prospeccao/desafio/editar/" + sensibilizacao.id);
+  navigateToEdit(desafio: any) {
+      this.router.navigateByUrl("prospeccao/desafio/editar/" + desafio.id);
   }
 }
