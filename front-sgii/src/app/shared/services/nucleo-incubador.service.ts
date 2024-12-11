@@ -37,13 +37,36 @@ export class NucleoIncubadorService {
   public getNucleoById(id: number): Observable<NucleoIncubador> {
     return this.http
       .get<NucleoIncubador>(
-        API_URL + this.controllerPrefix,
-        {        
-          params: {
-            id
-          }
-        }
+        API_URL + this.controllerPrefix + `/${id}`
       )      
+      .pipe(
+        catchError(err => {
+          console.error('API Error:', err);
+          return throwError('Something went wrong. Please try again later.');
+        })
+      );
+  }
+
+  public updateNucleo(nucleoIncubador: NucleoIncubador): Observable<any> {
+    return this.http
+      .put<NucleoIncubador>(
+        API_URL + this.controllerPrefix + `/${nucleoIncubador.Id}`,
+        nucleoIncubador
+      )
+      .pipe(
+        catchError(err => {
+          console.error('API Error:', err);
+          return throwError('Something went wrong. Please try again later.');
+        })
+      );
+  }
+
+  public createNucleo(nucleoIncubador): Observable<NucleoIncubador> {
+    return this.http
+      .post<NucleoIncubador>(
+        API_URL + this.controllerPrefix,
+        nucleoIncubador
+      )
       .pipe(
         catchError(err => {
           console.error('API Error:', err);

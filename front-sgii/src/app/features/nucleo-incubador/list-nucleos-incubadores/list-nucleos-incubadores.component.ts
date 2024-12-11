@@ -34,7 +34,6 @@ export class ListNucleosIncubadoresComponent implements OnInit {
         this.pagination.TotalCount = res?.TotalCount;
         this.pagination.TotalPages = res?.TotalPages;
         this.nucleos = res?.Data;
-        console.log('res', res);
       })
     )
     .subscribe();

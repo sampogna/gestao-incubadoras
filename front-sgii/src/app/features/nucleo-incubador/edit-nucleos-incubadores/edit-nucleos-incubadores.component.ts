@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcEditNucleoIncubador } from 'src/app/shared/breadcrumb-items';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
@@ -20,7 +21,8 @@ export class EditNucleosIncubadoresComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly nucleoService: NucleoIncubadorService
+    private readonly nucleoService: NucleoIncubadorService,
+    private readonly toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -38,10 +40,39 @@ export class EditNucleosIncubadoresComponent implements OnInit {
       .getNucleoById(id)
       .pipe(
         tap(nucleo => {
-          this.nucleoIncubador = nucleo[0];
+          this.nucleoIncubador = nucleo;
           
         })
       )
       .subscribe();
+  }
+
+  handlePersistence(): void {
+    if (this.nucleoIncubador?.Id) this.persistEdition();
+    else this.persistCreate();
+  }
+
+  persistEdition() {
+    this.nucleoService.updateNucleo(this.nucleoIncubador)
+    .pipe(
+      tap(() => this.toastr.success('Núcleo atualizado com sucesso!'))
+    )
+    .subscribe();
+  }
+
+  persistCreate() {
+    this.nucleoService.createNucleo(this.nucleoIncubador)
+    .pipe(
+      tap(
+        nucleoCriado => {
+          if (nucleoCriado.Id) {
+            this.toastr.success('Núcleo criado com sucesso!');
+            this.nucleoIncubador = nucleoCriado;
+          }
+          
+        }
+      )
+    )
+    .subscribe();
   }
 }
