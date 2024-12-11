@@ -86,11 +86,11 @@ namespace SGII.Api.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Capacitacao_EditalCapacitacao");
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.Capacitacaos)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Capacitacao_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.Capacitacaos)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Capacitacao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdResponsavelNavigation)
                     .WithMany(p => p.CapacitacaoIdResponsavelNavigations)
@@ -128,11 +128,11 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Titulo).HasMaxLength(400);
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.DesafioInovacaos)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DesafioInovacao_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.DesafioInovacaos)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_DesafioInovacao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdResponsavelNavigation)
                     .WithMany(p => p.DesafioInovacaos)
@@ -361,11 +361,11 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Titulo).HasMaxLength(400);
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.PreIncubacaos)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PreIncubacao_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.PreIncubacaos)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_PreIncubacao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdResponsavelNavigation)
                     .WithMany(p => p.PreIncubacaoIdResponsavelNavigations)
@@ -400,11 +400,11 @@ namespace SGII.Api.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposta_Edital");
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.Proposta)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Proposta_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.Proposta)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Proposta_NucleoIncubador");
 
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Proposta)
@@ -441,11 +441,11 @@ namespace SGII.Api.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ReuniaoProspeccao_EstagioMaturidade");
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.ReuniaoProspeccaos)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ReuniaoProspeccao_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.ReuniaoProspeccaos)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_ReuniaoProspeccao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdTipoAcaoProspeccaoNavigation)
                     .WithMany(p => p.ReuniaoProspeccaos)
@@ -478,11 +478,11 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Tema).HasMaxLength(200);
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.Sensibilizacaos)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sensibilizacao_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.Sensibilizacaos)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Sensibilizacao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdTipoSensibilizacaoNavigation)
                     .WithMany(p => p.Sensibilizacaos)
@@ -546,11 +546,11 @@ namespace SGII.Api.Models
                     .HasForeignKey(d => d.IdCargo)
                     .HasConstraintName("FK_Usuario_Cargo");
 
-                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                    .WithMany(p => p.Usuarios)
-                    .HasForeignKey(d => d.IdNucleoIncubador)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Usuario_NucleoIncubador");
+                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                //    .WithMany(p => p.Usuarios)
+                //    .HasForeignKey(d => d.IdNucleoIncubador)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Usuario_NucleoIncubador");
 
                 entity.HasOne(d => d.IdTipoNavigation)
                     .WithMany(p => p.Usuarios)

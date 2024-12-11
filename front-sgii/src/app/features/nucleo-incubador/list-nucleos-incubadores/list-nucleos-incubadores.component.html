@@ -10,16 +10,16 @@
         </card-header>
     </div>
     <div class="card__search">
-        <simple-input [placeholder]="'Digite o nome do núcleo'" [leftIconClass]="'search'"></simple-input>
+        <simple-input [(ngModel)]="termFilter" [placeholder]="'Digite o nome do núcleo'" [leftIconClass]="'search'"></simple-input>
     </div>
     <div class="card__table">
-        <table-striped [tableItems]="users" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
+        <table-striped [tableItems]="nucleos" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
         </table-striped>
         
-        <ng-template #actionButtonsTemplate let-user>
+        <ng-template #actionButtonsTemplate let-nucleo>
             <div class="table-btns-spaced">
-                <edit-button (clicked)="navigateToEdit(user)"></edit-button>
-                <delete-button (clicked)="deleteElement(user)"></delete-button>
+                <edit-button (clicked)="navigateToEdit(nucleo)"></edit-button>
+                <delete-button (clicked)="deleteElement(nucleo)"></delete-button>
             </div>
             
         </ng-template>

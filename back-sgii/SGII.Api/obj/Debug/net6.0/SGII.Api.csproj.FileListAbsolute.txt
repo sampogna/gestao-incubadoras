@@ -68,7 +68,6 @@ C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\staticwebassets.pack.json
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\staticwebassets.build.json
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\staticwebassets.development.json
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\scopedcss\bundle\SGII.Api.styles.css
-C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.csproj.CopyComplete
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.dll
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\refint\SGII.Api.dll
 C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.pdb
@@ -283,5 +282,4 @@ C:\SGII\back-sgii\SGII.Api\bin\Debug\net6.0\runtimes\win-arm64\native\e_sqlite3.
 C:\SGII\back-sgii\SGII.Api\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\SGII\back-sgii\SGII.Api\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\SGII\back-sgii\SGII.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
-C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.RazorAssemblyInfo.cache
-C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.RazorAssemblyInfo.cs
+C:\SGII\back-sgii\SGII.Api\obj\Debug\net6.0\SGII.Api.csproj.CopyComplete

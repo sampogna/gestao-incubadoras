@@ -1,162 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using SGII.Api.Models;
+using SGII.Api.Services;
+using System.Threading.Tasks;
 
 namespace SGII.Api.Controllers
 {
-    public class NucleoIncubadorController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class NucleoIncubadorController : ControllerBase
     {
-        private readonly IncubadoraContext _context;
+        private readonly INucleoIncubadorService _service;
 
-        public NucleoIncubadorController(IncubadoraContext context)
+        public NucleoIncubadorController(INucleoIncubadorService service)
         {
-            _context = context;
+            _service = service;
         }
 
-        // GET: NucleoIncubador
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-              return _context.NucleoIncubadors != null ? 
-                          View(await _context.NucleoIncubadors.ToListAsync()) :
-                          Problem("Entity set 'IncubadoraContext.NucleoIncubadors'  is null.");
+            var nucleos = await _service.GetAllAsync();
+            return Ok(nucleos);
         }
 
-        // GET: NucleoIncubador/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetAllPaginated([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? filter = null)
         {
-            if (id == null || _context.NucleoIncubadors == null)
+            if (page < 1 || pageSize < 1)
+                return BadRequest("Page and PageSize must be greater than zero.");
+
+            var (data, totalCount) = await _service.GetAllPaginatedAsync(page, pageSize, filter);
+
+            var response = new
             {
-                return NotFound();
-            }
+                TotalCount = totalCount,
+                Page = page,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize),
+                Data = data
+            };
 
-            var nucleoIncubador = await _context.NucleoIncubadors
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (nucleoIncubador == null)
-            {
-                return NotFound();
-            }
-
-            return View(nucleoIncubador);
+            return Ok(response);
         }
 
-        // GET: NucleoIncubador/Create
-        public IActionResult Create()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            return View();
+            var nucleo = await _service.GetByIdAsync(id);
+            if (nucleo == null)
+                return NotFound();
+
+            return Ok(nucleo);
         }
 
-        // POST: NucleoIncubador/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao")] NucleoIncubador nucleoIncubador)
+        public async Task<IActionResult> Add([FromBody] NucleoIncubador nucleoIncubador)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(nucleoIncubador);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(nucleoIncubador);
+            await _service.AddAsync(nucleoIncubador);
+            return CreatedAtAction(nameof(GetById), new { id = nucleoIncubador.Id }, nucleoIncubador);
         }
 
-        // GET: NucleoIncubador/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.NucleoIncubadors == null)
-            {
-                return NotFound();
-            }
-
-            var nucleoIncubador = await _context.NucleoIncubadors.FindAsync(id);
-            if (nucleoIncubador == null)
-            {
-                return NotFound();
-            }
-            return View(nucleoIncubador);
-        }
-
-        // POST: NucleoIncubador/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao")] NucleoIncubador nucleoIncubador)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] NucleoIncubador nucleoIncubador)
         {
             if (id != nucleoIncubador.Id)
-            {
-                return NotFound();
-            }
+                return BadRequest();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(nucleoIncubador);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NucleoIncubadorExists(nucleoIncubador.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(nucleoIncubador);
+            await _service.UpdateAsync(nucleoIncubador);
+            return NoContent();
         }
 
-        // GET: NucleoIncubador/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.NucleoIncubadors == null)
-            {
-                return NotFound();
-            }
-
-            var nucleoIncubador = await _context.NucleoIncubadors
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (nucleoIncubador == null)
-            {
-                return NotFound();
-            }
-
-            return View(nucleoIncubador);
-        }
-
-        // POST: NucleoIncubador/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.NucleoIncubadors == null)
-            {
-                return Problem("Entity set 'IncubadoraContext.NucleoIncubadors'  is null.");
-            }
-            var nucleoIncubador = await _context.NucleoIncubadors.FindAsync(id);
-            if (nucleoIncubador != null)
-            {
-                _context.NucleoIncubadors.Remove(nucleoIncubador);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool NucleoIncubadorExists(int id)
-        {
-          return (_context.NucleoIncubadors?.Any(e => e.Id == id)).GetValueOrDefault();
+            await _service.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

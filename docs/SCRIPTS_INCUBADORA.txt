@@ -1,0 +1,769 @@
+USE [master]
+GO
+/****** Object:  Database [Incubadora]    Script Date: 13/07/2023 16:28:18 ******/
+CREATE DATABASE [Incubadora]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Incubadora', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Incubadora.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'Incubadora_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\DATA\Incubadora_log.ldf' , SIZE = 73728KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [Incubadora] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Incubadora].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Incubadora] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Incubadora] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Incubadora] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Incubadora] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Incubadora] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Incubadora] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [Incubadora] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Incubadora] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Incubadora] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Incubadora] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Incubadora] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Incubadora] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Incubadora] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Incubadora] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Incubadora] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [Incubadora] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Incubadora] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Incubadora] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Incubadora] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Incubadora] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Incubadora] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Incubadora] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Incubadora] SET RECOVERY FULL 
+GO
+ALTER DATABASE [Incubadora] SET  MULTI_USER 
+GO
+ALTER DATABASE [Incubadora] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Incubadora] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Incubadora] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Incubadora] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [Incubadora] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [Incubadora] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'Incubadora', N'ON'
+GO
+ALTER DATABASE [Incubadora] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [Incubadora] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [Incubadora]
+GO
+/****** Object:  Table [dbo].[CampusProposta]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CampusProposta](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_CampusProposta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Capacitacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Capacitacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Email] [nvarchar](532) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[Tema] [nvarchar](400) NOT NULL,
+	[IdResponsavel] [bigint] NOT NULL,
+	[Data] [date] NOT NULL,
+	[Local] [nvarchar](400) NOT NULL,
+	[NumeroParticipantes] [nvarchar](400) NOT NULL,
+	[Observacoes] [nvarchar](max) NULL,
+	[IdEdital] [bigint] NOT NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+	[DataRegistro] [datetime] NOT NULL,
+ CONSTRAINT [PK_Capacitacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cargo]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cargo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](100) NULL,
+ CONSTRAINT [PK_Cargo] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DesafioInovacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DesafioInovacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Email] [nvarchar](532) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[Titulo] [nvarchar](400) NOT NULL,
+	[IdResponsavel] [bigint] NOT NULL,
+	[DataInicio] [date] NOT NULL,
+	[DataFinal] [date] NOT NULL,
+	[Local] [nvarchar](200) NOT NULL,
+	[Perfil] [nvarchar](200) NOT NULL,
+	[NumeroOportunidades] [int] NOT NULL,
+	[Observacoes] [nvarchar](max) NULL,
+ CONSTRAINT [PK_DesafioInovacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Edital]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Edital](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Arquivo] [image] NOT NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+	[DataRegistro] [datetime] NOT NULL,
+ CONSTRAINT [PK_Edital] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EditalCapacitacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EditalCapacitacao](
+	[Id] [bigint] NOT NULL,
+	[Arquivo] [image] NOT NULL,
+ CONSTRAINT [PK_EditalCapacitacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EstagioMaturidade]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EstagioMaturidade](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](200) NULL,
+ CONSTRAINT [PK_EstagioMaturidade] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[IdeiaDesafioInovacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[IdeiaDesafioInovacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdDesafioInovacao] [bigint] NOT NULL,
+	[Ideia] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_IdeiaDesafioInovacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImagemCapacitacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImagemCapacitacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdCapacitacao] [bigint] NOT NULL,
+	[Arquivo] [image] NOT NULL,
+ CONSTRAINT [PK_ImagemCapacitacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImagemDesafioInovacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImagemDesafioInovacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdDesafioInovacao] [bigint] NOT NULL,
+	[Arquivo] [image] NOT NULL,
+ CONSTRAINT [PK_ImagemDesafioInovacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImagemPreIncubacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImagemPreIncubacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdPreIncubacao] [bigint] NOT NULL,
+	[Imagem] [image] NOT NULL,
+ CONSTRAINT [PK_ImagemPreIncubacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImagemReuniaoProspeccao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImagemReuniaoProspeccao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdReuniaoProspeccao] [bigint] NOT NULL,
+	[Arquivo] [image] NOT NULL,
+ CONSTRAINT [PK_ImagemReuniaoProspeccao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ImagemSensibilizacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ImagemSensibilizacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdSensibilizacao] [bigint] NOT NULL,
+	[Arquivo] [image] NOT NULL,
+ CONSTRAINT [PK_ImagemSensibilizacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ModalidadeProposta]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ModalidadeProposta](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](500) NOT NULL,
+ CONSTRAINT [PK_ModalidadeProposta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[NucleoIncubador]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NucleoIncubador](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](100) NULL,
+ CONSTRAINT [PK_NucleoIncubador] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParticipanteCapacitacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParticipanteCapacitacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdCapacitacao] [bigint] NOT NULL,
+	[Nome] [nvarchar](50) NOT NULL,
+	[Contato] [nvarchar](532) NULL,
+ CONSTRAINT [PK_ParticipanteCapacitacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParticipanteDesafioInovacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParticipanteDesafioInovacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdDesafioInovacao] [bigint] NOT NULL,
+	[Nome] [nvarchar](200) NOT NULL,
+ CONSTRAINT [PK_ParticipanteDesafioInovacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParticipantePreIncubacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParticipantePreIncubacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdPreIncubacao] [bigint] NOT NULL,
+	[Nome] [nchar](50) NOT NULL,
+	[Contato] [nchar](532) NULL,
+ CONSTRAINT [PK_ParticipantePreIncubacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParticipanteReuniaoProspeccao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParticipanteReuniaoProspeccao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdReuniaoProspeccao] [bigint] NOT NULL,
+	[NomeParticipante] [nvarchar](200) NOT NULL,
+	[Contato] [nvarchar](532) NULL,
+ CONSTRAINT [PK_ParticipanteReuniaoProspeccao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ParticipanteSensibilizacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ParticipanteSensibilizacao](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Nome] [nvarchar](200) NOT NULL,
+	[IdSensibilizacao] [bigint] NOT NULL,
+ CONSTRAINT [PK_ParticipanteSensibilizacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PreIncubacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PreIncubacao](
+	[Id] [bigint] NOT NULL,
+	[Email] [nvarchar](532) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[IdTipoAcaoQualificacao] [int] NOT NULL,
+	[Titulo] [nvarchar](400) NOT NULL,
+	[DataInicio] [date] NOT NULL,
+	[DataFim] [date] NOT NULL,
+	[Local] [nvarchar](200) NOT NULL,
+	[Perfil] [nvarchar](200) NOT NULL,
+	[Observacoes] [nvarchar](max) NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+	[DataRegistro] [datetime] NOT NULL,
+	[Edital] [image] NOT NULL,
+	[IdResponsavel] [bigint] NOT NULL,
+	[NumeroParticipantes] [int] NOT NULL,
+	[Resumo] [image] NOT NULL,
+ CONSTRAINT [PK_PreIncubacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Proposta]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Proposta](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Nome] [nvarchar](500) NOT NULL,
+	[IdModalidade] [int] NOT NULL,
+	[Email] [nvarchar](532) NOT NULL,
+	[Telefone] [nvarchar](200) NOT NULL,
+	[IdCampus] [nchar](10) NOT NULL,
+	[DataRegistro] [date] NOT NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[IdStatus] [int] NOT NULL,
+	[IdEdital] [bigint] NOT NULL,
+ CONSTRAINT [PK_Proposta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ReuniaoProspeccao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ReuniaoProspeccao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Email] [nvarchar](532) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[IdTipoAcaoProspeccao] [int] NOT NULL,
+	[TemaAcao] [nvarchar](400) NOT NULL,
+	[DataAcao] [date] NOT NULL,
+	[Local] [nvarchar](200) NOT NULL,
+	[Perfil] [nvarchar](200) NOT NULL,
+	[Descricao] [nvarchar](max) NOT NULL,
+	[IdEstagioMaturidade] [int] NOT NULL,
+	[Observacoes] [nvarchar](max) NULL,
+	[IdResponsavel] [bigint] NOT NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+	[DataRegistro] [datetime] NOT NULL,
+ CONSTRAINT [PK_ReuniaoProspeccao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sensibilizacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sensibilizacao](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[IdTipoSensibilizacao] [int] NOT NULL,
+	[Tema] [nvarchar](200) NOT NULL,
+	[IdUsuarioResponsavel] [bigint] NOT NULL,
+	[DataAcao] [datetime] NOT NULL,
+	[Local] [nvarchar](200) NOT NULL,
+	[Perfil] [nvarchar](200) NOT NULL,
+	[NumeroSensibilizados] [int] NOT NULL,
+	[Observacoes] [nvarchar](600) NULL,
+	[DataRegistro] [datetime] NOT NULL,
+	[IdUsuRegistrou] [bigint] NOT NULL,
+ CONSTRAINT [PK_Sensibilizacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[StatusProposta]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[StatusProposta](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_StatusProposta] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TipoAcaoProspeccao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TipoAcaoProspeccao](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](350) NULL,
+ CONSTRAINT [PK_TipoAcaoProspeccao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TipoSensibilizacao]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TipoSensibilizacao](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_TipoSensibilizacao] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TiposUsuario]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TiposUsuario](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [nvarchar](100) NOT NULL,
+ CONSTRAINT [PK_TiposUsuario] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Usuario]    Script Date: 13/07/2023 16:28:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Nome] [nvarchar](50) NOT NULL,
+	[Sobrenome] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](512) NOT NULL,
+	[Senha] [nvarchar](60) NOT NULL,
+	[IdNucleoIncubador] [int] NOT NULL,
+	[IdTipo] [int] NOT NULL,
+	[IdCargo] [int] NULL,
+ CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Sensibilizacao] ADD  CONSTRAINT [DF_Sensibilizacao_DataRegistro]  DEFAULT (getdate()) FOR [DataRegistro]
+GO
+ALTER TABLE [dbo].[Capacitacao]  WITH CHECK ADD  CONSTRAINT [FK_Capacitacao_EditalCapacitacao] FOREIGN KEY([IdEdital])
+REFERENCES [dbo].[EditalCapacitacao] ([Id])
+GO
+ALTER TABLE [dbo].[Capacitacao] CHECK CONSTRAINT [FK_Capacitacao_EditalCapacitacao]
+GO
+ALTER TABLE [dbo].[Capacitacao]  WITH CHECK ADD  CONSTRAINT [FK_Capacitacao_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[Capacitacao] CHECK CONSTRAINT [FK_Capacitacao_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[Capacitacao]  WITH CHECK ADD  CONSTRAINT [FK_Capacitacao_Usuario] FOREIGN KEY([IdResponsavel])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Capacitacao] CHECK CONSTRAINT [FK_Capacitacao_Usuario]
+GO
+ALTER TABLE [dbo].[Capacitacao]  WITH CHECK ADD  CONSTRAINT [FK_Capacitacao_Usuario1] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Capacitacao] CHECK CONSTRAINT [FK_Capacitacao_Usuario1]
+GO
+ALTER TABLE [dbo].[DesafioInovacao]  WITH CHECK ADD  CONSTRAINT [FK_DesafioInovacao_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[DesafioInovacao] CHECK CONSTRAINT [FK_DesafioInovacao_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[DesafioInovacao]  WITH CHECK ADD  CONSTRAINT [FK_DesafioInovacao_Usuario] FOREIGN KEY([IdResponsavel])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[DesafioInovacao] CHECK CONSTRAINT [FK_DesafioInovacao_Usuario]
+GO
+ALTER TABLE [dbo].[Edital]  WITH CHECK ADD  CONSTRAINT [FK_Edital_Usuario] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Edital] CHECK CONSTRAINT [FK_Edital_Usuario]
+GO
+ALTER TABLE [dbo].[IdeiaDesafioInovacao]  WITH CHECK ADD  CONSTRAINT [FK_IdeiaDesafioInovacao_DesafioInovacao] FOREIGN KEY([IdDesafioInovacao])
+REFERENCES [dbo].[DesafioInovacao] ([Id])
+GO
+ALTER TABLE [dbo].[IdeiaDesafioInovacao] CHECK CONSTRAINT [FK_IdeiaDesafioInovacao_DesafioInovacao]
+GO
+ALTER TABLE [dbo].[ImagemCapacitacao]  WITH CHECK ADD  CONSTRAINT [FK_ImagemCapacitacao_Capacitacao] FOREIGN KEY([IdCapacitacao])
+REFERENCES [dbo].[Capacitacao] ([Id])
+GO
+ALTER TABLE [dbo].[ImagemCapacitacao] CHECK CONSTRAINT [FK_ImagemCapacitacao_Capacitacao]
+GO
+ALTER TABLE [dbo].[ImagemDesafioInovacao]  WITH CHECK ADD  CONSTRAINT [FK_ImagemDesafioInovacao_DesafioInovacao] FOREIGN KEY([IdDesafioInovacao])
+REFERENCES [dbo].[DesafioInovacao] ([Id])
+GO
+ALTER TABLE [dbo].[ImagemDesafioInovacao] CHECK CONSTRAINT [FK_ImagemDesafioInovacao_DesafioInovacao]
+GO
+ALTER TABLE [dbo].[ImagemPreIncubacao]  WITH CHECK ADD  CONSTRAINT [FK_ImagemPreIncubacao_PreIncubacao] FOREIGN KEY([IdPreIncubacao])
+REFERENCES [dbo].[PreIncubacao] ([Id])
+GO
+ALTER TABLE [dbo].[ImagemPreIncubacao] CHECK CONSTRAINT [FK_ImagemPreIncubacao_PreIncubacao]
+GO
+ALTER TABLE [dbo].[ImagemReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ImagemReuniaoProspeccao_ReuniaoProspeccao] FOREIGN KEY([IdReuniaoProspeccao])
+REFERENCES [dbo].[ReuniaoProspeccao] ([Id])
+GO
+ALTER TABLE [dbo].[ImagemReuniaoProspeccao] CHECK CONSTRAINT [FK_ImagemReuniaoProspeccao_ReuniaoProspeccao]
+GO
+ALTER TABLE [dbo].[ImagemSensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_ImagemSensibilizacao_Sensibilizacao] FOREIGN KEY([IdSensibilizacao])
+REFERENCES [dbo].[Sensibilizacao] ([Id])
+GO
+ALTER TABLE [dbo].[ImagemSensibilizacao] CHECK CONSTRAINT [FK_ImagemSensibilizacao_Sensibilizacao]
+GO
+ALTER TABLE [dbo].[ParticipanteCapacitacao]  WITH CHECK ADD  CONSTRAINT [FK_ParticipanteCapacitacao_Capacitacao] FOREIGN KEY([IdCapacitacao])
+REFERENCES [dbo].[Capacitacao] ([Id])
+GO
+ALTER TABLE [dbo].[ParticipanteCapacitacao] CHECK CONSTRAINT [FK_ParticipanteCapacitacao_Capacitacao]
+GO
+ALTER TABLE [dbo].[ParticipanteDesafioInovacao]  WITH CHECK ADD  CONSTRAINT [FK_ParticipanteDesafioInovacao_DesafioInovacao] FOREIGN KEY([IdDesafioInovacao])
+REFERENCES [dbo].[DesafioInovacao] ([Id])
+GO
+ALTER TABLE [dbo].[ParticipanteDesafioInovacao] CHECK CONSTRAINT [FK_ParticipanteDesafioInovacao_DesafioInovacao]
+GO
+ALTER TABLE [dbo].[ParticipantePreIncubacao]  WITH CHECK ADD  CONSTRAINT [FK_ParticipantePreIncubacao_PreIncubacao] FOREIGN KEY([IdPreIncubacao])
+REFERENCES [dbo].[PreIncubacao] ([Id])
+GO
+ALTER TABLE [dbo].[ParticipantePreIncubacao] CHECK CONSTRAINT [FK_ParticipantePreIncubacao_PreIncubacao]
+GO
+ALTER TABLE [dbo].[ParticipanteReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ParticipanteReuniaoProspeccao_ReuniaoProspeccao] FOREIGN KEY([Id])
+REFERENCES [dbo].[ReuniaoProspeccao] ([Id])
+GO
+ALTER TABLE [dbo].[ParticipanteReuniaoProspeccao] CHECK CONSTRAINT [FK_ParticipanteReuniaoProspeccao_ReuniaoProspeccao]
+GO
+ALTER TABLE [dbo].[ParticipanteSensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_ParticipanteSensibilizacao_Sensibilizacao] FOREIGN KEY([IdSensibilizacao])
+REFERENCES [dbo].[Sensibilizacao] ([Id])
+GO
+ALTER TABLE [dbo].[ParticipanteSensibilizacao] CHECK CONSTRAINT [FK_ParticipanteSensibilizacao_Sensibilizacao]
+GO
+ALTER TABLE [dbo].[PreIncubacao]  WITH CHECK ADD  CONSTRAINT [FK_PreIncubacao_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[PreIncubacao] CHECK CONSTRAINT [FK_PreIncubacao_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[PreIncubacao]  WITH CHECK ADD  CONSTRAINT [FK_PreIncubacao_Usuario] FOREIGN KEY([IdResponsavel])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[PreIncubacao] CHECK CONSTRAINT [FK_PreIncubacao_Usuario]
+GO
+ALTER TABLE [dbo].[PreIncubacao]  WITH CHECK ADD  CONSTRAINT [FK_PreIncubacao_Usuario1] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[PreIncubacao] CHECK CONSTRAINT [FK_PreIncubacao_Usuario1]
+GO
+ALTER TABLE [dbo].[Proposta]  WITH CHECK ADD  CONSTRAINT [FK_Proposta_Edital] FOREIGN KEY([IdEdital])
+REFERENCES [dbo].[Edital] ([Id])
+GO
+ALTER TABLE [dbo].[Proposta] CHECK CONSTRAINT [FK_Proposta_Edital]
+GO
+ALTER TABLE [dbo].[Proposta]  WITH CHECK ADD  CONSTRAINT [FK_Proposta_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[Proposta] CHECK CONSTRAINT [FK_Proposta_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[Proposta]  WITH CHECK ADD  CONSTRAINT [FK_Proposta_StatusProposta] FOREIGN KEY([IdStatus])
+REFERENCES [dbo].[StatusProposta] ([Id])
+GO
+ALTER TABLE [dbo].[Proposta] CHECK CONSTRAINT [FK_Proposta_StatusProposta]
+GO
+ALTER TABLE [dbo].[Proposta]  WITH CHECK ADD  CONSTRAINT [FK_Proposta_Usuario] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Proposta] CHECK CONSTRAINT [FK_Proposta_Usuario]
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ReuniaoProspeccao_EstagioMaturidade] FOREIGN KEY([IdEstagioMaturidade])
+REFERENCES [dbo].[EstagioMaturidade] ([Id])
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao] CHECK CONSTRAINT [FK_ReuniaoProspeccao_EstagioMaturidade]
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ReuniaoProspeccao_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao] CHECK CONSTRAINT [FK_ReuniaoProspeccao_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ReuniaoProspeccao_TipoAcaoProspeccao] FOREIGN KEY([IdTipoAcaoProspeccao])
+REFERENCES [dbo].[TipoAcaoProspeccao] ([Id])
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao] CHECK CONSTRAINT [FK_ReuniaoProspeccao_TipoAcaoProspeccao]
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ReuniaoProspeccao_Usuario] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao] CHECK CONSTRAINT [FK_ReuniaoProspeccao_Usuario]
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao]  WITH CHECK ADD  CONSTRAINT [FK_ReuniaoProspeccao_Usuario1] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[ReuniaoProspeccao] CHECK CONSTRAINT [FK_ReuniaoProspeccao_Usuario1]
+GO
+ALTER TABLE [dbo].[Sensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_Sensibilizacao_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[Sensibilizacao] CHECK CONSTRAINT [FK_Sensibilizacao_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[Sensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_Sensibilizacao_TipoSensibilizacao] FOREIGN KEY([IdTipoSensibilizacao])
+REFERENCES [dbo].[TipoSensibilizacao] ([Id])
+GO
+ALTER TABLE [dbo].[Sensibilizacao] CHECK CONSTRAINT [FK_Sensibilizacao_TipoSensibilizacao]
+GO
+ALTER TABLE [dbo].[Sensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_Sensibilizacao_Usuario] FOREIGN KEY([IdUsuarioResponsavel])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Sensibilizacao] CHECK CONSTRAINT [FK_Sensibilizacao_Usuario]
+GO
+ALTER TABLE [dbo].[Sensibilizacao]  WITH CHECK ADD  CONSTRAINT [FK_Sensibilizacao_Usuario1] FOREIGN KEY([IdUsuRegistrou])
+REFERENCES [dbo].[Usuario] ([Id])
+GO
+ALTER TABLE [dbo].[Sensibilizacao] CHECK CONSTRAINT [FK_Sensibilizacao_Usuario1]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Cargo] FOREIGN KEY([IdCargo])
+REFERENCES [dbo].[Cargo] ([Id])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [FK_Usuario_Cargo]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_NucleoIncubador] FOREIGN KEY([IdNucleoIncubador])
+REFERENCES [dbo].[NucleoIncubador] ([Id])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [FK_Usuario_NucleoIncubador]
+GO
+ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_TiposUsuario] FOREIGN KEY([IdTipo])
+REFERENCES [dbo].[TiposUsuario] ([Id])
+GO
+ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [FK_Usuario_TiposUsuario]
+GO
+USE [master]
+GO
+ALTER DATABASE [Incubadora] SET  READ_WRITE 
+GO

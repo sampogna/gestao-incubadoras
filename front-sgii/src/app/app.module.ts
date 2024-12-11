@@ -9,6 +9,7 @@ import { LayoutModule } from './core/layout/layout.module';
 import { LoginModule } from './core/login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleInputModule } from './shared/components/simple-input/simple-input.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SimpleInputModule } from './shared/components/simple-input/simple-input
     SimpleInputModule,
     LoginModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
