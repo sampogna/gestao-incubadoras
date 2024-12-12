@@ -1,10 +1,14 @@
-import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
   selector: '[secondary-button]',
 })
-export class SecondaryButtonDirective{
+export class SecondaryButtonDirective {
+  @Input() buttonSmaller: boolean = false;
+
   @HostBinding('class') get classes(): string {
-    return 'button button--secondary';
+    const baseClasses = 'button button--secondary';
+    const smallerClass = this.buttonSmaller ? 'button--smaller' : '';
+    return `${baseClasses} ${smallerClass}`.trim();
   }
 }

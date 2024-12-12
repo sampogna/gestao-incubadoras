@@ -1,0 +1,14 @@
+
+<div class="dialog">
+    <div class="dialog-title">
+        <h3>{{data.title}}</h3>
+    </div>
+    
+    <div class="dialog-content">
+      {{data.message}}
+    </div>
+    <div class="dialog-footer">
+      <button secondary-button [mat-dialog-close]="false" [buttonSmaller]="true"> {{ data.secondaryButtonTitle }} </button>
+      <button primary-button [mat-dialog-close]="true" [buttonSmaller]="true"> {{ data.primaryButtonTitle }} </button>
+    </div>
+</div>

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, tap, throwError } from 'rxjs';
 import { bcListNucleosIncubadores } from 'src/app/shared/breadcrumb-items';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { NucleoIncubadorService } from 'src/app/shared/services/nucleo-incubador.service';
@@ -22,7 +25,9 @@ export class ListNucleosIncubadoresComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly nucleoService: NucleoIncubadorService
+    private readonly nucleoService: NucleoIncubadorService,
+    private readonly dialog: MatDialog,
+    private readonly toastr: ToastrService
   ) { }
 
 
@@ -43,11 +48,23 @@ export class ListNucleosIncubadoresComponent implements OnInit {
       this.router.navigateByUrl("/nucleo-incubador/editar");
   }
 
-  navigateToEdit(nucleo: any): void {
+  navigateToEdit(nucleo: NucleoIncubador): void {
       this.router.navigateByUrl("/nucleo-incubador/editar/" + nucleo.Id);
   }
 
-  deleteElement(nucleo: any): void {
-    //doSomething
+  deleteElement(nucleo: NucleoIncubador): void {
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Você tem certeza que deseja deletar o núcleo: ' + nucleo.Descricao
+      }
+    });
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.nucleoService.deleteNucleo(nucleo.Id).subscribe(() => {
+          this.toastr.success('Núcleo deletado com sucesso')
+          this.ngOnInit();
+        })
+      }
+    });
   }
 }

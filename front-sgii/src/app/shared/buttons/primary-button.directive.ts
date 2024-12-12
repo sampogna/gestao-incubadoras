@@ -4,7 +4,10 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
   selector: '[primary-button]',
 })
 export class PrimaryButtonDirective {
+  @Input() buttonSmaller: boolean = false;
   @HostBinding('class') get classes(): string {
-    return 'button button--primary';
+    const baseClasses = 'button button--primary';
+    const smallerClass = this.buttonSmaller ? 'button--smaller' : '';
+    return `${baseClasses} ${smallerClass}`.trim();
   }
 }

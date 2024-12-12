@@ -20,4 +20,9 @@
     color: $bg-color;
     border: 1px solid $bg-color;
   }
+
+  &--smaller{
+    padding: 3px 28px !important;
+    font-size: 14px !important;
+  }
 }

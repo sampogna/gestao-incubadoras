@@ -1,0 +1,22 @@
+.dialog {
+
+    padding: 23px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &-title h3 {
+        margin: 0;
+    }
+
+    &-footer {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+    }
+
+}
+
+:host ::ng-deep * {
+    font-family: "Nunito Sans", sans-serif;
+}

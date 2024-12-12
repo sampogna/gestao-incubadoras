@@ -61,7 +61,7 @@ export class NucleoIncubadorService {
       );
   }
 
-  public createNucleo(nucleoIncubador): Observable<NucleoIncubador> {
+  public createNucleo(nucleoIncubador: NucleoIncubador): Observable<NucleoIncubador> {
     return this.http
       .post<NucleoIncubador>(
         API_URL + this.controllerPrefix,
@@ -73,6 +73,13 @@ export class NucleoIncubadorService {
           return throwError('Something went wrong. Please try again later.');
         })
       );
+  }
+
+  public deleteNucleo(id: number) : Observable<any> {
+    return this.http
+      .delete(
+        API_URL + this.controllerPrefix + `/${id}`
+      )
   }
 
 
