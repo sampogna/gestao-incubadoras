@@ -4,6 +4,7 @@ import { TableStripedComponent } from './table-striped.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { CustomPaginatorModule } from '../custom-paginator/custom-paginator.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    CustomPaginatorModule
   ],
   exports: [TableStripedComponent]
 })

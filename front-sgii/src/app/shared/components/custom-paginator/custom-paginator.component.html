@@ -1,0 +1,8 @@
+<div class="paginator-actions">
+    <button class="fa fa-angle-left" (click)="proceedToPaginate(paginationActions.PREVIOUS_PAGE)"></button>
+    <div class="paginator-actions__description">
+        Página {{paginationData.Page}} de {{ paginationData.TotalPages }}, {{ paginationData.TotalCount }} registros
+    </div>
+    <button class="fa fa-angle-right" (click)="proceedToPaginate(paginationActions.NEXT_PAGE)"></button>
+</div>
+

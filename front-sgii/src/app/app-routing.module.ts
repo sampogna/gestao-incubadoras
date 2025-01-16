@@ -11,6 +11,7 @@ const sensibilizacaoModule = () => import ('./features/sensibilizacao/sensibiliz
 const nucleoIncubadorModule = () => import ('./features/nucleo-incubador/nucleo-incubador.module').then(x => x.NucleoIncubadorModule)
 const prospeccaoDesafioModule = () => import ('./features/prospeccao/prospeccao-desafio/prospeccao-desafio.module').then(x => x.ProspeccaoDesafioModule)
 const prospeccaoReuniaoModule = () => import ('./features/prospeccao/prospeccao-reuniao/prospeccao-reuniao.module').then(x => x.ProspeccaoReuniaoModule)
+const usuarioModule = () => import ('./features/usuario/usuario.module').then(x => x.UsuarioModule);
 
 const routes: Routes = [
   { path: 'login', loadChildren: loginModule },
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'nucleo-incubador', loadChildren: nucleoIncubadorModule },
       { path: 'prospeccao/desafio', loadChildren: prospeccaoDesafioModule },
       { path: 'prospeccao/reuniao', loadChildren: prospeccaoReuniaoModule },
+      { path: 'usuario', loadChildren:  usuarioModule},
       { path: 'profile', component: ProfileComponent }
     ]
   },

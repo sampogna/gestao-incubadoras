@@ -1,0 +1,17 @@
+.paginator-actions {
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 10px;
+
+    button {
+        font-size: 2rem !important;
+    }
+
+    &__description {
+        font-size: 1.1rem;
+    }
+
+}

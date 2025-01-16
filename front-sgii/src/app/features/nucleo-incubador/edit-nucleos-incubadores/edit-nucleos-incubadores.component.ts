@@ -60,7 +60,7 @@ export class EditNucleosIncubadoresComponent implements OnInit {
     .subscribe();
   }
 
-  persistCreate() {
+  persistCreate(): void {
     this.nucleoService.createNucleo(this.nucleoIncubador)
     .pipe(
       tap(

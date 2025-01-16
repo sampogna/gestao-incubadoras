@@ -24,6 +24,6 @@ export class Sensibilizacao {
   }
 
 export enum TiposAcaoSensibilizacao {
-    Palestra,
+    Palestra = 1,
     Evento
 }

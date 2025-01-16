@@ -14,8 +14,7 @@ export class PaginatedResult<T> {
     Data: T[] = [];
 }
 
-
-
-// export function assertPaginationResult(paginatedResult: PaginatedResult, pagination: Pagination, items: any[]) {
-
-// }
+export enum PaginationActions {
+    NEXT_PAGE = 1,
+    PREVIOUS_PAGE = -1
+}

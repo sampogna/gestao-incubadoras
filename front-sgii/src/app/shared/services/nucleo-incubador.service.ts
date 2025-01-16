@@ -16,16 +16,28 @@ export class NucleoIncubadorService {
     private readonly http: HttpClient
   ) { }
 
-  public getAllNucleos(pagination: Pagination): Observable<PaginatedResult<NucleoIncubador>> {
+  public getAllNucleos(pagination: Pagination, filter?: string): Observable<PaginatedResult<NucleoIncubador>> {
     return this.http.get<PaginatedResult<NucleoIncubador>>(
       API_URL + this.controllerPrefix + '/paginated', 
       { 
         params: 
         { 
           page: pagination.Page,
-          pageSize: pagination.PageSize 
+          pageSize: pagination.PageSize,
+          filter: filter ?? ''
         } 
       })
+      .pipe(
+        catchError(err => {
+          console.error('API Error:', err);
+          return throwError('Something went wrong. Please try again later.');
+        })
+      );
+  }
+
+  public getAllNucleosNonPaginated(): Observable<NucleoIncubador[]> {
+    return this.http.get<NucleoIncubador[]>(
+      API_URL + this.controllerPrefix)
       .pipe(
         catchError(err => {
           console.error('API Error:', err);

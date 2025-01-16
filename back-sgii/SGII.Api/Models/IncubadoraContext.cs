@@ -42,7 +42,7 @@ namespace SGII.Api.Models
         public virtual DbSet<Sensibilizacao> Sensibilizacaos { get; set; } = null!;
         public virtual DbSet<StatusPropostum> StatusProposta { get; set; } = null!;
         public virtual DbSet<TipoAcaoProspeccao> TipoAcaoProspeccaos { get; set; } = null!;
-        public virtual DbSet<TipoSensibilizacao> TipoSensibilizacaos { get; set; } = null!;
+        //public virtual DbSet<TipoSensibilizacao> TipoSensibilizacaos { get; set; } = null!;
         public virtual DbSet<TiposUsuario> TiposUsuarios { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
@@ -447,11 +447,11 @@ namespace SGII.Api.Models
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("FK_ReuniaoProspeccao_NucleoIncubador");
 
-                entity.HasOne(d => d.IdTipoAcaoProspeccaoNavigation)
-                    .WithMany(p => p.ReuniaoProspeccaos)
-                    .HasForeignKey(d => d.IdTipoAcaoProspeccao)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ReuniaoProspeccao_TipoAcaoProspeccao");
+                //entity.HasOne(d => d.IdTipoAcaoProspeccaoNavigation)
+                //    .WithMany(p => p.ReuniaoProspeccaos)
+                //    .HasForeignKey(d => d.IdTipoAcaoProspeccao)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_ReuniaoProspeccao_TipoAcaoProspeccao");
 
                 entity.HasOne(d => d.IdUsuRegistrouNavigation)
                     .WithMany(p => p.ReuniaoProspeccaos)
@@ -478,17 +478,17 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Tema).HasMaxLength(200);
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.Sensibilizacaos)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Sensibilizacao_NucleoIncubador");
-
-                entity.HasOne(d => d.IdTipoSensibilizacaoNavigation)
+                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
                     .WithMany(p => p.Sensibilizacaos)
-                    .HasForeignKey(d => d.IdTipoSensibilizacao)
+                    .HasForeignKey(d => d.IdNucleoIncubador)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Sensibilizacao_TipoSensibilizacao");
+                    .HasConstraintName("FK_Sensibilizacao_NucleoIncubador");
+
+                //entity.HasOne(d => d.IdTipoSensibilizacaoNavigation)
+                //    .WithMany(p => p.Sensibilizacaos)
+                //    .HasForeignKey(d => d.IdTipoSensibilizacao)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Sensibilizacao_TipoSensibilizacao");
 
                 entity.HasOne(d => d.IdUsuRegistrouNavigation)
                     .WithMany(p => p.SensibilizacaoIdUsuRegistrouNavigations)
@@ -515,12 +515,12 @@ namespace SGII.Api.Models
                 entity.Property(e => e.Descricao).HasMaxLength(350);
             });
 
-            modelBuilder.Entity<TipoSensibilizacao>(entity =>
-            {
-                entity.ToTable("TipoSensibilizacao");
+            //modelBuilder.Entity<TipoSensibilizacao>(entity =>
+            //{
+            //    entity.ToTable("TipoSensibilizacao");
 
-                entity.Property(e => e.Descricao).HasMaxLength(50);
-            });
+            //    entity.Property(e => e.Descricao).HasMaxLength(50);
+            //});
 
             modelBuilder.Entity<TiposUsuario>(entity =>
             {

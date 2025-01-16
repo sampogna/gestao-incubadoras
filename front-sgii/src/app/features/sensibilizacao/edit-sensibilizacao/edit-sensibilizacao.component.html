@@ -7,13 +7,13 @@
         <div class="row mb-4">
             <div class="col-md-4">
                 <label>Tema</label>
-                <simple-input placeholder="Digite o tema"></simple-input>
+                <simple-input placeholder="Digite o tema" [(ngModel)]="sensibilizacao.Tema"></simple-input>
             </div>
             <div class="col-md-4">
                 <label> Núcleo Incubador </label>
                 <select [(ngModel)]="sensibilizacao.IdNucleoIncubador">
                     <option [value]="null" disabled> Escolha o núcleo </option>
-                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.id">{{nucleo.name}}</option>
+                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
                 </select>
             </div>
             <div class="col-md-4">
@@ -42,13 +42,13 @@
                 <label>
                     Local
                 </label>
-                 <input placeholder="Digite o local">
+                 <input placeholder="Digite o local" [(ngModel)]="sensibilizacao.Local">
             </div>
             <div class="col-md-4">
                 <label>
                     Perfil do público-alvo
                 </label>
-                 <input placeholder="Digite o perfil">
+                 <input placeholder="Digite o perfil" [(ngModel)]="sensibilizacao.Perfil">
             </div>
             <div class="col-md-2">
                 <label>
@@ -109,6 +109,6 @@
 
     <div class="card__footer">
         <button secondary-button routerLink="/sensibilizacao"> Voltar </button>
-        <button primary-button> Salvar </button>
+        <button primary-button (click)="persistCreate()"> Salvar </button>
     </div>
 </div>

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, finalize, tap, throwError } from 'rxjs';
 import { bcListNucleosIncubadores } from 'src/app/shared/breadcrumb-items';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
-import { Pagination } from 'src/app/shared/models/pagination.model';
+import { Pagination, PaginationActions } from 'src/app/shared/models/pagination.model';
 import { NucleoIncubadorService } from 'src/app/shared/services/nucleo-incubador.service';
 
 @Component({
@@ -23,6 +23,8 @@ export class ListNucleosIncubadoresComponent implements OnInit {
   termFilter: string;
   pagination: Pagination = new Pagination();
 
+  private previousTermFilter: string;
+
   constructor(
     private readonly router: Router,
     private readonly nucleoService: NucleoIncubadorService,
@@ -32,16 +34,7 @@ export class ListNucleosIncubadoresComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.nucleoService.getAllNucleos(this.pagination).pipe(
-      tap( res => {
-        this.pagination.Page = res?.Page;
-        this.pagination.PageSize = res?.PageSize;
-        this.pagination.TotalCount = res?.TotalCount;
-        this.pagination.TotalPages = res?.TotalPages;
-        this.nucleos = res?.Data;
-      })
-    )
-    .subscribe();
+    this.searchData();
   }
 
   navigateToCreation(): void {
@@ -66,5 +59,28 @@ export class ListNucleosIncubadoresComponent implements OnInit {
         })
       }
     });
+  }
+
+  paginateAction(ev: PaginationActions) {
+    this.pagination.Page += ev;
+    this.searchData();
+  }
+
+  searchData(): void {
+
+    if (this.termFilter != this.previousTermFilter)
+      this.pagination.Page = 1;
+
+    this.nucleoService.getAllNucleos(this.pagination, this.termFilter).pipe(
+      tap( res => {
+        this.pagination.Page = res?.Page;
+        this.pagination.PageSize = res?.PageSize;
+        this.pagination.TotalCount = res?.TotalCount;
+        this.pagination.TotalPages = res?.TotalPages;
+        this.nucleos = res?.Data;
+        this.previousTermFilter = this.termFilter;
+      })
+    )
+    .subscribe();
   }
 }

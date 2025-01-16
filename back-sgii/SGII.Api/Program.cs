@@ -14,6 +14,8 @@ builder.Services.AddDbContext<IncubadoraContext>(options =>
 // Registro de Repositórios e Serviços
 builder.Services.AddScoped<INucleoIncubadorRepository, NucleoIncubadorRepository>();
 builder.Services.AddScoped<INucleoIncubadorService, NucleoIncubadorService>();
+builder.Services.AddScoped<ISensibilizacaoRepository, SensibilizacaoRepository>();
+builder.Services.AddScoped<ISensibilizacaoService, SensibilizacaoService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

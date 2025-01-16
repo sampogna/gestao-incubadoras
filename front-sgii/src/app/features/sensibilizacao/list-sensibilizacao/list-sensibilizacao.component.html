@@ -12,11 +12,17 @@
         <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>
     </div>
     <div class="card__table">
-        <table-striped [tableItems]="users" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
+        <table-striped 
+            [tableItems]="sensibilizacoes" 
+            [displayedColumns]="columns" 
+            [actionTemplate]="actionButtonsTemplate" 
+            (paginationChanged)="paginateAction($event)"
+            [pagination]="pagination"
+        >
         </table-striped>
         
-        <ng-template #actionButtonsTemplate let-user>
-            <edit-button (clicked)="navigateToEdit(user)"></edit-button>
+        <ng-template #actionButtonsTemplate let-sensibilizacao>
+            <edit-button (clicked)="navigateToEdit(sensibilizacao)"></edit-button>
         </ng-template>
     </div>
 </div>
