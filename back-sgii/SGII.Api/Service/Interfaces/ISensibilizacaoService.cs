@@ -12,5 +12,7 @@ namespace SGII.Api.Services
         Task AddAsync(Sensibilizacao sensibilizacao);
         Task UpdateAsync(Sensibilizacao sensibilizacao);
         Task DeleteAsync(int id);
+
+        Task UploadImage(ImagemSensibilizacao image);
     }
 }

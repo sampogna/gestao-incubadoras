@@ -43,5 +43,10 @@ namespace SGII.Api.Services
         {
             await _repository.DeleteAsync(id);
         }
+
+        public async Task UploadImage(ImagemSensibilizacao image)
+        {
+            await _repository.UploadImage(image);
+        }
     }
 }

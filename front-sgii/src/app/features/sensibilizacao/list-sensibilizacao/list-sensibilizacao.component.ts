@@ -42,7 +42,7 @@ export class ListSensibilizacaoComponent implements OnInit {
     }
 
     navigateToEdit(sensibilizacao: any) {
-        this.router.navigateByUrl("/sensibilizacao/editar/" + sensibilizacao.id);
+        this.router.navigateByUrl("/sensibilizacao/editar/" + sensibilizacao.Id);
     }
 
     deleteElement(sensibilizacao: Sensibilizacao): void {

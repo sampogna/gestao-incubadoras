@@ -1,0 +1,36 @@
+@use 'src/shared/styles/variables.scss' as *;
+
+.file-container {
+    display: flex;
+    gap: 8px;
+
+    &__badge {
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 1px solid $grey;
+        width: 350px;
+
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        height: 45px;
+        overflow: hidden;
+
+        justify-content: space-between;
+
+        &__name {
+            text-overflow: ellipsis;
+            max-width: 80%;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .fa-times {
+            font-size: 18px;
+        }
+    }
+
+
+}

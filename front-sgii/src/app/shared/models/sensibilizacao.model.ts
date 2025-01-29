@@ -1,3 +1,4 @@
+import { FileBase } from "./file.model";
 import { Participante } from "./participante.model";
 import { StatusAprovacaoBasico } from "./status-aprovacao.model";
 
@@ -16,14 +17,28 @@ export class Sensibilizacao {
     IdUsuRegistrou: number;
     Status: StatusAprovacaoBasico;
 
-    Participantes?: Participante[] = [];
+    ParticipanteSensibilizacaos?: Participante[] = [];
+
+    DataAcaoStr: string;
+
+    ImagemSensibilizacaos: ImagemSensibilizacao[] = [];
 
     constructor() {
-        this.Participantes = [];
+        this.ParticipanteSensibilizacaos = [];
     }
   }
 
 export enum TiposAcaoSensibilizacao {
     Palestra = 1,
     Evento
+}
+
+export class ImagemSensibilizacao extends FileBase {
+    IdSensibilizacao?: number;
+    Tipo: TiposImagemSensibilizacao;
+}
+
+export enum TiposImagemSensibilizacao {
+    ListaParticipantes = 1,
+    RegistroFotografico
 }

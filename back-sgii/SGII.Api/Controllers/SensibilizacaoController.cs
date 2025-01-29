@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SGII.Api.Models;
 using SGII.Api.Services;
 using System.Threading.Tasks;
@@ -60,8 +61,17 @@ namespace SGII.Api.Controllers
                 TO DO:
                     - corrigir datas, adicionar um input ou formatar a string da forma correta;
                     - apos criacao da feat de usuarios, adicionar assercao de ID corretamente
-                    - verificar o porque de lista de participantes nao estar sendo passada corretamente. Pelo payload da p visualizar, mas chega vazio na API
              */
+
+            foreach (var image in Sensibilizacao.ImagemSensibilizacaos)
+            {
+                if (!string.IsNullOrEmpty(image.ArquivoBase64))
+                {
+                    // Convert Base64 string to byte[]
+                    image.Arquivo = Convert.FromBase64String(image.ArquivoBase64);
+                }
+            }
+
             await _service.AddAsync(Sensibilizacao);
             return CreatedAtAction(nameof(GetById), new { id = Sensibilizacao.Id }, Sensibilizacao);
         }
@@ -81,6 +91,31 @@ namespace SGII.Api.Controllers
         {
             await _service.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpPost]
+        [Route("api/imagem-sensibilizacao")]
+        public async Task<IActionResult> UploadImage([FromForm] long idSensibilizacao, [FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                var image = new ImagemSensibilizacao
+                {
+                    IdSensibilizacao = idSensibilizacao,
+                    Arquivo = memoryStream.ToArray()
+                };
+
+                //// Save to the database
+                await _service.UploadImage(image);
+            }
+
+            return Ok("Image uploaded successfully.");
         }
     }
 }

@@ -241,11 +241,17 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Arquivo).HasColumnType("image");
 
-                entity.HasOne(d => d.IdSensibilizacaoNavigation)
+                entity.HasOne(d => d.Sensibilizacao)
                     .WithMany(p => p.ImagemSensibilizacaos)
                     .HasForeignKey(d => d.IdSensibilizacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ImagemSensibilizacao_Sensibilizacao");
+
+                //entity.HasOne(d => d.IdSensibilizacaoNavigation)
+                //    .WithMany(p => p.ImagemSensibilizacaos)
+                //    .HasForeignKey(d => d.IdSensibilizacao)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_ImagemSensibilizacao_Sensibilizacao");
             });
 
             modelBuilder.Entity<ModalidadePropostum>(entity =>
@@ -330,7 +336,7 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Nome).HasMaxLength(200);
 
-                entity.HasOne(d => d.IdSensibilizacaoNavigation)
+                entity.HasOne(d => d.Sensibilizacao)
                     .WithMany(p => p.ParticipanteSensibilizacaos)
                     .HasForeignKey(d => d.IdSensibilizacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -484,12 +490,6 @@ namespace SGII.Api.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Sensibilizacao_NucleoIncubador");
 
-                //entity.HasOne(d => d.IdTipoSensibilizacaoNavigation)
-                //    .WithMany(p => p.Sensibilizacaos)
-                //    .HasForeignKey(d => d.IdTipoSensibilizacao)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Sensibilizacao_TipoSensibilizacao");
-
                 entity.HasOne(d => d.IdUsuRegistrouNavigation)
                     .WithMany(p => p.SensibilizacaoIdUsuRegistrouNavigations)
                     .HasForeignKey(d => d.IdUsuRegistrou)
@@ -501,6 +501,16 @@ namespace SGII.Api.Models
                     .HasForeignKey(d => d.IdUsuarioResponsavel)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Sensibilizacao_Usuario");
+
+                entity.HasMany(s => s.ParticipanteSensibilizacaos)
+                    .WithOne(p => p.Sensibilizacao)
+                    .HasForeignKey(p => p.IdSensibilizacao);
+
+                entity.HasMany(s => s.ImagemSensibilizacaos)
+                    .WithOne(p => p.Sensibilizacao)
+                    .HasForeignKey(p => p.IdSensibilizacao);
+
+
             });
 
             modelBuilder.Entity<StatusPropostum>(entity =>
@@ -514,13 +524,6 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Descricao).HasMaxLength(350);
             });
-
-            //modelBuilder.Entity<TipoSensibilizacao>(entity =>
-            //{
-            //    entity.ToTable("TipoSensibilizacao");
-
-            //    entity.Property(e => e.Descricao).HasMaxLength(50);
-            //});
 
             modelBuilder.Entity<TiposUsuario>(entity =>
             {

@@ -1,4 +1,20 @@
-<div class="file-upload-area mt-3">
+<div 
+    class="file-upload-area mt-3 mb-3"
+    (click)="fileInput.click()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onFileDrop($event)"
+    [class.drag-over]="isDragOver">
     <i class="fa fa-cloud-upload"></i>
     <span> Arraste o arquivo ou clique na caixa para realizar o upload </span>
 </div>
+<input 
+    #fileInput 
+    type="file" 
+    class="d-none" 
+    (change)="onFileSelected($event)"
+    [accept]="allowedFileTypes"
+>
+
+
+<uploaded-items [files]="filesUploaded" *ngIf="filesUploaded?.length" (onFileDeleted)="onFileDeleted.emit($event)"></uploaded-items>

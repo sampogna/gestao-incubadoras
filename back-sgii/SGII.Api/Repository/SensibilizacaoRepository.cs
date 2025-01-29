@@ -43,25 +43,34 @@ namespace SGII.Api.Repositories
 
         public async Task<Sensibilizacao> GetByIdAsync(int id)
         {
-            return await _context.Sensibilizacaos.FindAsync(id);
+            var sensibilizacao = await _context.Sensibilizacaos
+            .Include(s => s.ParticipanteSensibilizacaos)
+            .Include(i => i.ImagemSensibilizacaos)
+            .FirstOrDefaultAsync(s => s.Id == (long)id);
+
+            return sensibilizacao;
         }
 
         public async Task AddAsync(Sensibilizacao sensibilizacao)
         {
-            try
-            {
-                sensibilizacao.DataAcao = DateTime.Now;
-                sensibilizacao.DataRegistro = DateTime.Now;
-                sensibilizacao.IdUsuarioResponsavel = 3;
-                sensibilizacao.IdUsuRegistrou = 3;
+            // TO DO: Remover ids chumbados
+            sensibilizacao.DataRegistro = DateTime.Now;
+            sensibilizacao.IdUsuarioResponsavel = 3;
+            sensibilizacao.IdUsuRegistrou = 3;
 
-                _context.Sensibilizacaos.Add(sensibilizacao);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
+
+            _context.Sensibilizacaos.Add(sensibilizacao);
+            await _context.SaveChangesAsync();
+
+            if (sensibilizacao?.Id > 0 && sensibilizacao.ImagemSensibilizacaos.Count > 0)
             {
-                throw ex;
+                foreach(var arquivo in sensibilizacao.ImagemSensibilizacaos)
+                {
+                    arquivo.IdSensibilizacao = sensibilizacao.Id;
+                    await UploadImage(arquivo);
+                }
             }
+
         }
 
         public async Task UpdateAsync(Sensibilizacao Sensibilizacao)
@@ -78,6 +87,12 @@ namespace SGII.Api.Repositories
                 _context.Sensibilizacaos.Remove(entity);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task UploadImage(ImagemSensibilizacao image)
+        {
+            await _context.ImagemSensibilizacaos.AddAsync(image);
+            await _context.SaveChangesAsync();
         }
     }
 }

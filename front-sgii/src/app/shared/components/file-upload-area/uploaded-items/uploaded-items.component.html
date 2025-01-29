@@ -1,0 +1,9 @@
+<div class="file-container">
+    <div *ngFor="let file of files" class="file-container__badge">
+        <span class="fa fa-file-o"></span>
+        <div class="file-container__badge__name">
+            {{ file.Nome }}
+        </div>
+        <button (click)="onFileDeleted.emit(file)"> <span class="fa fa-times"></span> </button>
+    </div>
+</div>

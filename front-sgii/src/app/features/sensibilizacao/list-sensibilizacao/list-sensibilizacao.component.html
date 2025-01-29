@@ -1,6 +1,7 @@
 <div class="card">
     <div class="card__header">
-        <card-header [title]="'LISTAGEM DE AÇÕES DE SENSIBILIZAÇÃO'" 
+        <card-header 
+            [title]="'LISTAGEM DE AÇÕES DE SENSIBILIZAÇÃO'" 
             [breadcrumbItems]="breadcrumbItems" 
             (buttonNewClicked)="navigateToCreation()"
             [showExportButton]="true"
@@ -9,7 +10,7 @@
         </card-header>
     </div>
     <div class="card__search">
-        <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>
+        <simple-input [(ngModel)]="termFilter" [placeholder]="'Digite o tema da sensibilização'" [leftIconClass]="'search'" (ngModelChange)="searchData()"></simple-input>
     </div>
     <div class="card__table">
         <table-striped 

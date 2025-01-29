@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { API_URL } from 'src/environments/environment';
 import { PaginatedResult, Pagination } from '../models/pagination.model';
 import { Sensibilizacao } from '../models/sensibilizacao.model';
+import { convertDateObjectToDateString } from '../utils/date';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,7 @@ export class SensibilizacaoService {
         API_URL + this.controllerPrefix + `/${id}`
       )      
       .pipe(
+        map(sensibilizacao =>( {...sensibilizacao, DataAcaoStr : convertDateObjectToDateString(new Date(sensibilizacao.DataAcao))} )),
         catchError(err => {
           console.error('API Error:', err);
           return throwError('Something went wrong. Please try again later.');
@@ -69,6 +71,7 @@ export class SensibilizacaoService {
         sensibilizacao
       )
       .pipe(
+        map(sensibilizacao =>( {...sensibilizacao, DataAcaoStr : convertDateObjectToDateString(new Date(sensibilizacao.DataAcao))} )),
         catchError(err => {
           console.error('API Error:', err);
           return throwError('Something went wrong. Please try again later.');
