@@ -17,4 +17,4 @@
 >
 
 
-<uploaded-items [files]="filesUploaded" *ngIf="filesUploaded?.length" (onFileDeleted)="onFileDeleted.emit($event)"></uploaded-items>
+<uploaded-items [files]="filesUploaded" *ngIf="filesUploaded?.length" (onFileDelete)="onFileDeleted.emit($event)"></uploaded-items>

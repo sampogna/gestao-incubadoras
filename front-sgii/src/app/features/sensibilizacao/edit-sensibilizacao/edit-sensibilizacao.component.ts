@@ -30,6 +30,9 @@ export class EditSensibilizacaoComponent implements OnInit {
 
     readonly tiposImagemSensibilizacao = TiposImagemSensibilizacao;
 
+    listaParticipantes: ImagemSensibilizacao[] = [];
+    registrosFotograficos: ImagemSensibilizacao[] = [];
+
     constructor(
         private route: ActivatedRoute,
         private toastr: ToastrService,
@@ -51,7 +54,8 @@ export class EditSensibilizacaoComponent implements OnInit {
         this.sensibilizacaoService
             .getSensibilizacaoById(id)
             .pipe(
-                tap(sensibilizacao => this.sensibilizacao = sensibilizacao)
+                tap(sensibilizacao => this.sensibilizacao = sensibilizacao),
+                tap(() => this.assertFileTypesArray())
             )
             .subscribe();
     }
@@ -120,6 +124,7 @@ export class EditSensibilizacaoComponent implements OnInit {
             const base64String = (reader.result as string).split(',')[1];
             console.log('file', file);
             this.sensibilizacao.ImagemSensibilizacaos.push({ ArquivoBase64: base64String, Nome: file.name, Tipo: tipo });
+            this.assertFileTypesArray();
         }
 
         reader.readAsDataURL(file);
@@ -127,7 +132,16 @@ export class EditSensibilizacaoComponent implements OnInit {
     }
 
     handleFileDeleted(file: ImagemSensibilizacao): void {
-        console.log('bati aqui po')
-        this.sensibilizacao.ImagemSensibilizacaos = this.sensibilizacao.ImagemSensibilizacaos.filter(i => i.Id != file.Id);
+        const index = this.sensibilizacao.ImagemSensibilizacaos.indexOf(file);
+        if (index !== -1) {
+          this.sensibilizacao.ImagemSensibilizacaos.splice(index, 1);
+        }
+
+        this.assertFileTypesArray();
+    }
+
+    assertFileTypesArray(): void {
+        this.listaParticipantes = this.sensibilizacao.ImagemSensibilizacaos.filter(s => s.Tipo == this.tiposImagemSensibilizacao.ListaParticipantes)
+        this.registrosFotograficos = this.sensibilizacao.ImagemSensibilizacaos.filter(s => s.Tipo == this.tiposImagemSensibilizacao.RegistroFotografico)
     }
 }

@@ -96,7 +96,8 @@
                 <file-upload-area 
                     allowedFileTypes="image/*" 
                     (onFileUploaded)="handleFileUploaded($event, tiposImagemSensibilizacao.ListaParticipantes)"
-                    [filesUploaded]="sensibilizacao.ImagemSensibilizacaos"
+                    [filesUploaded]="listaParticipantes"
+                    (onFileDeleted)="handleFileDeleted($event)"
                 >
                 </file-upload-area>
             </div>
@@ -111,6 +112,7 @@
                     allowedFileTypes="image/*" 
                     (onFileUploaded)="handleFileUploaded($event, tiposImagemSensibilizacao.RegistroFotografico)"
                     (onFileDeleted)="handleFileDeleted($event)"
+                    [filesUploaded]="registrosFotograficos"
                 >
                 </file-upload-area>
             </div>  
