@@ -99,24 +99,25 @@ export class EditSensibilizacaoComponent implements OnInit {
     }
 
     handlePersistence(): void {
+        if (this.sensibilizacao.DataAcaoStr?.length > 0)
+            this.sensibilizacao.DataAcao = convertDateStringToDateObject(this.sensibilizacao.DataAcaoStr);
+        else
+            this.sensibilizacao.DataAcao = new Date();
+
         if (this.sensibilizacao?.Id) this.persistEdition();
         else this.persistCreate();
     }
 
     persistEdition(): void {
 
-        this.sensibilizacao.DataAcao = convertDateStringToDateObject(this.sensibilizacao.DataAcaoStr);
-
         this.sensibilizacaoService.updateSensibilizacao(this.sensibilizacao)
         .pipe(
-          tap(() => this.toastr.success('Núcleo atualizado com sucesso!'))
+          tap(() => this.toastr.success('Sensibilização atualizada com sucesso!'))
         )
         .subscribe();
     }
 
     persistCreate(): void {
-
-        this.sensibilizacao.DataAcao = convertDateStringToDateObject(this.sensibilizacao.DataAcaoStr);
 
         this.sensibilizacaoService.createSensibilizacao(this.sensibilizacao)
         .pipe(

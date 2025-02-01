@@ -62,15 +62,6 @@ namespace SGII.Api.Repositories
             _context.Sensibilizacaos.Add(sensibilizacao);
             await _context.SaveChangesAsync();
 
-            if (sensibilizacao?.Id > 0 && sensibilizacao.ImagemSensibilizacaos.Count > 0)
-            {
-                foreach(var arquivo in sensibilizacao.ImagemSensibilizacaos)
-                {
-                    arquivo.IdSensibilizacao = sensibilizacao.Id;
-                    await UploadImage(arquivo);
-                }
-            }
-
         }
 
         public async Task UpdateAsync(Sensibilizacao Sensibilizacao)

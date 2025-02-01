@@ -57,12 +57,6 @@ namespace SGII.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] Sensibilizacao Sensibilizacao)
         {
-            /*
-                TO DO:
-                    - corrigir datas, adicionar um input ou formatar a string da forma correta;
-                    - apos criacao da feat de usuarios, adicionar assercao de ID corretamente
-             */
-
             foreach (var image in Sensibilizacao.ImagemSensibilizacaos)
             {
                 if (!string.IsNullOrEmpty(image.ArquivoBase64))
