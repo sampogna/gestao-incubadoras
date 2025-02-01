@@ -20,6 +20,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from "ngx-mask";
 import { FileUploadAreaModule } from "src/app/shared/components/file-upload-area/file-upload-area.module";
 import { MatDialogModule } from "@angular/material/dialog";
+import { SharedModule } from "src/app/shared/shared.module";
 
 
 @NgModule({
@@ -30,24 +31,9 @@ import { MatDialogModule } from "@angular/material/dialog";
   imports: [
     CommonModule,
     SensibilizacaoRoutingModule,
-    ButtonModule,
-    MatTableModule,
-    CardModule,
-    TableStripedModule,
-    EditButtonModule,
-    MatSelectModule,
     FormsModule,
-    MatRadioModule,
-    MatChipsModule,
-    MatIconModule,
-    MatInputModule,
-    MatDatepickerModule, 
-    MatNativeDateModule,
-    NgxMaskDirective, 
-    NgxMaskPipe,
-    FileUploadAreaModule,
-    SimpleInputModule,
-    MatDialogModule
+    SharedModule
+
   ],
   providers: [provideNgxMask()]
 })

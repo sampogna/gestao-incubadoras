@@ -24,6 +24,7 @@
         
         <ng-template #actionButtonsTemplate let-sensibilizacao>
             <edit-button (clicked)="navigateToEdit(sensibilizacao)"></edit-button>
+            <delete-button (clicked)="deleteElement(sensibilizacao)"></delete-button>
         </ng-template>
     </div>
 </div>

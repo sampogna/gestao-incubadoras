@@ -98,6 +98,22 @@ export class EditSensibilizacaoComponent implements OnInit {
 		this.toastr.success('Participante removido!');
     }
 
+    handlePersistence(): void {
+        if (this.sensibilizacao?.Id) this.persistEdition();
+        else this.persistCreate();
+    }
+
+    persistEdition(): void {
+
+        this.sensibilizacao.DataAcao = convertDateStringToDateObject(this.sensibilizacao.DataAcaoStr);
+
+        this.sensibilizacaoService.updateSensibilizacao(this.sensibilizacao)
+        .pipe(
+          tap(() => this.toastr.success('Núcleo atualizado com sucesso!'))
+        )
+        .subscribe();
+    }
+
     persistCreate(): void {
 
         this.sensibilizacao.DataAcao = convertDateStringToDateObject(this.sensibilizacao.DataAcaoStr);

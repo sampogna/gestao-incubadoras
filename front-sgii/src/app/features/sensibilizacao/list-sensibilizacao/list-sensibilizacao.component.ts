@@ -46,24 +46,24 @@ export class ListSensibilizacaoComponent implements OnInit {
     }
 
     deleteElement(sensibilizacao: Sensibilizacao): void {
-    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
-        data: {
-        message: 'Você tem certeza que deseja deletar o núcleo: ' + sensibilizacao.Tema
-        }
-    });
-    confirmDialog.afterClosed().subscribe(result => {
-        if (result === true) {
-        this.sensibilizacaoService.deleteSensibilizacao(sensibilizacao.Id).subscribe(() => {
-            this.toastr.success('Núcleo deletado com sucesso')
-            this.ngOnInit();
-        })
-        }
-    });
+        const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+            data: {
+            message: 'Você tem certeza que deseja deletar o núcleo: ' + sensibilizacao.Tema
+            }
+        });
+        confirmDialog.afterClosed().subscribe(result => {
+            if (result === true) {
+            this.sensibilizacaoService.deleteSensibilizacao(sensibilizacao.Id).subscribe(() => {
+                this.toastr.success('Núcleo deletado com sucesso')
+                this.ngOnInit();
+            })
+            }
+        });
     }
     
-    paginateAction(ev: PaginationActions) {
-    this.pagination.Page += ev;
-    this.searchData();
+    paginateAction(ev: PaginationActions): void {
+        this.pagination.Page += ev;
+        this.searchData();
     }
 
     searchData(): void {

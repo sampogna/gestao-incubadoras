@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { FormsModule } from '@angular/forms';
-import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogModule } from './components/dialogs/confirmation-dialog/confirmation-dialog.module';
 import { CustomPaginatorModule } from './components/custom-paginator/custom-paginator.module';
 
