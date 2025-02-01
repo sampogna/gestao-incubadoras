@@ -76,6 +76,15 @@ namespace SGII.Api.Controllers
             if (id != Sensibilizacao.Id)
                 return BadRequest();
 
+            foreach (var image in Sensibilizacao.ImagemSensibilizacaos)
+            {
+                if (!string.IsNullOrEmpty(image.ArquivoBase64))
+                {
+                    // Convert Base64 string to byte[]
+                    image.Arquivo = Convert.FromBase64String(image.ArquivoBase64);
+                }
+            }
+
             await _service.UpdateAsync(Sensibilizacao);
             return NoContent();
         }
