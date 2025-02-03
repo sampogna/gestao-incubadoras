@@ -42,8 +42,6 @@ namespace SGII.Api.Models
         public virtual DbSet<Sensibilizacao> Sensibilizacaos { get; set; } = null!;
         public virtual DbSet<StatusPropostum> StatusProposta { get; set; } = null!;
         public virtual DbSet<TipoAcaoProspeccao> TipoAcaoProspeccaos { get; set; } = null!;
-        //public virtual DbSet<TipoSensibilizacao> TipoSensibilizacaos { get; set; } = null!;
-        public virtual DbSet<TiposUsuario> TiposUsuarios { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -525,13 +523,6 @@ namespace SGII.Api.Models
                 entity.Property(e => e.Descricao).HasMaxLength(350);
             });
 
-            modelBuilder.Entity<TiposUsuario>(entity =>
-            {
-                entity.ToTable("TiposUsuario");
-
-                entity.Property(e => e.Descricao).HasMaxLength(100);
-            });
-
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.ToTable("Usuario");
@@ -554,12 +545,6 @@ namespace SGII.Api.Models
                 //    .HasForeignKey(d => d.IdNucleoIncubador)
                 //    .OnDelete(DeleteBehavior.ClientSetNull)
                 //    .HasConstraintName("FK_Usuario_NucleoIncubador");
-
-                entity.HasOne(d => d.IdTipoNavigation)
-                    .WithMany(p => p.Usuarios)
-                    .HasForeignKey(d => d.IdTipo)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Usuario_TiposUsuario");
             });
 
             OnModelCreatingPartial(modelBuilder);

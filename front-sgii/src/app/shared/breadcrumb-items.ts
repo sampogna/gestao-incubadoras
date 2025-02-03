@@ -36,3 +36,12 @@ export const bcEditProspeccaoReuniao: IBreadCrumbItem[] = [
     { name: 'Listagem de reuniões de prospecção', route: '../' },
     { name: 'Edição', route: '' }
 ]
+
+export const bcListUsuario: IBreadCrumbItem[] = [
+    { name: 'Listagem de usuários', route: '' }
+]
+
+export const bcEditUsuario: IBreadCrumbItem[] = [
+    { name: 'Listagem de usuários', route: '../' },
+    { name: 'Edição', route: '' }
+]

@@ -16,6 +16,8 @@ builder.Services.AddScoped<INucleoIncubadorRepository, NucleoIncubadorRepository
 builder.Services.AddScoped<INucleoIncubadorService, NucleoIncubadorService>();
 builder.Services.AddScoped<ISensibilizacaoRepository, SensibilizacaoRepository>();
 builder.Services.AddScoped<ISensibilizacaoService, SensibilizacaoService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -54,7 +56,5 @@ app.MapControllers();
 
 // Use a política de CORS
 app.UseCors("PermitirFrontend");
-
-app.MapGet("/sua-rota", () => "CORS habilitado!");
 
 app.Run();

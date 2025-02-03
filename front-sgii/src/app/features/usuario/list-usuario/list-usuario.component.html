@@ -1,1 +1,33 @@
-<p>list-usuario works!</p>
+<div class="card">
+    <div class="card__header">
+        <card-header 
+            [title]="'LISTAGEM DE USUÁRIOS'" 
+            [breadcrumbItems]="breadcrumbItems" 
+            (buttonNewClicked)="navigateToCreation()"
+            [showExportButton]="true"
+            [showCreateButton]="true"
+        >
+        </card-header>
+    </div>
+    <div class="card__search">
+        <simple-input [(ngModel)]="termFilter" [placeholder]="'Digite o nome do usuário'" [leftIconClass]="'search'" (ngModelChange)="searchData()"></simple-input>
+    </div>
+    <div class="card__table">
+        <table-striped 
+            [tableItems]="usuarios" 
+            [displayedColumns]="columns" 
+            [actionTemplate]="actionButtonsTemplate" 
+            (paginationChanged)="paginateAction($event)"
+            [pagination]="pagination"
+        >
+        </table-striped>
+        
+        <ng-template #actionButtonsTemplate let-usuario>
+            <div class="table-btns-spaced">
+                <edit-button (clicked)="navigateToEdit(usuario)"></edit-button>
+                <delete-button (clicked)="deleteElement(usuario)"></delete-button>
+            </div>
+            
+        </ng-template>
+    </div>
+</div>

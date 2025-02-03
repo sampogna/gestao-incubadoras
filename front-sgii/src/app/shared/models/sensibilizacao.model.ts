@@ -25,6 +25,7 @@ export class Sensibilizacao {
 
     constructor() {
         this.ParticipanteSensibilizacaos = [];
+        this.ImagemSensibilizacaos = [];
     }
   }
 
