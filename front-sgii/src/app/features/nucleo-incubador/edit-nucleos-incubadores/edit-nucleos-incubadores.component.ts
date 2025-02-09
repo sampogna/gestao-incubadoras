@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcEditNucleoIncubador } from 'src/app/shared/breadcrumb-items';
@@ -22,7 +22,8 @@ export class EditNucleosIncubadoresComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly nucleoService: NucleoIncubadorService,
-    private readonly toastr: ToastrService
+    private readonly toastr: ToastrService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +68,7 @@ export class EditNucleosIncubadoresComponent implements OnInit {
         nucleoCriado => {
           if (nucleoCriado.Id) {
             this.toastr.success('Núcleo criado com sucesso!');
-            this.nucleoIncubador = nucleoCriado;
+            this.router.navigateByUrl('nucleo-incubador/editar/' + nucleoCriado.Id);
           }
           
         }

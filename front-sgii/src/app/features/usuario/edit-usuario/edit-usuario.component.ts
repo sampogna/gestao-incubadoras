@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcEditUsuario } from 'src/app/shared/breadcrumb-items';
@@ -28,7 +28,8 @@ export class EditUsuarioComponent implements OnInit{
     private readonly route: ActivatedRoute,
     private readonly usuarioService: UsuarioService,
     private readonly toastr: ToastrService,
-    private readonly nucleoService: NucleoIncubadorService
+    private readonly nucleoService: NucleoIncubadorService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +83,7 @@ export class EditUsuarioComponent implements OnInit{
         usuarioCriado => {
           if (usuarioCriado.Id) {
             this.toastr.success('Usuário criado com sucesso!');
-            this.usuario = usuarioCriado;
+            this.router.navigateByUrl('usuario/editar/' + usuarioCriado.Id);
           }
           
         }

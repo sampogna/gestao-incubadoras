@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcEditSensibilizacao } from 'src/app/shared/breadcrumb-items';
@@ -37,7 +37,8 @@ export class EditSensibilizacaoComponent implements OnInit {
         private route: ActivatedRoute,
         private toastr: ToastrService,
         private readonly nucleoService: NucleoIncubadorService,
-        private readonly sensibilizacaoService: SensibilizacaoService
+        private readonly sensibilizacaoService: SensibilizacaoService,
+        private readonly router: Router
     ) { }
 
     ngOnInit() {
@@ -125,7 +126,7 @@ export class EditSensibilizacaoComponent implements OnInit {
                 sensibilizacaoCriada => {
                     if (sensibilizacaoCriada.Id) {
                         this.toastr.success('Sensibilização criada com sucesso!');
-                        this.sensibilizacao = sensibilizacaoCriada;
+                        this.router.navigateByUrl('sensibilizacao/editar/' + sensibilizacaoCriada.Id);
                     }
                 }
             )
