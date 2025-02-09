@@ -76,7 +76,12 @@ h1 {
     justify-content: flex-end;
     gap: 12px;
   }
-	
+  
+  &__fields {
+    .row {
+      row-gap: 25px;
+    }
+  }
 }
 
 

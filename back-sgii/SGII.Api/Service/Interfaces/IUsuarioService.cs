@@ -8,7 +8,7 @@ namespace SGII.Api.Services
     {
         Task<IEnumerable<Usuario>> GetAllAsync();
         Task<(IEnumerable<Usuario> Data, int TotalCount)> GetAllPaginatedAsync(int page, int pageSize, string term);
-        Task<Usuario> GetByIdAsync(int id);
+        Task<Usuario> GetByIdAsync(long id);
         Task AddAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(int id);

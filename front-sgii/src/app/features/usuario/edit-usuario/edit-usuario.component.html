@@ -1,1 +1,56 @@
-<p>edit-usuario works!</p>
+<div class="card">
+    <div class="card__header">
+        <card-header [title]="pageTitle" [breadcrumbItems]="breadcrumbItems" [showCreateButton]="false"></card-header>
+    </div>
+    <div class="card__fields">
+        <div class="row">
+            <div class="col-md-3">
+                <label> Código </label>
+                <input type="text" [(ngModel)]="usuario.Id" disabled placeholder="Crie para visualizar">
+            </div>
+
+            <div class="col-md-3">
+                <label> Nome </label>
+                <input type="text" [(ngModel)]="usuario.Nome" placeholder="Digite o nome">
+            </div>
+
+            <div class="col-md-3">
+                <label> Sobrenome </label>
+                <input type="text" [(ngModel)]="usuario.Sobrenome" placeholder="Digite o nome">
+            </div>
+
+            <div class="col-md-3">
+                <label> Email </label>
+                <input type="email" [(ngModel)]="usuario.Email" placeholder="Digite o nome">
+            </div>
+            
+            <div class="col-md-3">
+                <label> Senha </label>
+                <input type="password" [(ngModel)]="usuario.Senha" placeholder="Digite o nome">
+            </div>
+            <div class="col-md-3">
+                <label> Núcleo Incubador </label>
+                <select [(ngModel)]="usuario.IdNucleoIncubador">
+                    <option [value]="null" disabled> Escolha o núcleo </option>
+                    <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label> Tipo de Usuário </label>
+                <select [(ngModel)]="usuario.IdTipo">
+                    <option [ngValue]="null" disabled> Escolha o tipo </option>
+                    <option [ngValue]="tiposUsuario.Comum"> Comum </option>
+                    <option [ngValue]="tiposUsuario.SuperUsuario"> Super usuário </option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label> Cargo </label>
+                <input type="text" value="Colaborador" [disabled]="true">
+            </div>
+        </div>
+    </div>
+    <div class="card__footer">
+        <button secondary-button routerLink="/nucleo-incubador"> Voltar </button>
+        <button primary-button (click)="handlePersistence()"> Salvar </button>
+    </div>
+</div>

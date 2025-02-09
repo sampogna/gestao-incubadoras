@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SGII.Api.Models;
 using SGII.Api.Repositories;
 using SGII.Api.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -24,7 +24,7 @@ namespace SGII.Api.Services
             return await _repository.GetAllPaginatedAsync(page, pageSize, term);
         }
 
-        public async Task<Usuario> GetByIdAsync(int id)
+        public async Task<Usuario> GetByIdAsync(long id)
         {
             return await _repository.GetByIdAsync(id);
         }

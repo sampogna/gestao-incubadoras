@@ -44,7 +44,7 @@ namespace SGII.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(long id)
         {
             var usuario = await _service.GetByIdAsync(id);
             if (usuario == null)

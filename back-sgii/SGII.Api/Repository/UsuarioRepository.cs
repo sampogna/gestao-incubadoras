@@ -41,7 +41,7 @@ namespace SGII.Api.Repositories
             return (data, totalCount);
         }
 
-        public async Task<Usuario> GetByIdAsync(int id)
+        public async Task<Usuario> GetByIdAsync(long id)
         {
             return await _context.Usuarios.FindAsync(id);
         }

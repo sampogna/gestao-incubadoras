@@ -7,6 +7,21 @@ namespace SGII.Api.Models
 {
     public partial class Usuario
     {
+
+        public Usuario()
+        {
+            CapacitacaoIdResponsavelNavigations = new HashSet<Capacitacao>();
+            CapacitacaoIdUsuRegistrouNavigations = new HashSet<Capacitacao>();
+            DesafioInovacaos = new HashSet<DesafioInovacao>();
+            Editals = new HashSet<Edital>();
+            PreIncubacaoIdResponsavelNavigations = new HashSet<PreIncubacao>();
+            PreIncubacaoIdUsuRegistrouNavigations = new HashSet<PreIncubacao>();
+            Proposta = new HashSet<Propostum>();
+            ReuniaoProspeccaos = new HashSet<ReuniaoProspeccao>();
+            SensibilizacaoIdUsuRegistrouNavigations = new HashSet<Sensibilizacao>();
+            SensibilizacaoIdUsuarioResponsavelNavigations = new HashSet<Sensibilizacao>();
+        }
+
         public long Id { get; set; }
         public string Nome { get; set; } = null!;
         public string Sobrenome { get; set; } = null!;
