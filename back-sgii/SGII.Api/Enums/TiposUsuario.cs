@@ -2,7 +2,9 @@
 {
     public enum TiposUsuario
     {
-        COMUM = 1,
-        SUPER_USUARIO
+        COLABORADOR = 1,
+        COORDENADOR,
+        INCUBADO,
+        ASSOCIADO
     }
 }

@@ -36,17 +36,19 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <label> Tipo de Usuário </label>
+                <label> Cargo </label>
                 <select [(ngModel)]="usuario.IdTipo">
                     <option [ngValue]="null" disabled> Escolha o tipo </option>
-                    <option [ngValue]="tiposUsuario.Comum"> Comum </option>
-                    <option [ngValue]="tiposUsuario.SuperUsuario"> Super usuário </option>
+                    <option [ngValue]="tiposUsuario.Colaborador"> Colaborador </option>
+                    <option [ngValue]="tiposUsuario.Coordenador"> Coordenador </option>
+                    <option [ngValue]="tiposUsuario.Incubado"> Incubado </option>
+                    <option [ngValue]="tiposUsuario.Associado"> Associado </option>
                 </select>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <label> Cargo </label>
                 <input type="text" value="Colaborador" [disabled]="true">
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="card__footer">

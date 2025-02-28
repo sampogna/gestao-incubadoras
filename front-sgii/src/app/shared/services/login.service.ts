@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { IUser, UserTypes } from '../models/login.model';
+import { BehaviorSubject, catchError, EMPTY, Observable, of, throwError } from 'rxjs';
+import { Auth, IUser, UserTypes } from '../models/login.model';
+import { API_URL } from 'src/environments/environment';
+import { Usuario } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,12 @@ import { IUser, UserTypes } from '../models/login.model';
 export class LoginService {
     private userSubject: BehaviorSubject<IUser | null>;
     public user: Observable<IUser | null>;
+
+    
+  private readonly controllerPrefix = 'api/Auth'
     
     constructor(
-        // private httpClient: HttpClient
+        private http: HttpClient
     ) { 
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
@@ -34,14 +39,33 @@ export class LoginService {
         return !!this.userSubject?.value;
     }
 
-    login(): Observable<IUser | string> {
+    login(user: Auth): Observable<Usuario> {
         /**
          * Retorna string para erro
          * Para sucesso, retorna o objeto do usuario
          */
-        this.userSubject.next(this.mockedUser)
-        localStorage.setItem('user', JSON.stringify(this.mockedUser));
-        return of(this.mockedUser);
+        // this.userSubject.next(this.mockedUser)
+        // localStorage.setItem('user', JSON.stringify(this.mockedUser));
+        // return of(this.mockedUser);
+
+
+
+        return this.http.get<Usuario>(
+            API_URL + this.controllerPrefix + '/SignIn', 
+            { 
+                params: 
+                { 
+                    email: user.username,
+                    senha: user.password
+                } 
+            })
+            .pipe(
+                catchError(err => {
+                    console.error('API Error:', err);
+                    return EMPTY;
+                })
+            );
+
     }
 
     logout() {

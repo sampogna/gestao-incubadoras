@@ -10,6 +10,8 @@ export class Usuario {
 }
 
 export enum TipoUsuario {
-    Comum = 1,
-    SuperUsuario
+    Colaborador = 1,
+    Coordenador,
+    Incubado,
+    Associado
 }
