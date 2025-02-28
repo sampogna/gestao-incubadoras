@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SGII.Api.Models;
 using SGII.Api.Services;
 using System.Threading.Tasks;
@@ -19,8 +20,16 @@ namespace SGII.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var nucleos = await _service.GetAllAsync();
-            return Ok(nucleos);
+            try
+            {
+                var nucleos = await _service.GetAllAsync();
+                return Ok(nucleos);
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         [HttpGet("paginated")]

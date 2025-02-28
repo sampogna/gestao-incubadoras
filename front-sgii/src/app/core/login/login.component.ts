@@ -22,7 +22,7 @@ export class LoginComponent {
   ) {}
 
   logIntoSystem(): void {
-    this.loginService.login()
+    this.loginService.login(this.auth)
       .subscribe(
         (data => {
           if (typeof data != 'string')
