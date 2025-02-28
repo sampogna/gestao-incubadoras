@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, map, Observable, of, throwError } from 'rxjs';
 import { Auth, IUser, UserTypes } from '../models/login.model';
 import { API_URL } from 'src/environments/environment';
 import { Usuario } from '../models/usuario.model';
@@ -30,46 +30,46 @@ export class LoginService {
     } as IUser;
 
 
+
     public get currentUserValue(): (IUser | null) {
-        debugger;
         return this.userSubject.value;
     }
 
-    public get isLoggedIn(): boolean {
-        return !!this.userSubject?.value;
+
+    isLoggedIn(): boolean{
+        return !!localStorage.getItem('token')
     }
 
-    login(user: Auth): Observable<Usuario> {
-        /**
-         * Retorna string para erro
-         * Para sucesso, retorna o objeto do usuario
-         */
-        // this.userSubject.next(this.mockedUser)
-        // localStorage.setItem('user', JSON.stringify(this.mockedUser));
-        // return of(this.mockedUser);
+    //TO DO: construct user store so i can retrieve user name and role afterwards
+    // decodedToken(){
+    //     const jwtHelper = new JwtHelperService();
+    //     const token = this.getToken()!;
+    //     console.log(jwtHelper.decodeToken(token))
+    //     return jwtHelper.decodeToken(token)
+    //   }
 
-
-
-        return this.http.get<Usuario>(
+    login(user: Auth): Observable<string> {
+        const userDTO = {
+            email : user.username,
+            senha : user.password
+        }
+        return this.http.post(
             API_URL + this.controllerPrefix + '/SignIn', 
-            { 
-                params: 
-                { 
-                    email: user.username,
-                    senha: user.password
-                } 
+            userDTO, 
+            {
+                responseType: "text"
+            }
+        )
+        .pipe(
+            catchError(err => {
+                console.error('API Error:', err);
+                return EMPTY;
             })
-            .pipe(
-                catchError(err => {
-                    console.error('API Error:', err);
-                    return EMPTY;
-                })
-            );
-
+        );
     }
 
     logout() {
-        localStorage.removeItem('user');
+        localStorage.removeItem('token');
         this.userSubject.next(undefined);
       }
 

@@ -25,11 +25,15 @@ export class LoginComponent {
     this.loginService.login(this.auth)
       .subscribe(
         (data => {
-          if (typeof data != 'string')
-            this.router.navigateByUrl('bem-vindo');
-          else
-            this.toastr.error(data);
+          localStorage.setItem('token', data);
+          this.router.navigateByUrl('bem-vindo');
         })
       )
+  }
+
+  verifyIfUserIsLoggedInThenRedirect(): void {
+    if (this.loginService.isLoggedIn) {
+      this.router.navigateByUrl('bem-vindo');
+    }
   }
 }

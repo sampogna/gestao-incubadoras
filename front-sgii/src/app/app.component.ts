@@ -12,7 +12,7 @@ export class AppComponent {
   isLoggedIn = false;
 
   constructor(private loginService: LoginService) {
-    this.isLoggedIn = loginService.isLoggedIn;
+    // this.isLoggedIn = loginService.isLoggedIn;
   }
 
 }

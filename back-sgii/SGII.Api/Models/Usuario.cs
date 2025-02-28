@@ -56,6 +56,12 @@ namespace SGII.Api.Models
         [NotMapped]
         public virtual ICollection<Sensibilizacao> SensibilizacaoIdUsuarioResponsavelNavigations { get; set; }
 
+        [NotMapped]
+        public string RefreshToken { get; set; }
+        [NotMapped]
+        public DateTime TokenCreated { get; set; }
+        [NotMapped]
+        public DateTime TokenExpires { get; set; }
 
         //BEGIN - Auxiliar methods
 

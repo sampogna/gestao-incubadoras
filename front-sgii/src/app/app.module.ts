@@ -9,7 +9,8 @@ import { LayoutModule } from './core/layout/layout.module';
 import { LoginModule } from './core/login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleInputModule } from './shared/components/simple-input/simple-input.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
