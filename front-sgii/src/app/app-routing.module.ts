@@ -20,13 +20,13 @@ const routes: Routes = [
     component: LayoutComponent,  
     canActivate: [LoginGuard], 
     children: [
-      { path: 'bem-vindo', loadChildren: bemVindoModule },
-      { path: 'sensibilizacao', loadChildren: sensibilizacaoModule },
-      { path: 'nucleo-incubador', loadChildren: nucleoIncubadorModule },
-      { path: 'prospeccao/desafio', loadChildren: prospeccaoDesafioModule },
-      { path: 'prospeccao/reuniao', loadChildren: prospeccaoReuniaoModule },
-      { path: 'usuario', loadChildren:  usuarioModule},
-      { path: 'profile', component: ProfileComponent }
+      { path: 'bem-vindo', loadChildren: bemVindoModule, canActivate: [LoginGuard] },
+      { path: 'sensibilizacao', loadChildren: sensibilizacaoModule, canActivate: [LoginGuard] },
+      { path: 'nucleo-incubador', loadChildren: nucleoIncubadorModule, canActivate: [LoginGuard] },
+      { path: 'prospeccao/desafio', loadChildren: prospeccaoDesafioModule, canActivate: [LoginGuard] },
+      { path: 'prospeccao/reuniao', loadChildren: prospeccaoReuniaoModule, canActivate: [LoginGuard] },
+      { path: 'usuario', loadChildren:  usuarioModule, canActivate: [LoginGuard]},
+      { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard]}
     ]
   },
   { path: '**', redirectTo: 'login' } 

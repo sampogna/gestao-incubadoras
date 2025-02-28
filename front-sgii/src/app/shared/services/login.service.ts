@@ -26,6 +26,7 @@ export class LoginService {
 
 
     public get currentUserValue(): (IUser | null) {
+        debugger;
         return this.userSubject.value;
     }
 
@@ -44,8 +45,8 @@ export class LoginService {
     }
 
     logout() {
-        localStorage.removeItem('currentUser');
-        this.userSubject.next(null);
+        localStorage.removeItem('user');
+        this.userSubject.next(undefined);
       }
 
 }

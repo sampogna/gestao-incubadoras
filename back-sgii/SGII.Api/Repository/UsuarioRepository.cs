@@ -48,6 +48,8 @@ namespace SGII.Api.Repositories
 
         public async Task AddAsync(Usuario usuario)
         {
+
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
         }
@@ -67,5 +69,8 @@ namespace SGII.Api.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public Task<bool> CheckIfEmailIsAlreadyRegistered(string email) 
+            => _context.Usuarios.AnyAsync(user => user.Email == email);
     }
 }

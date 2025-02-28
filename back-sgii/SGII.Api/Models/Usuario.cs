@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace SGII.Api.Models
 {
@@ -54,5 +55,14 @@ namespace SGII.Api.Models
         public virtual ICollection<Sensibilizacao> SensibilizacaoIdUsuRegistrouNavigations { get; set; }
         [NotMapped]
         public virtual ICollection<Sensibilizacao> SensibilizacaoIdUsuarioResponsavelNavigations { get; set; }
+
+
+        //BEGIN - Auxiliar methods
+
+        public bool IsValidEmail()
+        {
+            var emailRegex = new Regex(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            return emailRegex.IsMatch(this.Email);
+        }
     }
 }

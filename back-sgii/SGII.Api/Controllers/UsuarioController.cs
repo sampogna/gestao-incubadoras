@@ -56,8 +56,15 @@ namespace SGII.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] Usuario usuario)
         {
-            await _service.AddAsync(usuario);
-            return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+            try
+            {
+                await _service.AddAsync(usuario);
+                return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut("{id}")]

@@ -1,6 +1,12 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SGII.Api.Models;
 using SGII.Api.Repositories;
+using SGII.Api.Repository;
+using SGII.Api.Repository.Interfaces;
+using SGII.Api.Service.Interfaces;
 using SGII.Api.Services;
 using System.Text.Json.Serialization;
 
@@ -19,11 +25,12 @@ builder.Services.AddScoped<ISensibilizacaoRepository, SensibilizacaoRepository>(
 builder.Services.AddScoped<ISensibilizacaoService, SensibilizacaoService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    //options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 }); 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
