@@ -10,10 +10,14 @@ import { Pagination, PaginationActions } from '../../models/pagination.model';
 })
 export class TableStripedComponent<T> implements OnChanges {
   @Input() tableItems: T[] = [];
-  @Input() displayedColumns: string[];
+  @Input() displayedColumns: ITableColumnDisplay[];
   @Input() actionTemplate: TemplateRef<any>; // Input to accept action template
   @Input() pagination: Pagination = new Pagination();
   dataSource = new MatTableDataSource<T>();
+  columnDataTypes = ColumnDataType;
+  get columnStringArray(): string[] {
+    return this.displayedColumns?.map(column => column.labelInDb);
+  }
 
   @Output() paginationChanged = new EventEmitter<PaginationActions>();
 
@@ -26,4 +30,16 @@ export class TableStripedComponent<T> implements OnChanges {
   private updateDataSource() {
     this.dataSource = new MatTableDataSource<T>(this.tableItems);
   }
+}
+
+export interface ITableColumnDisplay {
+  name: string;
+  labelInDb: string;
+  type: ColumnDataType;
+}
+
+export enum ColumnDataType {
+  Text,
+  Date,
+  Currency //R$ - Project is for Brazilian currency, ATM
 }

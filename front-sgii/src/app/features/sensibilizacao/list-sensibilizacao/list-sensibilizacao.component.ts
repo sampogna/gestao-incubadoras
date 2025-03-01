@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcListSensibilizacao } from 'src/app/shared/breadcrumb-items';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ColumnDataType, ITableColumnDisplay } from 'src/app/shared/components/table-striped/table-striped.component';
 import { Pagination, PaginationActions } from 'src/app/shared/models/pagination.model';
 import { Sensibilizacao } from 'src/app/shared/models/sensibilizacao.model';
 import { SensibilizacaoService } from 'src/app/shared/services/sensibilizacao.service';
@@ -17,7 +18,13 @@ import { SensibilizacaoService } from 'src/app/shared/services/sensibilizacao.se
 
 export class ListSensibilizacaoComponent implements OnInit {
 
-    columns = ['Id', 'Tema'];
+    columns: ITableColumnDisplay[] = [
+        { name: 'Id', labelInDb: 'Id', type: ColumnDataType.Text },
+        { name: 'Tema', labelInDb: 'Tema', type: ColumnDataType.Text },
+        { name: 'Local', labelInDb: 'Local', type: ColumnDataType.Text },
+        { name: 'Perfil', labelInDb: 'Perfil', type: ColumnDataType.Text },
+        { name: 'Número Sensibilizados', labelInDb: 'NumeroSensibilizados', type: ColumnDataType.Text },
+    ];
 
     breadcrumbItems = bcListSensibilizacao;
     sensibilizacoes: Sensibilizacao[];

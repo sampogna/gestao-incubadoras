@@ -1,3 +1,5 @@
+@use 'src/shared/styles/variables.scss' as variables;
+
 .mat-elevation-z8 {
     box-shadow: none;
 }
@@ -41,4 +43,10 @@
         
 .mat-mdc-row:nth-child(odd){
     background-color: #fff;
+}
+
+:host ::ng-deep .mat-mdc-row:hover {
+  background-color: variables.$ligh-grey;
+  color: #fff;
+  transition: 0.2s;
 }

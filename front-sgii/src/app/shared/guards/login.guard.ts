@@ -9,17 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginGuard implements CanActivate {
   constructor(private loginService: LoginService, private router: Router, private readonly toast: ToastrService) {}
 
-  // canActivate(): boolean {
-  //   if (this.loginService.currentUserValue) {
-  //     return true;
-  //   }
-  //   this.router.navigate(['/Login']);
-  //   return false;
-  // }
-
-
   canActivate():boolean{
-    debugger;
     if(this.loginService.isLoggedIn()){
       return true
     }else{

@@ -40,8 +40,6 @@ export class FileUploadAreaComponent {
   }
 
   private handleFiles(files: FileList): void {
-    console.log('Selected files:', files);
-    console.log('files types', typeof files[0]);
     if (files?.length)
       this.onFileUploaded.emit(files[0]);
   }
