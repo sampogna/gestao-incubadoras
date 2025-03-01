@@ -24,6 +24,7 @@ export class ListSensibilizacaoComponent implements OnInit {
         { name: 'Local', labelInDb: 'Local', type: ColumnDataType.Text },
         { name: 'Perfil', labelInDb: 'Perfil', type: ColumnDataType.Text },
         { name: 'Número Sensibilizados', labelInDb: 'NumeroSensibilizados', type: ColumnDataType.Text },
+        { name: 'Data Ação', labelInDb: 'DataAcao', type: ColumnDataType.Date }
     ];
 
     breadcrumbItems = bcListSensibilizacao;

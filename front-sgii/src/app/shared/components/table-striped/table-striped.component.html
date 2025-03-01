@@ -4,7 +4,17 @@
     <!-- Define other columns dynamically -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.labelInDb">
       <th mat-header-cell *matHeaderCellDef> {{ column.name | uppercase }} </th>
-      <td mat-cell *matCellDef="let element"> {{ element[column.labelInDb] }} </td>
+      <td mat-cell *matCellDef="let element"> 
+        <div class="" *ngIf="column.type === columnDataTypes.Date">
+          {{ element[column.labelInDb] | date: 'dd/MM/yyyy' }}   
+        </div>
+        <div class="" *ngIf="column.type === columnDataTypes.Text">
+          {{ element[column.labelInDb] }}   
+        </div>
+        <div class="" *ngIf="column.type === columnDataTypes.Currency">
+          {{ element[column.labelInDb] | currency:'BRL' }}   
+        </div>
+      </td>
     </ng-container>
   
     <!-- Action Column -->
