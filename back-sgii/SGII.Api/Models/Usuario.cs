@@ -55,6 +55,8 @@ namespace SGII.Api.Models
         public virtual ICollection<Sensibilizacao> SensibilizacaoIdUsuRegistrouNavigations { get; set; }
         [NotMapped]
         public virtual ICollection<Sensibilizacao> SensibilizacaoIdUsuarioResponsavelNavigations { get; set; }
+        [NotMapped]
+        public virtual NucleoIncubador NucleoIncubador { get; set; }
 
         [NotMapped]
         public string RefreshToken { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SGII.Api.Models
 {
@@ -13,7 +14,7 @@ namespace SGII.Api.Models
             //PreIncubacaos = new HashSet<PreIncubacao>();
             //Proposta = new HashSet<Propostum>();
             //ReuniaoProspeccaos = new HashSet<ReuniaoProspeccao>();
-            //Usuarios = new HashSet<Usuario>();
+            Usuario = new HashSet<Usuario>();
             Sensibilizacaos = new HashSet<Sensibilizacao>();
         }
 
@@ -26,7 +27,10 @@ namespace SGII.Api.Models
         //public virtual ICollection<Propostum> Proposta { get; set; }
         //public virtual ICollection<ReuniaoProspeccao> ReuniaoProspeccaos { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Sensibilizacao> Sensibilizacaos { get; set; }
-        //public virtual ICollection<Usuario> Usuarios { get; set; }
+        [NotMapped]
+        [JsonIgnore]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

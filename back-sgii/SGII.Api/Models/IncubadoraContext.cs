@@ -261,6 +261,10 @@ namespace SGII.Api.Models
             {
                 entity.ToTable("NucleoIncubador");
 
+                //entity.HasMany(p => p.Usuarios)
+                //    .WithOne(p => p.NucleoIncubador)
+                //    .HasForeignKey(p => p.)
+
                 entity.Property(e => e.Descricao).HasMaxLength(100);
             });
 
@@ -540,11 +544,13 @@ namespace SGII.Api.Models
                     .HasForeignKey(d => d.IdCargo)
                     .HasConstraintName("FK_Usuario_Cargo");
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.Usuarios)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Usuario_NucleoIncubador");
+                //entity.HasOne(d => d.NucleoIncubador)
+                //    .WithOne(d => d.Usuarios)
+                //    .HasForeignKey(d => d.Id);
+
+                entity.HasOne(d => d.NucleoIncubador)
+                    .WithMany(p => p.Usuario)
+                    .HasForeignKey(d => d.IdNucleoIncubador);
             });
 
             OnModelCreatingPartial(modelBuilder);

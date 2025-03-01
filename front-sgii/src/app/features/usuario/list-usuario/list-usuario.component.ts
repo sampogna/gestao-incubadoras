@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { bcListUsuario } from 'src/app/shared/breadcrumb-items';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { Pagination, PaginationActions } from 'src/app/shared/models/pagination.model';
-import { Usuario } from 'src/app/shared/models/usuario.model';
+import { ColumnDataType, ITableColumnDisplay } from 'src/app/shared/components/table-striped/table-striped.component';
+import { PaginatedResult, Pagination, PaginationActions } from 'src/app/shared/models/pagination.model';
+import { TipoStringMapper, Usuario } from 'src/app/shared/models/usuario.model';
 import { UsuarioService } from 'src/app/shared/services/usuario.service';
 
 @Component({
@@ -15,7 +16,14 @@ import { UsuarioService } from 'src/app/shared/services/usuario.service';
   styleUrls: ['./list-usuario.component.scss']
 })
 export class ListUsuarioComponent {
-    columns = ['Id', 'Nome', 'Sobrenome'];
+
+    columns: ITableColumnDisplay[] = [
+        { name: 'Id', labelInDb: 'Id', type: ColumnDataType.Text },
+        { name: 'Nome', labelInDb: 'Nome', type: ColumnDataType.Text },
+        { name: 'Sobrenome', labelInDb: 'Sobrenome', type: ColumnDataType.Text },
+        { name: 'Cargo', labelInDb: 'Tipo', type: ColumnDataType.Text },
+        { name: 'Núcleo', labelInDb: 'StrNucleoIncubador', type: ColumnDataType.Text },
+    ]
 
     breadcrumbItems = bcListUsuario;
     usuarios: Usuario[];
@@ -69,13 +77,15 @@ export class ListUsuarioComponent {
             this.pagination.Page = 1;
 
         this.usuarioService.getAllUsuarios(this.pagination, this.termFilter).pipe(
+            map((res) => ({...res, Data: res.Data.map(u => ({...u, Tipo: TipoStringMapper[u.IdTipo], StrNucleoIncubador: u.NucleoIncubador?.Descricao}))})
+            ),
             tap( res => {
-            this.pagination.Page = res?.Page;
-            this.pagination.PageSize = res?.PageSize;
-            this.pagination.TotalCount = res?.TotalCount;
-            this.pagination.TotalPages = res?.TotalPages;
-            this.usuarios = res?.Data;
-            this.previousTermFilter = this.termFilter;
+                this.pagination.Page = res?.Page;
+                this.pagination.PageSize = res?.PageSize;
+                this.pagination.TotalCount = res?.TotalCount;
+                this.pagination.TotalPages = res?.TotalPages;
+                this.usuarios = res?.Data;
+                this.previousTermFilter = this.termFilter;
             })
         )
         .subscribe();

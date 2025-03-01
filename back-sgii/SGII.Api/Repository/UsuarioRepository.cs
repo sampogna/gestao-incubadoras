@@ -33,6 +33,7 @@ namespace SGII.Api.Repositories
 
             // Paginated results
             var data = await query
+                .Include(n => n.NucleoIncubador)
                 .OrderBy(n => n.Id)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
