@@ -60,12 +60,23 @@ namespace SGII.Api.Repositories
 
         public async Task DeleteAsync(int id)
         {
+            if (await IsBeingUsedAsync(id))
+            {
+                throw new InvalidOperationException("Não é possível deletar o Núcleo pois ele está vinculado à um usuário ou à uma sensibilização.");
+            }
+
             var entity = await GetByIdAsync(id);
             if (entity != null)
             {
                 _context.NucleoIncubadors.Remove(entity);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        private async Task<bool> IsBeingUsedAsync(int id)
+        {
+            return await _context.Sensibilizacaos.AnyAsync(s => s.IdNucleoIncubador == id)
+                || await _context.Usuarios.AnyAsync(u => u.IdNucleoIncubador == id);
         }
     }
 }

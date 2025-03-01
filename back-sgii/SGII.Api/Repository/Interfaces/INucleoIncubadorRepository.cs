@@ -1,4 +1,5 @@
-﻿using SGII.Api.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SGII.Api.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,5 +13,7 @@ namespace SGII.Api.Repositories
         Task AddAsync(NucleoIncubador nucleoIncubador);
         Task UpdateAsync(NucleoIncubador nucleoIncubador);
         Task DeleteAsync(int id);
+        //Task<bool> IsBeingUsedAsync(int id);
+
     }
 }

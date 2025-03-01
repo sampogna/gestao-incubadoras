@@ -9,10 +9,7 @@ import { LoginService } from './shared/services/login.service';
 export class AppComponent {
   title = 'front-sgii';
 
-  isLoggedIn = false;
-
   constructor(private loginService: LoginService) {
-    // this.isLoggedIn = loginService.isLoggedIn;
   }
 
 }

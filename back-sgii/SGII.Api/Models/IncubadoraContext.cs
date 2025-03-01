@@ -253,10 +253,6 @@ namespace SGII.Api.Models
             {
                 entity.ToTable("NucleoIncubador");
 
-                //entity.HasMany(p => p.Usuarios)
-                //    .WithOne(p => p.NucleoIncubador)
-                //    .HasForeignKey(p => p.)
-
                 entity.Property(e => e.Descricao).HasMaxLength(100);
             });
 

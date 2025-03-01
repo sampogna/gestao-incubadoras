@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { bcListNucleosIncubadores } from 'src/app/shared/breadcrumb-items';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ColumnDataType, ITableColumnDisplay } from 'src/app/shared/components/table-striped/table-striped.component';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
 import { Pagination, PaginationActions } from 'src/app/shared/models/pagination.model';
 import { NucleoIncubadorService } from 'src/app/shared/services/nucleo-incubador.service';
@@ -16,8 +17,10 @@ import { NucleoIncubadorService } from 'src/app/shared/services/nucleo-incubador
 })
 export class ListNucleosIncubadoresComponent implements OnInit {
 
-
-  columns = ['Id', 'Descricao'];
+  columns: ITableColumnDisplay[] = [
+    { name: 'Id', labelInDb: 'Id', type: ColumnDataType.Text },
+    { name: 'Descrição', labelInDb: 'Descricao', type: ColumnDataType.Text },
+  ]
   breadcrumbItems = bcListNucleosIncubadores;
   nucleos: NucleoIncubador[];
   termFilter: string;

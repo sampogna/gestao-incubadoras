@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NucleoIncubador } from '../models/nucleo-incubador.model';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, EMPTY, Observable, throwError } from 'rxjs';
 import { API_URL } from 'src/environments/environment';
 import { PaginatedResult, Pagination } from '../models/pagination.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class NucleoIncubadorService {
   private readonly controllerPrefix = 'api/NucleoIncubador'
 
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private toastr: ToastrService
   ) { }
 
   public getAllNucleos(pagination: Pagination, filter?: string): Observable<PaginatedResult<NucleoIncubador>> {
@@ -92,6 +94,13 @@ export class NucleoIncubadorService {
       .delete(
         API_URL + this.controllerPrefix + `/${id}`
       )
+      .pipe(
+        catchError(err => {
+          console.error('API Error:', err);
+          this.toastr.error(err?.error);
+          return EMPTY;
+        })
+      );
   }
 
 

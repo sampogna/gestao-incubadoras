@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Auth } from 'src/app/shared/models/login.model';
@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
@@ -20,6 +20,10 @@ export class LoginComponent {
     private loginService: LoginService,
     private toastr: ToastrService
   ) {}
+
+  ngOnInit(): void {
+    this.verifyIfUserIsLoggedInThenRedirect();
+  }
 
   logIntoSystem(): void {
     this.loginService.login(this.auth)

@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, EMPTY, map, Observable, of, throwError } f
 import { Auth, IUser, UserTypes } from '../models/login.model';
 import { API_URL } from 'src/environments/environment';
 import { Usuario } from '../models/usuario.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class LoginService {
   private readonly controllerPrefix = 'api/Auth'
     
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private readonly toastr: ToastrService
     ) { 
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
@@ -62,6 +64,7 @@ export class LoginService {
         )
         .pipe(
             catchError(err => {
+                this.toastr.error(err?.error);
                 console.error('API Error:', err);
                 return EMPTY;
             })
