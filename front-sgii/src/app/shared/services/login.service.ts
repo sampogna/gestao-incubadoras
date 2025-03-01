@@ -61,13 +61,6 @@ export class LoginService {
             {
                 responseType: "text"
             }
-        )
-        .pipe(
-            catchError(err => {
-                this.toastr.error(err?.error);
-                console.error('API Error:', err);
-                return EMPTY;
-            })
         );
     }
 

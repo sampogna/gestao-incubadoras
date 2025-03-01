@@ -14,18 +14,31 @@ import { catchError, Observable, switchMap, throwError } from 'rxjs';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    intercept(
-        req: HttpRequest<any>,
-        next: HttpHandler
-      ): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('token');
-    
-        if (token) {
-          req = req.clone({
-            setHeaders: { Authorization: `Bearer ${token}` },
-          });
-        }
-    
-        return next.handle(req);
+  constructor(
+    private readonly toastr: ToastrService
+  ) {}
+
+  intercept(
+      req: HttpRequest<any>,
+      next: HttpHandler
+    ): Observable<HttpEvent<any>> {
+      const token = localStorage.getItem('token');
+  
+      if (token) {
+        req = req.clone({
+          setHeaders: { Authorization: `Bearer ${token}` },
+        });
       }
+  
+      return next.handle(req).pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            this.toastr.error(error?.error ?? 'Erro ao tentar realizar a ação. Contate o administrador do sistema.');
+          }
+          return throwError(() => error);
+        })
+      );;
+    }
+
+
 }
