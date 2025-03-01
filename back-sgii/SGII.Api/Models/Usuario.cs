@@ -30,11 +30,7 @@ namespace SGII.Api.Models
         public string Senha { get; set; } = null!;
         public int IdNucleoIncubador { get; set; }
         public TiposUsuario IdTipo { get; set; }
-        public int? IdCargo { get; set; }
 
-        [NotMapped]
-        public virtual Cargo? IdCargoNavigation { get; set; }
-        //public virtual NucleoIncubador IdNucleoIncubadorNavigation { get; set; } = null!;
         [NotMapped]
         public virtual ICollection<Capacitacao> CapacitacaoIdResponsavelNavigations { get; set; }
         [NotMapped]

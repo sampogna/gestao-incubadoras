@@ -18,7 +18,6 @@ namespace SGII.Api.Models
 
         public virtual DbSet<CampusPropostum> CampusProposta { get; set; } = null!;
         public virtual DbSet<Capacitacao> Capacitacaos { get; set; } = null!;
-        public virtual DbSet<Cargo> Cargos { get; set; } = null!;
         public virtual DbSet<DesafioInovacao> DesafioInovacaos { get; set; } = null!;
         public virtual DbSet<Edital> Editals { get; set; } = null!;
         public virtual DbSet<EditalCapacitacao> EditalCapacitacaos { get; set; } = null!;
@@ -101,13 +100,6 @@ namespace SGII.Api.Models
                     .HasForeignKey(d => d.IdUsuRegistrou)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Capacitacao_Usuario1");
-            });
-
-            modelBuilder.Entity<Cargo>(entity =>
-            {
-                entity.ToTable("Cargo");
-
-                entity.Property(e => e.Descricao).HasMaxLength(100);
             });
 
             modelBuilder.Entity<DesafioInovacao>(entity =>
@@ -538,15 +530,6 @@ namespace SGII.Api.Models
                 entity.Property(e => e.Senha).HasMaxLength(60);
 
                 entity.Property(e => e.Sobrenome).HasMaxLength(100);
-
-                entity.HasOne(d => d.IdCargoNavigation)
-                    .WithMany(p => p.Usuarios)
-                    .HasForeignKey(d => d.IdCargo)
-                    .HasConstraintName("FK_Usuario_Cargo");
-
-                //entity.HasOne(d => d.NucleoIncubador)
-                //    .WithOne(d => d.Usuarios)
-                //    .HasForeignKey(d => d.Id);
 
                 entity.HasOne(d => d.NucleoIncubador)
                     .WithMany(p => p.Usuario)

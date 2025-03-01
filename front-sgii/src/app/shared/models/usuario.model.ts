@@ -8,7 +8,6 @@ export class Usuario {
     Senha: string 
     IdNucleoIncubador: number 
     IdTipo: TipoUsuario; 
-    IdCargo?: number;
 
     Tipo?: string;
 
