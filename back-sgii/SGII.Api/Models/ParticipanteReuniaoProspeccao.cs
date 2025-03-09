@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SGII.Api.Models
 {
@@ -10,6 +11,7 @@ namespace SGII.Api.Models
         public string NomeParticipante { get; set; } = null!;
         public string? Contato { get; set; }
 
-        public virtual ReuniaoProspeccao IdNavigation { get; set; } = null!;
+        [JsonIgnore]
+        public virtual ReuniaoProspeccao? ReuniaoProspeccao { get; set; } = null!;
     }
 }

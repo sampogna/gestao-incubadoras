@@ -19,12 +19,13 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationDialogModule } from './components/dialogs/confirmation-dialog/confirmation-dialog.module';
 import { CustomPaginatorModule } from './components/custom-paginator/custom-paginator.module';
+import { ResolveParticipantDescriptionPipe } from './pipes/resolve-participant-description.pipe';
 
 
 
 @NgModule({
   declarations: [
-    
+    ResolveParticipantDescriptionPipe
   ],
   imports: [
     CommonModule,
@@ -68,7 +69,8 @@ import { CustomPaginatorModule } from './components/custom-paginator/custom-pagi
     NgxMaskDirective, 
     NgxMaskPipe,
     FormsModule,
-    ConfirmationDialogModule
+    ConfirmationDialogModule,
+    ResolveParticipantDescriptionPipe
   ]
 })
 export class SharedModule { }

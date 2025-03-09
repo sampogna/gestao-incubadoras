@@ -21,7 +21,6 @@ namespace SGII.Api.Models
         public virtual DbSet<DesafioInovacao> DesafioInovacaos { get; set; } = null!;
         public virtual DbSet<Edital> Editals { get; set; } = null!;
         public virtual DbSet<EditalCapacitacao> EditalCapacitacaos { get; set; } = null!;
-        public virtual DbSet<EstagioMaturidade> EstagioMaturidades { get; set; } = null!;
         public virtual DbSet<IdeiaDesafioInovacao> IdeiaDesafioInovacaos { get; set; } = null!;
         public virtual DbSet<ImagemCapacitacao> ImagemCapacitacaos { get; set; } = null!;
         public virtual DbSet<ImagemDesafioInovacao> ImagemDesafioInovacaos { get; set; } = null!;
@@ -40,7 +39,6 @@ namespace SGII.Api.Models
         public virtual DbSet<ReuniaoProspeccao> ReuniaoProspeccaos { get; set; } = null!;
         public virtual DbSet<Sensibilizacao> Sensibilizacaos { get; set; } = null!;
         public virtual DbSet<StatusPropostum> StatusProposta { get; set; } = null!;
-        public virtual DbSet<TipoAcaoProspeccao> TipoAcaoProspeccaos { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -155,13 +153,6 @@ namespace SGII.Api.Models
                 entity.Property(e => e.Arquivo).HasColumnType("image");
             });
 
-            modelBuilder.Entity<EstagioMaturidade>(entity =>
-            {
-                entity.ToTable("EstagioMaturidade");
-
-                entity.Property(e => e.Descricao).HasMaxLength(200);
-            });
-
             modelBuilder.Entity<IdeiaDesafioInovacao>(entity =>
             {
                 entity.ToTable("IdeiaDesafioInovacao");
@@ -218,11 +209,11 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Arquivo).HasColumnType("image");
 
-                entity.HasOne(d => d.IdReuniaoProspeccaoNavigation)
-                    .WithMany(p => p.ImagemReuniaoProspeccaos)
-                    .HasForeignKey(d => d.IdReuniaoProspeccao)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ImagemReuniaoProspeccao_ReuniaoProspeccao");
+                //entity.HasOne(d => d.ReuniaoProspeccao)
+                //    .WithMany(p => p.ImagemReuniaoProspeccaos)
+                //    .HasForeignKey(d => d.IdReuniaoProspeccao)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_ImagemReuniaoProspeccao_ReuniaoProspeccao");
             });
 
             modelBuilder.Entity<ImagemSensibilizacao>(entity =>
@@ -236,12 +227,6 @@ namespace SGII.Api.Models
                     .HasForeignKey(d => d.IdSensibilizacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ImagemSensibilizacao_Sensibilizacao");
-
-                //entity.HasOne(d => d.IdSensibilizacaoNavigation)
-                //    .WithMany(p => p.ImagemSensibilizacaos)
-                //    .HasForeignKey(d => d.IdSensibilizacao)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_ImagemSensibilizacao_Sensibilizacao");
             });
 
             modelBuilder.Entity<ModalidadePropostum>(entity =>
@@ -313,9 +298,9 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.NomeParticipante).HasMaxLength(200);
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.ParticipanteReuniaoProspeccao)
-                    .HasForeignKey<ParticipanteReuniaoProspeccao>(d => d.Id)
+                entity.HasOne(d => d.ReuniaoProspeccao)
+                    .WithMany(p => p.ParticipanteReuniaoProspeccaos)
+                    .HasForeignKey(d => d.IdReuniaoProspeccao)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ParticipanteReuniaoProspeccao_ReuniaoProspeccao");
             });
@@ -357,12 +342,6 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Titulo).HasMaxLength(400);
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.PreIncubacaos)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_PreIncubacao_NucleoIncubador");
-
                 entity.HasOne(d => d.IdResponsavelNavigation)
                     .WithMany(p => p.PreIncubacaoIdResponsavelNavigations)
                     .HasForeignKey(d => d.IdResponsavel)
@@ -396,12 +375,6 @@ namespace SGII.Api.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proposta_Edital");
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.Proposta)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Proposta_NucleoIncubador");
-
                 entity.HasOne(d => d.IdStatusNavigation)
                     .WithMany(p => p.Proposta)
                     .HasForeignKey(d => d.IdStatus)
@@ -431,29 +404,29 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.TemaAcao).HasMaxLength(400);
 
-                entity.HasOne(d => d.IdEstagioMaturidadeNavigation)
+                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
                     .WithMany(p => p.ReuniaoProspeccaos)
-                    .HasForeignKey(d => d.IdEstagioMaturidade)
+                    .HasForeignKey(d => d.IdNucleoIncubador)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ReuniaoProspeccao_EstagioMaturidade");
+                    .HasConstraintName("FK_ReuniaoProspeccao_NucleoIncubador");
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.ReuniaoProspeccaos)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_ReuniaoProspeccao_NucleoIncubador");
-
-                //entity.HasOne(d => d.IdTipoAcaoProspeccaoNavigation)
-                //    .WithMany(p => p.ReuniaoProspeccaos)
-                //    .HasForeignKey(d => d.IdTipoAcaoProspeccao)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_ReuniaoProspeccao_TipoAcaoProspeccao");
 
                 entity.HasOne(d => d.IdUsuRegistrouNavigation)
                     .WithMany(p => p.ReuniaoProspeccaos)
                     .HasForeignKey(d => d.IdUsuRegistrou)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ReuniaoProspeccao_Usuario");
+
+                entity.HasMany(s => s.ParticipanteReuniaoProspeccaos)
+                    .WithOne(p => p.ReuniaoProspeccao)
+                    .HasForeignKey(p => p.IdReuniaoProspeccao)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(s => s.ImagemReuniaoProspeccaos)
+                    .WithOne(p => p.ReuniaoProspeccao)
+                    .HasForeignKey(p => p.IdReuniaoProspeccao)
+                    .OnDelete(DeleteBehavior.Cascade);
+
             });
 
             modelBuilder.Entity<Sensibilizacao>(entity =>
@@ -506,13 +479,6 @@ namespace SGII.Api.Models
             modelBuilder.Entity<StatusPropostum>(entity =>
             {
                 entity.Property(e => e.Descricao).HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<TipoAcaoProspeccao>(entity =>
-            {
-                entity.ToTable("TipoAcaoProspeccao");
-
-                entity.Property(e => e.Descricao).HasMaxLength(350);
             });
 
             modelBuilder.Entity<Usuario>(entity =>

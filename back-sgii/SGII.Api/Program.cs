@@ -10,6 +10,7 @@ using SGII.Api.Models;
 using SGII.Api.Repositories;
 using SGII.Api.Repository;
 using SGII.Api.Repository.Interfaces;
+using SGII.Api.Service;
 using SGII.Api.Service.Interfaces;
 using SGII.Api.Services;
 using System.Text;
@@ -90,6 +91,9 @@ builder.Services.AddScoped<ISensibilizacaoRepository, SensibilizacaoRepository>(
 builder.Services.AddScoped<ISensibilizacaoService, SensibilizacaoService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IReuniaoProspeccaoRepository, ReuniaoProspeccaoRepository>();
+builder.Services.AddScoped<IReuniaoProspeccaoService, ReuniaoProspeccaoService>();
+
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
@@ -129,9 +133,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers().RequireAuthorization();
-
-//app.MapControllers();
-
 
 // Use a política de CORS
 app.UseCors("PermitirFrontend");

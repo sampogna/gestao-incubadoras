@@ -13,7 +13,7 @@ namespace SGII.Api.Models
             //DesafioInovacaos = new HashSet<DesafioInovacao>();
             //PreIncubacaos = new HashSet<PreIncubacao>();
             //Proposta = new HashSet<Propostum>();
-            //ReuniaoProspeccaos = new HashSet<ReuniaoProspeccao>();
+            ReuniaoProspeccaos = new HashSet<ReuniaoProspeccao>();
             Usuario = new HashSet<Usuario>();
             Sensibilizacaos = new HashSet<Sensibilizacao>();
         }
@@ -25,7 +25,9 @@ namespace SGII.Api.Models
         //public virtual ICollection<DesafioInovacao> DesafioInovacaos { get; set; }
         //public virtual ICollection<PreIncubacao> PreIncubacaos { get; set; }
         //public virtual ICollection<Propostum> Proposta { get; set; }
-        //public virtual ICollection<ReuniaoProspeccao> ReuniaoProspeccaos { get; set; }
+        [NotMapped]
+        [JsonIgnore]
+        public virtual ICollection<ReuniaoProspeccao> ReuniaoProspeccaos { get; set; }
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Sensibilizacao> Sensibilizacaos { get; set; }

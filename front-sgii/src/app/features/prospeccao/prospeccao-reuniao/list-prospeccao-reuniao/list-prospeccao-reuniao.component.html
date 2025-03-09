@@ -10,14 +10,21 @@
         </card-header>
     </div>
     <div class="card__search">
-        <simple-input [placeholder]="'Digite o nome da ação'" [leftIconClass]="'search'"></simple-input>
+        <simple-input [(ngModel)]="termFilter" [placeholder]="'Digite o tema da reunião'" [leftIconClass]="'search'" (ngModelChange)="searchData()"></simple-input>
     </div>
     <div class="card__table">
-        <table-striped [tableItems]="users" [displayedColumns]="columns" [actionTemplate]="actionButtonsTemplate">
+        <table-striped 
+            [tableItems]="reunioes" 
+            [displayedColumns]="columns" 
+            [actionTemplate]="actionButtonsTemplate" 
+            (paginationChanged)="paginateAction($event)"
+            [pagination]="pagination"
+        >
         </table-striped>
         
-        <ng-template #actionButtonsTemplate let-user>
-            <edit-button (clicked)="navigateToEdit(user)"></edit-button>
+        <ng-template #actionButtonsTemplate let-reuniao>
+            <edit-button (clicked)="navigateToEdit(reuniao)"></edit-button>
+            <delete-button (clicked)="deleteElement(reuniao)"></delete-button>
         </ng-template>
     </div>
 </div>

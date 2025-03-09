@@ -5,9 +5,11 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 })
 export class PrimaryButtonDirective {
   @Input() buttonSmaller: boolean = false;
+  @Input() inlineButton: boolean = false;
   @HostBinding('class') get classes(): string {
     const baseClasses = 'button button--primary';
     const smallerClass = this.buttonSmaller ? 'button--smaller' : '';
-    return `${baseClasses} ${smallerClass}`.trim();
+    const inlineClass = this.inlineButton ? 'button--inline' : '';
+    return `${baseClasses} ${smallerClass} ${inlineClass}`.trim();
   }
 }

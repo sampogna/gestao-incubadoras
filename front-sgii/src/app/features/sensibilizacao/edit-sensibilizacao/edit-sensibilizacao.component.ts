@@ -140,7 +140,6 @@ export class EditSensibilizacaoComponent implements OnInit {
 
         reader.onload = () => {
             const base64String = (reader.result as string).split(',')[1];
-            console.log('file', file);
             this.sensibilizacao.ImagemSensibilizacaos.push({ ArquivoBase64: base64String, Nome: file.name, Tipo: tipo });
             this.assertFileTypesArray();
         }

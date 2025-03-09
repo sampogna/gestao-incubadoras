@@ -1,3 +1,4 @@
+import { FileBase } from "./file.model";
 import { Participante } from "./participante.model";
 import { StatusAprovacaoBasico } from "./status-aprovacao.model";
 
@@ -13,7 +14,8 @@ export class DesafioInovacao {
     Perfil: string;
     NumeroOportunidades: number;
     Observacoes: string;
-    Status: StatusAprovacaoBasico;
+
+    // Status: StatusAprovacaoBasico;
 
     Participantes?: Participante[] = [];
     Ideias?: IdeiaDesafioInovacao[]= []
@@ -34,31 +36,39 @@ export class ReuniaoProspeccao {
     Id: number;
     Email: string;
     IdNucleoIncubador: number;
-    IdTipoAcaoProspeccao: number;
+    IdTipoAcaoProspeccao: TiposAcaoReuniao;
     TemaAcao: string;
     DataAcao: Date;
     Local: string;
     Perfil: string;
     Descricao: string;
-    IdEstagioMaturidade: number;
+    IdEstagioMaturidade: EstagiosMaturidade;
     Observacoes: string;
     IdResponsavel: number;
     IdUsuRegistrou: number;
-    DataRegistro: Date;
+    DataRegistro?: Date;
 
-    Status: StatusAprovacaoBasico;
+    DataAcaoStr: string;
 
-    Participantes?: Participante[] = [];
+    // Status: StatusAprovacaoBasico;
+
+    ParticipanteReuniaoProspeccaos?: ParticipanteReuniaoProspeccao[] = [];
+    ImagemReuniaoProspeccaos: ImagemReuniaoProspeccao[] = [];
 
     constructor() {
-        this.Participantes = [];
+        this.ParticipanteReuniaoProspeccaos = [];
+        this.ImagemReuniaoProspeccaos = [];
     }
 }
 
 ///////////////////// Reuniao
 
+export class ImagemReuniaoProspeccao extends FileBase {
+    IdReuniaoProspeccao?: number;
+}
+
 export enum TiposAcaoReuniao {
-    ReuniaoGrupoPesquisa,
+    ReuniaoGrupoPesquisa = 1,
     ReuniaoOrganizacoes,
     AtendimentoEmpreendedor,
     AtendimentoInventorIndependente,
@@ -72,3 +82,24 @@ export const TiposReuniaoSelectItems = [
     { id: TiposAcaoReuniao.AtendimentoInventorIndependente, name: 'Atendimento à Inventor Independente' },
     { id: TiposAcaoReuniao.MapeamentoTCC, name: 'Mapeamento de TCC' }
 ]
+
+export enum EstagiosMaturidade {
+    CriacaoIdeacao = 1,
+    EvolucaoOperacao,
+    MaturacaoTracao,
+    AutossustentacaoScaleUp
+}
+
+export const EstagiosMaturidadeSelectItems = [
+    { id: EstagiosMaturidade.CriacaoIdeacao, name: 'Criação de Ideia' },
+    { id: EstagiosMaturidade.EvolucaoOperacao, name: 'Evolução de Operação' },
+    { id: EstagiosMaturidade.MaturacaoTracao, name: 'Maturação de Tração' },
+    { id: EstagiosMaturidade.AutossustentacaoScaleUp, name: 'Autossustentação Scale Up' }
+]
+
+export class ParticipanteReuniaoProspeccao {
+    Id?: number;
+    IdReuniaoProspeccao?: number;
+    Contato?: string;
+    NomeParticipante?: string;
+}

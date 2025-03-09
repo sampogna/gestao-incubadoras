@@ -13,7 +13,6 @@ namespace SGII.Api.Repositories
         Task AddAsync(NucleoIncubador nucleoIncubador);
         Task UpdateAsync(NucleoIncubador nucleoIncubador);
         Task DeleteAsync(int id);
-        //Task<bool> IsBeingUsedAsync(int id);
 
     }
 }
