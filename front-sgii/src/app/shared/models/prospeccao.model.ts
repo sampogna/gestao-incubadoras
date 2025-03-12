@@ -17,13 +17,28 @@ export class DesafioInovacao {
 
     // Status: StatusAprovacaoBasico;
 
-    Participantes?: Participante[] = [];
-    Ideias?: IdeiaDesafioInovacao[]= []
+    DataInicioStr: string;
+    DataFinalStr: string;
+
+    ParticipanteDesafioInovacaos?: Participante[] = [];
+    IdeiaDesafioInovacaos?: IdeiaDesafioInovacao[]= [];
+    ImagemDesafioInovacaos: ImagemDesafioInovacao[] = [];
 
     constructor() {
-        this.Participantes = [];
-        this.Ideias = [];
+        this.ParticipanteDesafioInovacaos = [];
+        this.IdeiaDesafioInovacaos = [];
+        this.ImagemDesafioInovacaos = [];
     }
+}
+
+export class ParticipanteDesafioInovacao {
+    Id?: number;
+    IdDesafioInovacao?: number;
+    Nome?: string;
+}
+
+export class ImagemDesafioInovacao extends FileBase {
+    IdDesafioInovacao?: number;
 }
 
 export class IdeiaDesafioInovacao {

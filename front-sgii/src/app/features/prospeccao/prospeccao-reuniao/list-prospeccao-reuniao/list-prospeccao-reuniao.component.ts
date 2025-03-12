@@ -71,7 +71,7 @@ export class ListProspeccaoReuniaoComponent {
   deleteElement(reuniao: ReuniaoProspeccao): void {
       const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
           data: {
-          message: 'Você tem certeza que deseja deletar o núcleo: ' + reuniao.TemaAcao
+          message: 'Você tem certeza que deseja deletar a reunião: ' + reuniao.TemaAcao
           }
       });
       confirmDialog.afterClosed().subscribe(result => {

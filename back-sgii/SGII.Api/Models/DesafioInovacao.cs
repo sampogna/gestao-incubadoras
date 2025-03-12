@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SGII.Api.Models
 {
@@ -24,10 +25,15 @@ namespace SGII.Api.Models
         public int NumeroOportunidades { get; set; }
         public string? Observacoes { get; set; }
 
+        [NotMapped]
         public virtual NucleoIncubador IdNucleoIncubadorNavigation { get; set; } = null!;
+        [NotMapped]
         public virtual Usuario IdResponsavelNavigation { get; set; } = null!;
+        [NotMapped]
         public virtual ICollection<IdeiaDesafioInovacao> IdeiaDesafioInovacaos { get; set; }
+        [NotMapped]
         public virtual ICollection<ImagemDesafioInovacao> ImagemDesafioInovacaos { get; set; }
+        [NotMapped]
         public virtual ICollection<ParticipanteDesafioInovacao> ParticipanteDesafioInovacaos { get; set; }
     }
 }

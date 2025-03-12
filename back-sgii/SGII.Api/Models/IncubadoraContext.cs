@@ -208,12 +208,6 @@ namespace SGII.Api.Models
                 entity.ToTable("ImagemReuniaoProspeccao");
 
                 entity.Property(e => e.Arquivo).HasColumnType("image");
-
-                //entity.HasOne(d => d.ReuniaoProspeccao)
-                //    .WithMany(p => p.ImagemReuniaoProspeccaos)
-                //    .HasForeignKey(d => d.IdReuniaoProspeccao)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_ImagemReuniaoProspeccao_ReuniaoProspeccao");
             });
 
             modelBuilder.Entity<ImagemSensibilizacao>(entity =>
@@ -262,7 +256,7 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Nome).HasMaxLength(200);
 
-                entity.HasOne(d => d.IdDesafioInovacaoNavigation)
+                entity.HasOne(d => d.DesafioInovacao)
                     .WithMany(p => p.ParticipanteDesafioInovacaos)
                     .HasForeignKey(d => d.IdDesafioInovacao)
                     .OnDelete(DeleteBehavior.ClientSetNull)

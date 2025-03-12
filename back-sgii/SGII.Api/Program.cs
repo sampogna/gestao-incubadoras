@@ -93,6 +93,8 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IReuniaoProspeccaoRepository, ReuniaoProspeccaoRepository>();
 builder.Services.AddScoped<IReuniaoProspeccaoService, ReuniaoProspeccaoService>();
+builder.Services.AddScoped<IDesafioInovacaoRepository, DesafioInovacaoRepository>();
+builder.Services.AddScoped<IDesafioInovacaoService, DesafioInovacaoService>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();

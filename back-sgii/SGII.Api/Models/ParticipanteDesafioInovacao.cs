@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SGII.Api.Models
 {
@@ -9,6 +10,7 @@ namespace SGII.Api.Models
         public long IdDesafioInovacao { get; set; }
         public string Nome { get; set; } = null!;
 
-        public virtual DesafioInovacao IdDesafioInovacaoNavigation { get; set; } = null!;
+        [JsonIgnore]
+        public virtual DesafioInovacao DesafioInovacao { get; set; } = null!;
     }
 }

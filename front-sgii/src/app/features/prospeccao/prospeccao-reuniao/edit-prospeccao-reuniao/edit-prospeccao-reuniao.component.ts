@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { bcEditProspeccaoReuniao } from 'src/app/shared/breadcrumb-items';
-import { mockedNucleos } from 'src/app/shared/mocks.util';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
 import { Participante } from 'src/app/shared/models/participante.model';
 import { EstagiosMaturidadeSelectItems, ImagemReuniaoProspeccao, ParticipanteReuniaoProspeccao, ReuniaoProspeccao, TiposAcaoReuniao, TiposReuniaoSelectItems } from 'src/app/shared/models/prospeccao.model';

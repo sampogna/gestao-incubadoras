@@ -7,130 +7,111 @@
         <div class="row mb-4">
             <div class="col-md-4">
                 <label>Email</label>
-                <simple-input [(ngModel)]="desafioInovacao.Email" type="email" placeholder="Digite o email"></simple-input>
-            </div>
-            <div class="col-md-4">
-                <label>Título do Desafio</label>
-                <simple-input placeholder="Digite o título do desafio"></simple-input>
+                <simple-input placeholder="Digite o email" [(ngModel)]="desafio.Email"></simple-input>
             </div>
             <div class="col-md-4">
                 <label> Núcleo Incubador </label>
-                <select [(ngModel)]="desafioInovacao.Id">
+                <select [(ngModel)]="desafio.IdNucleoIncubador">
                     <option [value]="null" disabled> Escolha o núcleo </option>
                     <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
                 </select>
             </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-md-2">
-                <label>
-                    Data do início
-                </label>
-                 <input mask="00/00/0000 00:00" placeholder="dd/mm/aaaa hh:mm">
+            <div class="col-md-4">
+                <label>Título do Desafio da Inovação</label>
+                <simple-input placeholder="Digite o tema" [(ngModel)]="desafio.Titulo"></simple-input>
             </div>
             <div class="col-md-2">
                 <label>
-                    Data do término
+                    Data do Início
                 </label>
-                 <input mask="00/00/0000 00:00" placeholder="dd/mm/aaaa hh:mm">
+                 <input mask="00/00/0000 00:00" placeholder="dd/mm/aaaa hh:mm" [(ngModel)]="desafio.DataInicioStr">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-2">
                 <label>
-                    Responsáveis
+                    Data Final da ação
                 </label>
-                <input type="text" placeholder="Isso aqui deverá se tornar um autocomplete de responsáveis utilizando badges">
+                 <input mask="00/00/0000 00:00" placeholder="dd/mm/aaaa hh:mm" [(ngModel)]="desafio.DataFinalStr">
             </div>
-        </div>
-
-        <div class="row mb-4">
             <div class="col-md-4">
                 <label>
                     Local
                 </label>
-                 <input placeholder="Digite o local">
+                 <input placeholder="Digite o local" [(ngModel)]="desafio.Local">
             </div>
             <div class="col-md-4">
                 <label>
                     Perfil do público-alvo
                 </label>
-                 <input placeholder="Digite o perfil">
+                 <input placeholder="Digite o perfil" [(ngModel)]="desafio.Perfil">
             </div>
             <div class="col-md-4">
                 <label>
                     Número de oportunidades prospectadas na ação
                 </label>
-                 <input placeholder="Digite o número" type="number">
+                 <input placeholder="Digite o perfil" [(ngModel)]="desafio.NumeroOportunidades">
+            </div>
+            <div class="col-md-6" style="display: flex; flex-direction: column;">
+                <label>
+                    Observações
+                </label>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    Esta resposta não é obrigatória. Caso haja outras informações que sejam importantes para o registro desta ação, inclua nesta resposta.
+                </span>
+                <textarea rows="4" [(ngModel)]="desafio.Observacoes"></textarea>
             </div>
         </div>
 
+        <!-- Responsaveis -->
         <div class="row mb-4">
-            <div class="col-md-6" style="display: flex; flex-direction: column;">
-                <label for="">
-                    Observações
-                </label>
-                <textarea rows="4"></textarea>
+            <div class="col">
+                <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    Inclua aqui a lista dos participantes da ação. Nesta lista, identifique os proponentes principais da ideia ou proposta prospectada e as formas de contato (telefone ou e-mail).
+                </span>
+                
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <simple-input placeholder="Digite o nome" (keydown.enter)="addParticipante($event)"></simple-input>
+                    </div>
+                </div>
+                <div class="listbox-container">
+                    <mat-chip-listbox>
+                        <mat-chip *ngFor="let participante of desafio.ParticipanteDesafioInovacaos" >
+                            {{ participante }}
+                            <button matChipRemove aria-label="Remove orange" (click)="removeParticipante(participante)">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                    </mat-chip-listbox>
+                </div>
             </div>
         </div>
 
         <!-- Ideias -->
         <div class="row mb-4">
             <div class="col">
-                <h3 class="mb-0"> Listas das ideias prospectadas </h3>
-                <small> Inclua aqui a lista das ideias que foram prospectadas neste desafio da inovação. </small>
-                <simple-input placeholder="Digite o nome" (keydown.enter)="add($event, 'Ideias')"></simple-input>
+                <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    Inclua aqui a lista dos participantes da ação. Nesta lista, identifique os proponentes principais da ideia ou proposta prospectada e as formas de contato (telefone ou e-mail).
+                </span>
+                
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <simple-input placeholder="Digite o nome" (keydown.enter)="addIdeia($event)"></simple-input>
+                    </div>
+                </div>
                 <div class="listbox-container">
                     <mat-chip-listbox>
-                        <mat-chip *ngFor="let ideia of desafioInovacao.Ideias" >
-                            {{ ideia.Ideia }}
-                            <button matChipRemove (click)="remove(ideia, 'Ideias')">
+                        <mat-chip *ngFor="let participante of desafio.ParticipanteDesafioInovacaos" >
+                            {{ participante }}
+                            <button matChipRemove aria-label="Remove orange" (click)="removeIdeia(participante)">
                                 <mat-icon>cancel</mat-icon>
                             </button>
                         </mat-chip>
                     </mat-chip-listbox>
                 </div>
             </div>
-         </div>
-
-        <!-- Responsaveis -->
-         <div class="row mb-4">
-            <div class="col">
-                <h3 class="mb-0"> Participantes </h3>
-                <small> Digite o(s) nome(s) do(s) participante(s) da ação </small>
-                <simple-input placeholder="Digite o nome" (keydown.enter)="add($event, 'Participantes')"></simple-input>
-                <div class="listbox-container">
-                    <mat-chip-listbox>
-                        <mat-chip *ngFor="let participante of desafioInovacao.Participantes" >
-                            {{ participante.Nome }}
-                            <button matChipRemove (click)="remove(participante, 'Participantes')">
-                                <mat-icon>cancel</mat-icon>
-                            </button>
-                        </mat-chip>
-                    </mat-chip-listbox>
-                </div>
-            </div>
-         </div>
-        
-         <div class="row mb-4">
-            <div class="col-md-6">
-                <h3 style="margin: 0 !important;"> Lista de participantes (arquivo) </h3>
-                <span style="font-style: italic; font-size: 14px;" class="mb-3">
-                    A lista de participantes pode ter sido incluída na pergunta anterior:  lista dos participantes (Texto). 
-                    Neste caso não é necessário fazer upload de arquivo e esta pergunta pode ser deixada em branco. 
-                    Caso contrário, é necessário fazer upload de arquivo (foto) com os nomes dos participantes.
-                </span>
-                <file-upload-area></file-upload-area>
-            </div>
-
-            <div class="col-md-6">
-                <h3 style="margin: 0 !important;"> Registro fotográfico </h3>
-                <span style="font-style: italic; font-size: 14px;" class="mb-3">
-                    Inclua aqui as imagens que comprovem a realização da ação de sensibilização. <br>
-                    <div style="text-decoration: underline;">Observação:</div> Não inserir imagens maiores que 1024 x 1080 px.
-                </span>
-                <file-upload-area></file-upload-area>
-            </div>  
-         </div>
+        </div>
     </div>
 
     
