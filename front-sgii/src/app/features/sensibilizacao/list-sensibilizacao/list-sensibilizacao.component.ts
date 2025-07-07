@@ -61,10 +61,10 @@ export class ListSensibilizacaoComponent implements OnInit {
         });
         confirmDialog.afterClosed().subscribe(result => {
             if (result === true) {
-            this.sensibilizacaoService.deleteSensibilizacao(sensibilizacao.Id).subscribe(() => {
-                this.toastr.success('Sensibilização deletada com sucesso')
-                this.ngOnInit();
-            })
+                this.sensibilizacaoService.deleteSensibilizacao(sensibilizacao.Id).subscribe(() => {
+                    this.toastr.success('Sensibilização deletada com sucesso')
+                    this.ngOnInit();
+                })
             }
         });
     }
@@ -89,5 +89,9 @@ export class ListSensibilizacaoComponent implements OnInit {
             })
         )
         .subscribe();
+    }
+
+    exportData(): void {
+        this.sensibilizacaoService.downloadExcel();
     }
 }

@@ -9,10 +9,12 @@ namespace SGII.Api.Service
     public class ReuniaoProspeccaoService : IReuniaoProspeccaoService
     {
         private readonly IReuniaoProspeccaoRepository _repository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public ReuniaoProspeccaoService(IReuniaoProspeccaoRepository repository)
+        public ReuniaoProspeccaoService(IReuniaoProspeccaoRepository repository, ICurrentUserService currentUserService)
         {
             _repository = repository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<IEnumerable<ReuniaoProspeccao>> GetAllAsync()
@@ -32,6 +34,9 @@ namespace SGII.Api.Service
 
         public async Task AddAsync(ReuniaoProspeccao reuniaoProspeccao)
         {
+            var userIdClaim = _currentUserService.UserId;
+            reuniaoProspeccao.IdResponsavel = (long)userIdClaim;
+            reuniaoProspeccao.IdUsuRegistrou = (long)userIdClaim;
             await _repository.AddAsync(reuniaoProspeccao);
         }
 

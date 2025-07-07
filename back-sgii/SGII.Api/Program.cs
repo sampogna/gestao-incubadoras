@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NuGet.Packaging;
+using OfficeOpenXml;
 using SGII.Api.Models;
 using SGII.Api.Repositories;
 using SGII.Api.Repository;
@@ -15,6 +17,7 @@ using SGII.Api.Service.Interfaces;
 using SGII.Api.Services;
 using System.Text;
 using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -98,6 +101,13 @@ builder.Services.AddScoped<IDesafioInovacaoService, DesafioInovacaoService>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+//ExcelPackage.SetLicenseContext(LicenseContext.NonCommercial);
+//ExcelPackage.License = LicenseContext.NonCommercial;
+ExcelPackage.License.SetNonCommercialPersonal("excel-tcc-gratuito");
+
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

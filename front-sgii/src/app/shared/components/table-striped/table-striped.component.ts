@@ -38,7 +38,6 @@ export interface ITableColumnDisplay {
   type: ColumnDataType;
 }
 
-//TO DO - Format data types
 export enum ColumnDataType {
   Text,
   Date,

@@ -1,6 +1,8 @@
 ﻿using SGII.Api.Models;
 using SGII.Api.Repositories;
+using SGII.Api.Service.Interfaces;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SGII.Api.Services
@@ -8,10 +10,13 @@ namespace SGII.Api.Services
     public class SensibilizacaoService : ISensibilizacaoService
     {
         private readonly ISensibilizacaoRepository _repository;
+        private readonly ICurrentUserService _currentUser;
 
-        public SensibilizacaoService(ISensibilizacaoRepository repository)
+
+        public SensibilizacaoService(ISensibilizacaoRepository repository, ICurrentUserService currentUser)
         {
             _repository = repository;
+            _currentUser = currentUser;
         }
 
         public async Task<IEnumerable<Sensibilizacao>> GetAllAsync()
@@ -31,6 +36,10 @@ namespace SGII.Api.Services
 
         public async Task AddAsync(Sensibilizacao sensibilizacao)
         {
+            var userIdClaim = _currentUser.UserId;
+            sensibilizacao.IdUsuarioResponsavel = (long)userIdClaim;
+            sensibilizacao.IdUsuRegistrou = (long)userIdClaim;
+
             await _repository.AddAsync(sensibilizacao);
         }
 

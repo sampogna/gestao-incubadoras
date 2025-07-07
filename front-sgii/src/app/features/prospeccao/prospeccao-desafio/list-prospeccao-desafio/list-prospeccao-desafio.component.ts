@@ -90,4 +90,8 @@ export class ListProspeccaoDesafioComponent {
       this.pagination.Page += ev;
       this.searchData();
   }
+
+  exportData(): void {
+    this.desafioService.downloadExcel();
+  }
 }

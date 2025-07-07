@@ -5,18 +5,18 @@
 
     <div class="card__fields">
         <div class="row mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Tema</label>
                 <simple-input placeholder="Digite o tema" [(ngModel)]="reuniao.TemaAcao"></simple-input>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label> Núcleo Incubador </label>
                 <select [(ngModel)]="reuniao.IdNucleoIncubador">
                     <option [value]="null" disabled> Escolha o núcleo </option>
                     <option *ngFor="let nucleo of nucleos" [value]="nucleo.Id">{{nucleo.Descricao}}</option>
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label> Tipo da Ação de Prospecção </label>
                 <select [(ngModel)]="reuniao.IdTipoAcaoProspeccao">
                     <option [ngValue]="null" disabled> Escolha o tipo da ação </option>
@@ -24,15 +24,15 @@
                 </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label> Estágio de Maturidade </label>
                 <select [(ngModel)]="reuniao.IdEstagioMaturidade">
                     <option [ngValue]="null" disabled> Escolha o estágio </option>
-                    <option *ngFor="let tipoAcao of tipoReuniaoSelectIems" [ngValue]="tipoAcao.id"> {{tipoAcao.name}} </option>
+                    <option *ngFor="let estagioMaturidade of estagiosMaturidadeSelectItems" [ngValue]="estagioMaturidade.id"> {{estagioMaturidade.name}} </option>
                 </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label>Email</label>
                 <simple-input placeholder="Digite o email" [(ngModel)]="reuniao.Email"></simple-input>
             </div>
@@ -82,7 +82,22 @@
 
         <!-- Responsaveis -->
          <div class="row mb-4">
-            <div class="col">
+            <div class="col-md-5 col-xs-12">
+                <h3 style="margin: 0 !important;"> Registro fotográfico </h3>
+                <span style="font-style: italic; font-size: 14px;" class="mb-3">
+                    Inclua aqui as imagens que comprovem a realização da ação de prospecção. <br>
+                    <div style="text-decoration: underline;">Observação:</div> Não inserir imagens maiores que 1024 x 1080 px.
+                </span>
+                <file-upload-area 
+                    allowedFileTypes="image/*" 
+                    (onFileUploaded)="handleFileUploaded($event)"
+                    (onFileDeleted)="handleFileDeleted($event)"
+                    [filesUploaded]="registrosFotograficos"
+                >
+                </file-upload-area>
+            </div> 
+
+            <div class="col-md-7 col-xs-12">
                 <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
                 <span style="font-style: italic; font-size: 14px;" class="mb-3">
                     Inclua aqui a lista dos participantes da ação. Nesta lista, identifique os proponentes principais da ideia ou proposta prospectada e as formas de contato (telefone ou e-mail).
@@ -113,24 +128,7 @@
                     </mat-chip-listbox>
                 </div>
             </div>
-         </div>
-        
-         <div class="row mb-4">
-
-            <div class="col-md-6">
-                <h3 style="margin: 0 !important;"> Registro fotográfico </h3>
-                <span style="font-style: italic; font-size: 14px;" class="mb-3">
-                    Inclua aqui as imagens que comprovem a realização da ação de prospecção. <br>
-                    <div style="text-decoration: underline;">Observação:</div> Não inserir imagens maiores que 1024 x 1080 px.
-                </span>
-                <file-upload-area 
-                    allowedFileTypes="image/*" 
-                    (onFileUploaded)="handleFileUploaded($event)"
-                    (onFileDeleted)="handleFileDeleted($event)"
-                    [filesUploaded]="registrosFotograficos"
-                >
-                </file-upload-area>
-            </div>  
+ 
          </div>
     </div>
 

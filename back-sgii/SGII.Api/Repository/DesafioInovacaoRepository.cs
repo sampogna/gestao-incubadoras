@@ -48,6 +48,7 @@ namespace SGII.Api.Repository
             var reuniaoProspeccao = await _context.DesafioInovacaos
             .Include(s => s.ParticipanteDesafioInovacaos)
             .Include(i => i.ImagemDesafioInovacaos)
+            .Include(i => i.IdeiaDesafioInovacaos)
             .FirstOrDefaultAsync(s => s.Id == (long)id);
 
             return reuniaoProspeccao;
@@ -65,6 +66,7 @@ namespace SGII.Api.Repository
             var existingDesafioInovacao = await _context.DesafioInovacaos
                 .Include(s => s.ParticipanteDesafioInovacaos)
                 .Include(s => s.ImagemDesafioInovacaos)
+                .Include(s => s.IdeiaDesafioInovacaos)
                 .FirstOrDefaultAsync(s => s.Id == desafioInovacao.Id);
 
             if (existingDesafioInovacao == null)
@@ -78,7 +80,7 @@ namespace SGII.Api.Repository
             // Update ImagemDesafioInovacaos
             UpdateCollection(existingDesafioInovacao.ImagemDesafioInovacaos, desafioInovacao.ImagemDesafioInovacaos);
 
-            // Update ImagemDesafioInovacaos
+            // Update IdeiaDesafioInovacaos
             UpdateCollection(existingDesafioInovacao.IdeiaDesafioInovacaos, desafioInovacao.IdeiaDesafioInovacaos);
 
             await _context.SaveChangesAsync();

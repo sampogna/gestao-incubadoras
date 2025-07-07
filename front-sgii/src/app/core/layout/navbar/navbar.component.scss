@@ -1,8 +1,10 @@
+@import "../../../../shared/styles/variables.scss";
+
 :host ::ng-deep .navbar {
     width: 100vw;
     height: 55px;
     max-height: 55px;
-    background-color: #04292A;
+    background-color: $navbar-color;
     padding: 8px 55px;
 
     display: flex;

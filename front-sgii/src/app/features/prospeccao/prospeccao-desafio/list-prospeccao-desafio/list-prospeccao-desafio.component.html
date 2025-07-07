@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card__header">
         <card-header 
-            [title]="'LISTAGEM DE DESAFIOS DE PROSPECÇÃO'"
+            [title]="'LISTAGEM DE DESAFIOS DA INOVAÇÃO'"
             [breadcrumbItems]="breadcrumbItems" 
             (buttonNewClicked)="navigateToCreation()"
+            (exportButtonClicked)="exportData()"
             [showExportButton]="true"
             [showCreateButton]="true"
         >

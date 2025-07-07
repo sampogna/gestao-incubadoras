@@ -86,4 +86,8 @@ export class ListNucleosIncubadoresComponent implements OnInit {
     )
     .subscribe();
   }
+
+  exportData(): void {
+    this.nucleoService.downloadExcel();
+  }
 }

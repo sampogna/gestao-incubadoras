@@ -1,5 +1,5 @@
 <div class="login-container">
-    <img src="../../../assets/img/full_logo.png" alt="">
+    <img src="../../../assets/img/incubadora_full_logo.jpg" alt="">
     <hr>
 
     
@@ -8,7 +8,7 @@
         <simple-input placeholder="Usuário" [(ngModel)]="auth.username" ></simple-input>
         <simple-input placeholder="Senha" [(ngModel)]="auth.password" [type]="'password'" ></simple-input>
 
-        <button type="button" primary-button (click)="logIntoSystem()"> Entrar </button>
+        <button type="button" primary-button (click)="logIntoSystem()" type="submit" class="login-container__controls-submit"> {{ 'Entrar' | uppercase }}</button>
         <a href="#"> Esqueci minha senha </a>
     </div>
     

@@ -88,4 +88,8 @@ export class ListProspeccaoReuniaoComponent {
       this.pagination.Page += ev;
       this.searchData();
   }
+
+  exportData(): void {
+    this.reuniaoService.downloadExcel();
+  }
 }

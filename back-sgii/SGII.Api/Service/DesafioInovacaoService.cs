@@ -9,10 +9,12 @@ namespace SGII.Api.Service
     public class DesafioInovacaoService : IDesafioInovacaoService
     {
         private readonly IDesafioInovacaoRepository _repository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public DesafioInovacaoService(IDesafioInovacaoRepository repository)
+        public DesafioInovacaoService(IDesafioInovacaoRepository repository, ICurrentUserService currentUserService)
         {
             _repository = repository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<IEnumerable<DesafioInovacao>> GetAllAsync()
@@ -32,6 +34,8 @@ namespace SGII.Api.Service
 
         public async Task AddAsync(DesafioInovacao desafioInovacao)
         {
+            var userIdClaim = _currentUserService.UserId;
+            desafioInovacao.IdResponsavel = (long)userIdClaim;
             await _repository.AddAsync(desafioInovacao);
         }
 

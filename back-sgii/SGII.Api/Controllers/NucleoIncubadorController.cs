@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using SGII.Api.Models;
 using SGII.Api.Services;
 using System.Threading.Tasks;
@@ -91,6 +92,30 @@ namespace SGII.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("export-excel")]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            var raw = await _service.GetAllAsync();
+            var dataDTO = raw.Select(x =>
+            new {
+                Id = x.Id,
+                Nome = x.Descricao
+            });
+            using var package = new ExcelPackage();
+
+            var worksheet = package.Workbook.Worksheets.Add("Data");
+            worksheet.Cells["A1"].LoadFromCollection(dataDTO, PrintHeaders: true);
+
+            var stream = new MemoryStream();
+            package.SaveAs(stream);
+            stream.Position = 0;
+
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = "data-export.xlsx";
+
+            return File(stream, contentType, fileName);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using SGII.Api.Models;
 using SGII.Api.Services;
 using System.Threading.Tasks;
@@ -82,6 +83,34 @@ namespace SGII.Api.Controllers
         {
             await _service.DeleteAsync(id);
             return NoContent();
+        }
+
+        [HttpGet("export-excel")]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            var raw = await _service.GetAllAsync(); // Replace with your real data source
+            var dataDTO = raw.Select(x =>
+            new {
+                Id = x.Id,
+                Nome = x.Nome,
+                Email = x.Email,
+                Senha = x.Senha,
+                IdNucleoIncubador = x.IdNucleoIncubador,
+                NucleoIncubador = x.NucleoIncubador.Descricao
+            });
+            using var package = new ExcelPackage();
+
+            var worksheet = package.Workbook.Worksheets.Add("Data");
+            worksheet.Cells["A1"].LoadFromCollection(dataDTO, PrintHeaders: true);
+
+            var stream = new MemoryStream();
+            package.SaveAs(stream);
+            stream.Position = 0;
+
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = "data-export.xlsx";
+
+            return File(stream, contentType, fileName);
         }
     }
 }

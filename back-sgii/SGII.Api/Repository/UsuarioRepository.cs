@@ -14,7 +14,9 @@ namespace SGII.Api.Repositories
 
         public async Task<IEnumerable<Usuario>> GetAllAsync()
         {
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Usuarios
+                .Include(n => n.NucleoIncubador)
+                .ToListAsync();
         }
 
         public async Task<(IEnumerable<Usuario> Data, int TotalCount)> GetAllPaginatedAsync(int page, int pageSize, string term)

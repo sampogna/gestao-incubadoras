@@ -65,10 +65,24 @@
                 </label>
                 <textarea rows="4" [(ngModel)]="sensibilizacao.Observacoes"></textarea>
             </div>
+            <div class="col-md-6">
+                <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
+                <simple-input placeholder="Digite o nome" (keydown.enter)="add($event)"></simple-input>
+                <div class="listbox-container">
+                    <mat-chip-listbox>
+                        <mat-chip *ngFor="let participante of sensibilizacao.ParticipanteSensibilizacaos" >
+                            {{ participante.Nome }}
+                            <button matChipRemove aria-label="Remove orange" (click)="removeParticipante(participante)">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip>
+                    </mat-chip-listbox>
+                </div>
+            </div>
         </div>
 
         <!-- Responsaveis -->
-         <div class="row mb-4">
+         <!-- <div class="row mb-4">
             <div class="col">
                 <h3> Digite o(s) nome(s) do(s) participante(s) da ação </h3>
                 <simple-input placeholder="Digite o nome" (keydown.enter)="add($event)"></simple-input>
@@ -83,7 +97,7 @@
                     </mat-chip-listbox>
                 </div>
             </div>
-         </div>
+         </div> -->
         
          <div class="row mb-4">
             <div class="col-md-6">

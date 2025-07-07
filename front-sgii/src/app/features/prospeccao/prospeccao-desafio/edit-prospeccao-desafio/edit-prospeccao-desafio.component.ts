@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 import { bcEditProspeccaoDesafio } from 'src/app/shared/breadcrumb-items';
 import { NucleoIncubador } from 'src/app/shared/models/nucleo-incubador.model';
 import { Participante } from 'src/app/shared/models/participante.model';
-import { DesafioInovacao, ImagemDesafioInovacao } from 'src/app/shared/models/prospeccao.model';
+import { DesafioInovacao, IdeiaDesafioInovacao, ImagemDesafioInovacao } from 'src/app/shared/models/prospeccao.model';
 import { NucleoIncubadorService } from 'src/app/shared/services/nucleo-incubador.service';
 import { DesafioProspeccaoService } from 'src/app/shared/services/desafio-prospeccao.service';
 import { convertDateStringToDateObject } from 'src/app/shared/utils/date';
@@ -40,7 +40,7 @@ export class EditProspeccaoDesafioComponent implements OnInit {
 
         if (id) this.getCurrentReuniao(id);
 
-        this.pageTitle = (id) ? 'Edição de reunião de prospecção' : 'Criação de reunião de prospecção';
+        this.pageTitle = (id) ? 'Edição de desafio da inovação' : 'Criação de desafio da inovação';
 
         
     }
@@ -101,23 +101,24 @@ export class EditProspeccaoDesafioComponent implements OnInit {
             return;
         }
 
-        if (!this.desafio.ParticipanteDesafioInovacaos) {
-            this.desafio.ParticipanteDesafioInovacaos = [];
+        if (!this.desafio.IdeiaDesafioInovacaos) {
+            this.desafio.IdeiaDesafioInovacaos = [];
         }
 
-        const participante: Participante = {
-            Nome: value
+        const ideia: IdeiaDesafioInovacao = {
+            Ideia: value
         }
-        this.desafio.ParticipanteDesafioInovacaos.push(participante);
+        this.desafio.IdeiaDesafioInovacaos.push(ideia);
 
         event.target.value = '';
         this.toastr.success('Participante adicionado à ação');
     }
 
-    removeIdeia(participante: Participante): void {
-        const index = this.desafio.ParticipanteDesafioInovacaos?.indexOf(participante) || 0;
+
+    removeIdeia(ideia: IdeiaDesafioInovacao): void {
+        const index = this.desafio.IdeiaDesafioInovacaos?.indexOf(ideia) || 0;
         if (index > -1) {
-            this.desafio.ParticipanteDesafioInovacaos?.splice(index, 1);
+            this.desafio.IdeiaDesafioInovacaos?.splice(index, 1);
         }
 		
 		this.toastr.success('Participante removido!');

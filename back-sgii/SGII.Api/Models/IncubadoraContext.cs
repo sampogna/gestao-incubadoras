@@ -116,17 +116,25 @@ namespace SGII.Api.Models
 
                 entity.Property(e => e.Titulo).HasMaxLength(400);
 
-                //entity.HasOne(d => d.IdNucleoIncubadorNavigation)
-                //    .WithMany(p => p.DesafioInovacaos)
-                //    .HasForeignKey(d => d.IdNucleoIncubador)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_DesafioInovacao_NucleoIncubador");
+                entity.HasOne(d => d.IdNucleoIncubadorNavigation)
+                    .WithMany(p => p.DesafioInovacaos)
+                    .HasForeignKey(d => d.IdNucleoIncubador)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DesafioInovacao_NucleoIncubador");
 
                 entity.HasOne(d => d.IdResponsavelNavigation)
                     .WithMany(p => p.DesafioInovacaos)
                     .HasForeignKey(d => d.IdResponsavel)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DesafioInovacao_Usuario");
+
+                entity.HasMany(s => s.ImagemDesafioInovacaos)
+                    .WithOne(p => p.IdDesafioInovacaoNavigation)
+                    .HasForeignKey(d => d.IdDesafioInovacao);
+
+                entity.HasMany(s => s.IdeiaDesafioInovacaos)
+                    .WithOne(p => p.IdDesafioInovacaoNavigation)
+                    .HasForeignKey(d => d.IdDesafioInovacao);
             });
 
             modelBuilder.Entity<Edital>(entity =>
@@ -159,9 +167,7 @@ namespace SGII.Api.Models
 
                 entity.HasOne(d => d.IdDesafioInovacaoNavigation)
                     .WithMany(p => p.IdeiaDesafioInovacaos)
-                    .HasForeignKey(d => d.IdDesafioInovacao)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_IdeiaDesafioInovacao_DesafioInovacao");
+                    .HasForeignKey(d => d.IdDesafioInovacao);
             });
 
             modelBuilder.Entity<ImagemCapacitacao>(entity =>

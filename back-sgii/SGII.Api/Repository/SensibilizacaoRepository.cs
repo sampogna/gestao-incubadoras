@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SGII.Api.Models;
+using System.Security.Claims;
 
 namespace SGII.Api.Repositories
 {
@@ -12,10 +13,11 @@ namespace SGII.Api.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Sensibilizacao>> GetAllAsync()
-        {
-            return await _context.Sensibilizacaos.ToListAsync();
-        }
+        public async Task<IEnumerable<Sensibilizacao>> GetAllAsync() =>
+             await _context.Sensibilizacaos
+                .Include(n => n.IdNucleoIncubadorNavigation)
+                .ToListAsync();
+        
 
         public async Task<(IEnumerable<Sensibilizacao> Data, int TotalCount)> GetAllPaginatedAsync(int page, int pageSize, string term)
         {
@@ -55,8 +57,7 @@ namespace SGII.Api.Repositories
         {
             // TO DO: Remover ids chumbados
             sensibilizacao.DataRegistro = DateTime.Now;
-            sensibilizacao.IdUsuarioResponsavel = 3;
-            sensibilizacao.IdUsuRegistrou = 3;
+
 
 
             _context.Sensibilizacaos.Add(sensibilizacao);

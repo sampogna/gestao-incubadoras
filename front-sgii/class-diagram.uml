@@ -1,0 +1,126 @@
+@startuml IncubadoraDatabase
+
+' Entities
+class NucleoIncubador {
+  + Id : int [PK]
+  + Descricao : nvarchar(100)
+}
+
+class Usuario {
+  + Id : bigint [PK]
+  + Nome : nvarchar(50)
+  + Sobrenome : nvarchar(100)
+  + Email : nvarchar(512)
+  + Senha : nvarchar(60)
+  + IdNucleoIncubador : int [FK]
+  + IdTipo : int
+}
+
+class DesafioInovacao {
+  + Id : bigint [PK]
+  + Email : nvarchar(532)
+  + IdNucleoIncubador : int [FK]
+  + Titulo : nvarchar(400)
+  + IdResponsavel : bigint [FK]
+  + DataInicio : date
+  + DataFinal : date
+  + Local : nvarchar(200)
+  + Perfil : nvarchar(200)
+  + NumeroOportunidades : int
+  + Observacoes : nvarchar(max)
+}
+
+class ImagemDesafioInovacao {
+  + Id : bigint [PK]
+  + IdDesafioInovacao : bigint [FK]
+  + Arquivo : image
+}
+
+class ParticipanteDesafioInovacao {
+  + Id : bigint [PK]
+  + IdDesafioInovacao : bigint [FK]
+  + Nome : nvarchar(200)
+}
+
+class ReuniaoProspeccao {
+  + Id : bigint [PK]
+  + Email : nvarchar(532)
+  + IdNucleoIncubador : int [FK]
+  + IdTipoAcaoProspeccao : int
+  + TemaAcao : nvarchar(400)
+  + DataAcao : date
+  + Local : nvarchar(200)
+  + Perfil : nvarchar(200)
+  + Descricao : nvarchar(max)
+  + IdEstagioMaturidade : int
+  + Observacoes : nvarchar(max)
+  + IdResponsavel : bigint [FK]
+  + IdUsuRegistrou : bigint [FK]
+  + DataRegistro : datetime
+}
+
+class ImagemReuniaoProspeccao {
+  + Id : bigint [PK]
+  + IdReuniaoProspeccao : bigint [FK]
+  + Arquivo : image
+  + Nome : nvarchar(200)
+}
+
+class ParticipanteReuniaoProspeccao {
+  + Id : bigint [PK]
+  + IdReuniaoProspeccao : bigint [FK]
+  + NomeParticipante : nvarchar(200)
+  + Contato : nvarchar(532)
+}
+
+class Sensibilizacao {
+  + Id : bigint [PK]
+  + IdNucleoIncubador : int [FK]
+  + IdTipoSensibilizacao : int
+  + Tema : nvarchar(200)
+  + IdUsuarioResponsavel : bigint [FK]
+  + DataAcao : datetime
+  + Local : nvarchar(200)
+  + Perfil : nvarchar(200)
+  + NumeroSensibilizados : int
+  + Observacoes : nvarchar(600)
+  + DataRegistro : datetime
+  + IdUsuRegistrou : bigint [FK]
+}
+
+class ImagemSensibilizacao {
+  + Id : bigint [PK]
+  + Arquivo : image
+  + IdSensibilizacao : bigint [FK]
+  + Nome : nvarchar(100)
+  + Tipo : int
+}
+
+class ParticipanteSensibilizacao {
+  + Id : int [PK]
+  + Nome : nvarchar(200)
+  + IdSensibilizacao : bigint [FK]
+}
+
+' Relationships
+NucleoIncubador "1" -- "*" Usuario
+NucleoIncubador "1" -- "*" DesafioInovacao
+NucleoIncubador "1" -- "*" ReuniaoProspeccao
+NucleoIncubador "1" -- "*" Sensibilizacao
+
+Usuario "1" -- "*" DesafioInovacao : IdResponsavel
+Usuario "1" -- "*" ReuniaoProspeccao : IdResponsavel
+Usuario "1" -- "*" ReuniaoProspeccao : IdUsuRegistrou
+Usuario "1" -- "*" Sensibilizacao : IdUsuarioResponsavel
+Usuario "1" -- "*" Sensibilizacao : IdUsuRegistrou
+
+DesafioInovacao "1" -- "*" ImagemDesafioInovacao
+DesafioInovacao "1" -- "*" ParticipanteDesafioInovacao
+
+ReuniaoProspeccao "1" -- "*" ImagemReuniaoProspeccao
+ReuniaoProspeccao "1" -- "*" ParticipanteReuniaoProspeccao
+
+Sensibilizacao "1" -- "*" ImagemSensibilizacao
+Sensibilizacao "1" -- "*" ParticipanteSensibilizacao
+
+@enduml

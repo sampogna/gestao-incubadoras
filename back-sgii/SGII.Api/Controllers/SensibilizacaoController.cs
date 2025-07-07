@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using SGII.Api.Models;
 using SGII.Api.Services;
+using System.Globalization;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace SGII.Api.Controllers
@@ -119,6 +122,40 @@ namespace SGII.Api.Controllers
             }
 
             return Ok("Image uploaded successfully.");
+        }
+
+        [HttpGet("export-excel")]
+        public async Task<IActionResult> ExportToExcel()
+        {
+            var raw = await _service.GetAllAsync();
+            var dataDTO = raw.Select(x =>
+            new {
+                Id = x.Id,
+                Tema = x.Tema,
+                Local = x.Local,
+                Observacoes = x.Observacoes,
+                Perfil = x.Perfil,
+                NumeroSensibilizados = x.NumeroSensibilizados,
+                TipoSensibilizacao = x.IdTipoSensibilizacao == Enums.TiposSensibilizacao.PALESTRA ? "Palestra" : "Evento",
+                DataAcao = x.DataAcao.ToString("dd/MM/yyyy", new CultureInfo("pt-BR")),
+                DataRegistro = x.DataRegistro.ToString("dd/MM/yyyy", new CultureInfo("pt-BR")),
+                IdNucleoIncubador = x.IdNucleoIncubador,
+                NucleoIncubador = x.IdNucleoIncubadorNavigation.Descricao
+
+            });
+            using var package = new ExcelPackage();
+
+            var worksheet = package.Workbook.Worksheets.Add("Data");
+            worksheet.Cells["A1"].LoadFromCollection(dataDTO, PrintHeaders: true);
+
+            var stream = new MemoryStream();
+            package.SaveAs(stream);
+            stream.Position = 0;
+
+            var contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            var fileName = "data-export.xlsx";
+
+            return File(stream, contentType, fileName);
         }
     }
 }

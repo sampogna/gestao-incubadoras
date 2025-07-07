@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleInputModule } from './shared/components/simple-input/simple-input.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,14 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [{
+  providers: [
+    {
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
     multi:true
-  }],
+  },
+  { provide: LocationStrategy, useClass: HashLocationStrategy }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

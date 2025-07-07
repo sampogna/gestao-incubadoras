@@ -55,7 +55,8 @@ namespace SGII.Api.Controllers
             {
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.Name, $"{user.Nome} {user.Sobrenome}"),
-                new Claim(ClaimTypes.Role, "Colaborador")
+                new Claim(ClaimTypes.Role, "Colaborador"),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
             var key = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

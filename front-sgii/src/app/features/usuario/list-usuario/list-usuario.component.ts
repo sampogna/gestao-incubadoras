@@ -90,4 +90,8 @@ export class ListUsuarioComponent {
         )
         .subscribe();
     }
+
+    exportData(): void {
+        this.usuarioService.downloadExcel();
+    }
 }

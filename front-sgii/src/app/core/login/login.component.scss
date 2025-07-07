@@ -1,9 +1,9 @@
 .login-container {
-    width: 420px;
+    width: 360px;
     background-color: #fff;
     border-radius: 15px;
     margin: auto;
-    padding: 26px 58px 60px 58px;
+    padding: 26px 45px 16px 45px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -12,12 +12,13 @@
     img {
         max-width: 258px;
         margin: auto;
+        max-height: 170px;
     }
 
     hr{
         width: 100%;
         border: 1px solid #2d2d2d;
-        margin-top: 35px;
+        margin-top: 10px;
     }
 
 
@@ -26,20 +27,25 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin-top: 35px;
+        margin-top: 20px;
 
         &-title {
             font-size: 24px;
         }
 
         &>*:not(button){
-            margin-bottom: 35px;
+            margin-bottom: 20px;
         }
 
         a{
             font-style: italic;
             line-height: 24px;
             font-size: 16px;
+            margin-top: 15px;
+        }
+
+        &-submit {
+            margin-top: 20px !important;
         }
 
     }

@@ -76,7 +76,9 @@ namespace SGII.Api.Repositories
         private async Task<bool> IsBeingUsedAsync(int id)
         {
             return await _context.Sensibilizacaos.AnyAsync(s => s.IdNucleoIncubador == id)
-                || await _context.Usuarios.AnyAsync(u => u.IdNucleoIncubador == id);
+                || await _context.Usuarios.AnyAsync(u => u.IdNucleoIncubador == id)
+                || await _context.ReuniaoProspeccaos.AnyAsync(r => r.IdNucleoIncubador == id)
+                || await _context.DesafioInovacaos.AnyAsync(d => d.IdNucleoIncubador == id);
         }
     }
 }

@@ -88,4 +88,16 @@ export class DesafioProspeccaoService {
       )
   }
 
+  downloadExcel(): void {
+    this.http.get(API_URL + this.controllerPrefix + '/export-excel', { responseType: 'blob' })
+      .subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'data-export.xlsx';
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
 }

@@ -10,7 +10,7 @@ namespace SGII.Api.Models
         public NucleoIncubador()
         {
             //Capacitacaos = new HashSet<Capacitacao>();
-            //DesafioInovacaos = new HashSet<DesafioInovacao>();
+            DesafioInovacaos = new HashSet<DesafioInovacao>();
             //PreIncubacaos = new HashSet<PreIncubacao>();
             //Proposta = new HashSet<Propostum>();
             ReuniaoProspeccaos = new HashSet<ReuniaoProspeccao>();
@@ -22,7 +22,7 @@ namespace SGII.Api.Models
         public string? Descricao { get; set; }
 
         //public virtual ICollection<Capacitacao> Capacitacaos { get; set; }
-        //public virtual ICollection<DesafioInovacao> DesafioInovacaos { get; set; }
+        public virtual ICollection<DesafioInovacao> DesafioInovacaos { get; set; }
         //public virtual ICollection<PreIncubacao> PreIncubacaos { get; set; }
         //public virtual ICollection<Propostum> Proposta { get; set; }
         [NotMapped]

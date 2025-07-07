@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SGII.Api.Models
 {
@@ -15,7 +16,8 @@ namespace SGII.Api.Models
 
         [NotMapped]
         public string? ArquivoBase64 { get; set; } = null;
-
+        [NotMapped]
+        [JsonIgnore]
         public virtual DesafioInovacao IdDesafioInovacaoNavigation { get; set; } = null!;
     }
 }

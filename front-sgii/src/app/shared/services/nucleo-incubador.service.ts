@@ -29,23 +29,11 @@ export class NucleoIncubadorService {
           filter: filter ?? ''
         } 
       })
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          return throwError('Something went wrong. Please try again later.');
-        })
-      );
   }
 
   public getAllNucleosNonPaginated(): Observable<NucleoIncubador[]> {
     return this.http.get<NucleoIncubador[]>(
       API_URL + this.controllerPrefix)
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          return throwError('Something went wrong. Please try again later.');
-        })
-      );
   }
 
   public getNucleoById(id: number): Observable<NucleoIncubador> {
@@ -53,12 +41,6 @@ export class NucleoIncubadorService {
       .get<NucleoIncubador>(
         API_URL + this.controllerPrefix + `/${id}`
       )      
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          return throwError('Something went wrong. Please try again later.');
-        })
-      );
   }
 
   public updateNucleo(nucleoIncubador: NucleoIncubador): Observable<any> {
@@ -67,12 +49,6 @@ export class NucleoIncubadorService {
         API_URL + this.controllerPrefix + `/${nucleoIncubador.Id}`,
         nucleoIncubador
       )
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          return throwError('Something went wrong. Please try again later.');
-        })
-      );
   }
 
   public createNucleo(nucleoIncubador: NucleoIncubador): Observable<NucleoIncubador> {
@@ -81,12 +57,6 @@ export class NucleoIncubadorService {
         API_URL + this.controllerPrefix,
         nucleoIncubador
       )
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          return throwError('Something went wrong. Please try again later.');
-        })
-      );
   }
 
   public deleteNucleo(id: number) : Observable<any> {
@@ -94,13 +64,18 @@ export class NucleoIncubadorService {
       .delete(
         API_URL + this.controllerPrefix + `/${id}`
       )
-      .pipe(
-        catchError(err => {
-          console.error('API Error:', err);
-          this.toastr.error(err?.error);
-          return EMPTY;
-        })
-      );
+  }
+
+  downloadExcel(): void {
+    this.http.get(API_URL + this.controllerPrefix + '/export-excel', { responseType: 'blob' })
+      .subscribe((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'data-export.xlsx';
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      });
   }
 
 

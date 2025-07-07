@@ -55,11 +55,7 @@ namespace SGII.Api.Repository
 
         public async Task AddAsync(ReuniaoProspeccao reuniaoProspeccao)
         {
-            // TO DO: Remover ids chumbados
             reuniaoProspeccao.DataRegistro = DateTime.Now;
-            //reuniaoProspeccao.IdUsuarioResponsavel = 3;
-            reuniaoProspeccao.IdUsuRegistrou = 3;
-
 
             _context.ReuniaoProspeccaos.Add(reuniaoProspeccao);
             await _context.SaveChangesAsync();
